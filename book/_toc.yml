@@ -3,3 +3,4 @@ root: intro
 sections:
 - file: setup
 - file: sample
+- file: sample2

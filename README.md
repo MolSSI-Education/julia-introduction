@@ -6,12 +6,12 @@ This is a Jupyter book template for molssi workshops
 
 ### Building the book
 
-If you'd like to develop on and build the Scientific Visualization using Python book, you should:
+If you'd like to develop on and build this book, you should:
 
 - Clone this repository and run
 - Run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
 - (Recommended) Remove the existing `book/_build/` directory
-- Run `jupyter-book build book/`
+- Run `make html` from the root of the repository
 
 A fully-rendered HTML version of the book will be built in `book/_build/html/`.
 
@@ -28,7 +28,7 @@ This will automatically push your build to the `gh-pages` branch. More informati
 
 ## Contributors
 
-We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab](https://github.com/janash/molssi_python_visualization/graphs/contributors).
+We welcome and recognize all contributions. 
 
 ## Credits
 
