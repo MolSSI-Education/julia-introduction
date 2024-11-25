@@ -31,9 +31,7 @@ jobs:
       run: |
         jupyter-book build book --all
 
-    # Deploy the book's HTML to gh-pages branch
-    - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v3.6.1
+   - name: Deploy Documentation
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: book/_build/html
+        folder: book/_build/html
