@@ -1,7 +1,6 @@
-name: deploy
+name: Build and Deploy Book
 
 on:
-  # Trigger the workflow on push to main branch
   push:
     branches:
       - main
@@ -33,7 +32,7 @@ jobs:
       run: |
         jupyter-book build book --all
 
-   - name: Deploy Documentation
+    - name: Deploy Documentation
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: book/_build/html
