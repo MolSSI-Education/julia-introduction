@@ -86,6 +86,18 @@ img:not(.logo__image, .footer_logo) {
 	max-height: 60px;
 }
 
+div.alert :is(h1, h2, h3, h4, h5, h6) {
+    color: black;
+   }
+
+   html[data-theme="dark"] a:visited {
+    color: #ffffff;
+}
+
+html[data-theme="light"] a:visited {
+    color: #ed1c24;
+}
+
 /* Custom CSS * - mostly custom admonitions */
 
 /**********************************************************************************/
