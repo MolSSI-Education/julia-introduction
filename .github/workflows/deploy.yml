@@ -7,32 +7,46 @@ on:
 
 permissions: write-all
 
-# This job installs dependencies, build the book, and pushes it to `gh-pages`
+env:
+  PYTHON_VERSION: 3.12
+  JULIA_VERSION: 1.11
+
 jobs:
   build-and-deploy-book:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        python-version: [3.12]
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      # Checkout repository
+      - uses: actions/checkout@v2
 
-    # Install dependencies
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
 
-    # Build the book - absolutely ridiculous attempted work around to get data files where i need them.
-    - name: Build the book
-      run: |
-        jupyter-book build book --all
+      # Install Python dependencies
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
 
-    - name: Deploy Documentation
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: book/_build/html
+      # Set up Julia
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: ${{ env.JULIA_VERSION }}
+
+      # Install IJulia
+      - name: Install IJulia
+        run: |
+          julia -e 'using Pkg; Pkg.add("IJulia"); using IJulia'
+
+      # Build the book
+      - name: Build the book
+        run: |
+          jupyter-book build book --all
+
+      # Deploy to GitHub Pages
+      - name: Deploy Documentation
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: book/_build/html
