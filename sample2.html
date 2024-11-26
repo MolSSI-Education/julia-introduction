@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Sample Notebook 2 &#8212; MolSSI Jupyter Book</title>
+    <title>Sample Notebook 2 &#8212; Introduction to Julia</title>
   
   
   
@@ -147,8 +147,8 @@
       
     
     
-    <img src="_static/molssi_main_logo.png" class="logo__image only-light" alt="MolSSI Jupyter Book - Home"/>
-    <img src="_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark pst-js-only" alt="MolSSI Jupyter Book - Home"/>
+    <img src="_static/molssi_main_logo.png" class="logo__image only-light" alt="Introduction to Julia - Home"/>
+    <img src="_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark pst-js-only" alt="Introduction to Julia - Home"/>
   
   
 </a></div>
@@ -336,12 +336,31 @@ Orange for exercises.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, World!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">κ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">cₚ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="n">ρ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="n">α</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">κ</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">cₚ</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ρ</span><span class="p">)</span>
+<span class="n">Fo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">L</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.011111111111111112
 </pre></div>
 </div>
 </div>
@@ -357,16 +376,16 @@ Orange for exercises.
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "julia-1.11"
         },
         kernelOptions: {
-            name: "python3",
+            name: "julia-1.11",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'julia-1.11'</script>
 
                 </article>
               
@@ -413,7 +432,7 @@ By The Molecular Sciences Software Institute
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024.
       <br/>
     
   </p>
