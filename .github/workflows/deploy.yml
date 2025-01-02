@@ -34,11 +34,18 @@ jobs:
         uses: julia-actions/setup-julia@v2
         with:
           version: ${{ env.JULIA_VERSION }}
+          project : '.' # this is the default
+        run: julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate()'
 
-      # Install IJulia
-      - name: Install IJulia
-        run: |
-          julia -e 'using Pkg; Pkg.add("IJulia"); using IJulia'
+      # # Install Julia environment
+      # - name: Install Julia environment
+      #   run: |
+      #     julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate()'
+      
+      # # Install IJulia
+      # - name: Install IJulia
+      #   run: |
+      #     julia -e 'using Pkg; Pkg.activate("."); Pkg.add("IJulia"); using IJulia'
 
       # Build the book
       - name: Build the book
