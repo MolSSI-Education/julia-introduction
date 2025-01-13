@@ -39,7 +39,7 @@ jobs:
       # Install Julia environment
       - name: Install Julia environment
         run: |
-          julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate()'
+          julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate(); using IJulia'
       
       # # Install IJulia
       # - name: Install IJulia
