@@ -49,6 +49,7 @@ jobs:
       # Build the book
       - name: Build the book
         run: |
+          julia -e 'using Pkg; Pkg.activate(".")'
           jupyter-book build book --all
 
       # Deploy to GitHub Pages
