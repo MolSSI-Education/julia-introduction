@@ -36,16 +36,21 @@ jobs:
           version: ${{ env.JULIA_VERSION }}
           project : '.' # this is the default
 
+      # Manually set kernel in notebooks
+      # HARD CODED TO ASSUME JULIA VERSION is 1.11
+      - name: Run script file
+        run: |
+          JULIA_SHORT_VERSION=$(echo $JULIA_PREFIX | cut -d. -f1,2)
+          echo "Julia short version: $JULIA_SHORT_VERSION"
+          chmod +x ./patch_kernel_versions.sh
+          sh ./scripts/patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-$JULIA_SHORT_VERSION"
+        shell: bash
+
       # Install Julia environment
       - name: Install Julia environment
         run: |
-          julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate()'
+          julia -e 'using Pkg; Pkg.activate("."); Pkg.build("IJulia"); using IJulia; installkernel("julia_kernel")'
       
-      # # Install IJulia
-      # - name: Install IJulia
-      #   run: |
-      #     julia -e 'using Pkg; Pkg.activate("."); Pkg.add("IJulia"); using IJulia'
-
       # Build the book
       - name: Build the book
         run: |
