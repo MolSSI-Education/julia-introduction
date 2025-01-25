@@ -3,7 +3,7 @@ name: Build and Deploy Book
 on:
   push:
     branches:
-      - main
+      - ethan-test
 
 permissions: write-all
 
