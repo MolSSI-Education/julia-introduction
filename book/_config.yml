@@ -37,10 +37,3 @@ sphinx:
       logo:
         image_light: images/molssi_main_logo.png
         image_dark: images/molssi_main_logo_inverted_white.png
-
-
-notebooks:
-  kernels:
-    - name: julia_jupyterbook_kernel-1.11     # Replace with the kernel name from `jupyter kernelspec list`
-      display_name: Julia 1.11
-      language: julia
