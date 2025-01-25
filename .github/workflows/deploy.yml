@@ -31,18 +31,18 @@ jobs:
           pip install -r requirements.txt
 
       # Set up Julia
-      - name: Set up Julia
+      - name: Install Julia
         uses: julia-actions/setup-julia@v2
         with:
           version: ${{ env.JULIA_VERSION }}
           project : '.' # this is the default
 
-      # Install Julia kernel into the jupyter install
+      # Install Julia kernel
       # kernel will be named KERNEL_NAME-JULIA_VERSION
       # JULIA_VERSION is appened by IJulia automatically
       - name: Setup IJulia 
         run: |
-          julia -e 'using Pkg; Pkg.build("IJulia"); using IJulia; installkernel("${{ env.KERNEL_NAME }}")'
+          julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; installkernel("${{ env.KERNEL_NAME }}")'
 
       # Manually set kernel in notebooks
       - name: Run script file
