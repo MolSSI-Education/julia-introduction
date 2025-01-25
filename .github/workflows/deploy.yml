@@ -45,7 +45,7 @@ jobs:
           julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; installkernel("${{ env.KERNEL_NAME }}")'
 
       # Manually set kernel in notebooks
-      - name: Run script file
+      - name: Manually Set Kernels in Jupyter Notebooks
         run: |
           chmod +x patch_kernel_versions.sh
           sh patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-${{ env.JULIA_VERSION }}"
@@ -58,7 +58,6 @@ jobs:
       # Build the book
       - name: Build the book
         run: |
-          julia -e 'using Pkg; Pkg.activate(".")'
           jupyter-book build book --all
 
       # Deploy to GitHub Pages
