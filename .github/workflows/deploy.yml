@@ -48,7 +48,7 @@ jobs:
       - name: Run script file
         run: |
           chmod +x patch_kernel_versions.sh
-          sh scripts/patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-${{ env.JULIA_VERSION }}"
+          sh patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-${{ env.JULIA_VERSION }}"
         shell: bash
 
       - name: Setup Julia Environment 
