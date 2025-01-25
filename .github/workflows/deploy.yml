@@ -40,10 +40,8 @@ jobs:
       # HARD CODED TO ASSUME JULIA VERSION is 1.11
       - name: Run script file
         run: |
-          JULIA_SHORT_VERSION=$(echo $JULIA_PREFIX | cut -d. -f1,2)
-          echo "Julia short version: $JULIA_SHORT_VERSION"
           chmod +x ./patch_kernel_versions.sh
-          sh ./scripts/patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-$JULIA_SHORT_VERSION"
+          sh ./scripts/patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-${{ env.JULIA_VERSION }}"
         shell: bash
 
       # Install Julia environment
