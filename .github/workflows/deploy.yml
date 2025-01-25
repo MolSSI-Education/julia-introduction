@@ -10,6 +10,7 @@ permissions: write-all
 env:
   PYTHON_VERSION: 3.12
   JULIA_VERSION: 1.11
+  KERNEL_NAME: "julia_kernel"
 
 jobs:
   build-and-deploy-book:
@@ -36,18 +37,23 @@ jobs:
           version: ${{ env.JULIA_VERSION }}
           project : '.' # this is the default
 
+      # Install Julia kernel into the jupyter install
+      # kernel will be named KERNEL_NAME-JULIA_VERSION
+      # JULIA_VERSION is appened by IJulia automatically
+      - name: Setup IJulia 
+        run: |
+          julia -e 'using Pkg; Pkg.build("IJulia"); using IJulia; installkernel("${{ env.KERNEL_NAME }}")'
+
       # Manually set kernel in notebooks
-      # HARD CODED TO ASSUME JULIA VERSION is 1.11
       - name: Run script file
         run: |
-          chmod +x ./patch_kernel_versions.sh
-          sh ./scripts/patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-${{ env.JULIA_VERSION }}"
+          chmod +x patch_kernel_versions.sh
+          sh scripts/patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-${{ env.JULIA_VERSION }}"
         shell: bash
 
-      # Install Julia environment
-      - name: Install Julia environment
+      - name: Setup Julia Environment 
         run: |
-          julia -e 'using Pkg; Pkg.activate("."); Pkg.build("IJulia"); using IJulia; installkernel("julia_kernel")'
+          julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate()'
       
       # Build the book
       - name: Build the book
