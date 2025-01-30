@@ -10,6 +10,7 @@ permissions: write-all
 env:
   PYTHON_VERSION: 3.12
   JULIA_VERSION: 1.11
+  KERNEL_NAME: "julia_kernel"
 
 jobs:
   build-and-deploy-book:
@@ -30,26 +31,33 @@ jobs:
           pip install -r requirements.txt
 
       # Set up Julia
-      - name: Set up Julia
+      - name: Install Julia
         uses: julia-actions/setup-julia@v2
         with:
           version: ${{ env.JULIA_VERSION }}
           project : '.' # this is the default
 
-      # Install Julia environment
-      - name: Install Julia environment
+      # Install Julia kernel
+      # kernel will be named KERNEL_NAME-JULIA_VERSION
+      # JULIA_VERSION is appened by IJulia automatically
+      - name: Setup IJulia 
         run: |
-          julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate(); using IJulia'
-      
-      # # Install IJulia
-      # - name: Install IJulia
-      #   run: |
-      #     julia -e 'using Pkg; Pkg.activate("."); Pkg.add("IJulia"); using IJulia'
+          julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; installkernel("${{ env.KERNEL_NAME }}")'
 
+      # Manually set kernel in notebooks
+      - name: Manually Set Kernels in Jupyter Notebooks
+        run: |
+          chmod +x patch_kernel_versions.sh
+          sh patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-${{ env.JULIA_VERSION }}"
+        shell: bash
+
+      - name: Setup Julia Environment 
+        run: |
+          julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate()'
+      
       # Build the book
       - name: Build the book
         run: |
-          julia -e 'using Pkg; Pkg.activate(".")'
           jupyter-book build book --all
 
       # Deploy to GitHub Pages

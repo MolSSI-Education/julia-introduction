@@ -1,12 +1,9 @@
 format: jb-article
 root: intro
 sections:
-- file: setup
-- file: sample
-- file: sample2
-- file : 1_juliaintro
-- file : 2_syntax
-- file : 3_whyjulia
-- file : 4_numericaldata
-- file : 5_optimization
-- file : 6_advanced
+- file : setup.ipynb
+- file : 2_syntax.ipynb
+# - file : 3_whyjulia.ipynb
+- file : 4_numericaldata.ipynb
+- file : 5_optimization.ipynb
+- file : 6_advanced.ipynb
