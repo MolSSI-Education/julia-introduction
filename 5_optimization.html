@@ -1,0 +1,789 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Row/Column Major: &#8212; Introduction to Julia</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=aaa2fd12" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '5_optimization';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Multi-Threading" href="6_advanced.html" />
+    <link rel="prev" title="Linear Algebra" href="4_numericaldata.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/molssi_main_logo.png" class="logo__image only-light" alt="Introduction to Julia - Home"/>
+    <img src="_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark pst-js-only" alt="Introduction to Julia - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Variables and Types</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Linear Algebra</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Row/Column Major:</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Multi-Threading</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/5_optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Row/Column Major:</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Row/Column Major:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-code">Benchmarking Code</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-memory-allocations">Reducing Memory Allocations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#staticarrays">StaticArrays</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#type-stability">Type Stability</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="alert alert-block alert-info"> 
+<h2>Overview</h2>
+This notebook will cover techniques for going from "Julia code that runs" to "Julia code that runs *fast*(er)!"
+<p>Another useful “one-stop-shop” resource in this category (there are many more!) is the <a class="reference external" href="https://modernjuliaworkflows.org/optimizing/">Optimization post on Modern Julia Workflows</a>.</p>
+<p><strong>Questions:</strong></p>
+<ul class="simple">
+<li><p>How do I time and benchmark code in Julia?</p></li>
+<li><p>How do I avoid unnecessary memory allocations?</p>
+<ul>
+<li><p>Array views</p></li>
+<li><p>Re-using memory</p></li>
+</ul>
+</li>
+<li><p>How do I use statically sized arrays?</p></li>
+<li><p>How to check for type stability</p></li>
+</ul>
+<p><strong>Objectives:</strong></p>
+<ul class="simple">
+<li><p>Learn common performance pitfalls and how to catch and avoid them.</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
+<span class="k">using</span><span class="w"> </span><span class="n">StaticArrays</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Random</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+<span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>project at `~/work/julia-introduction/julia-introduction/book`
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Package BenchmarkTools not found in current path.
+<span class="o">-</span> <span class="n">Run</span> <span class="err">`</span><span class="kn">import</span><span class="w"> </span><span class="nn">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;BenchmarkTools&quot;</span><span class="p">)</span><span class="err">`</span> <span class="n">to</span> <span class="n">install</span> <span class="n">the</span> <span class="n">BenchmarkTools</span> <span class="n">package</span><span class="o">.</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2296</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">273</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">__require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2271</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">#invoke_in_world#3</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1089</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">invoke_in_world</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1086</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2260</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="row-column-major">
+<h1>Row/Column Major:<a class="headerlink" href="#row-column-major" title="Link to this heading">#</a></h1>
+<p>Julia is column-major, which means columns are contiguous in memory. This is the same as MATLAB and Fortran, but Numpy is row-major by default. Remeber this fact when looping over data as looping incorrectly comes with a big performance penalty!</p>
+</section>
+<section id="benchmarking-code">
+<h1>Benchmarking Code<a class="headerlink" href="#benchmarking-code" title="Link to this heading">#</a></h1>
+<p>Julia is just in time (JIT) compiled, so the first time you run code there will be a penalty to first compile the code before it can be run. We can use the <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> macro to see this effect. (If you run the cell more than once, the effect will go away since it has already been compiled!)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="k">function</span><span class="w"> </span><span class="n">sum_global</span><span class="p">()</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">x</span>
+<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">sum_global</span><span class="p">();</span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">sum_global</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> macro is convenient, but only executes the function once. We can use the <a class="reference external" href="https://juliaci.github.io/BenchmarkTools.jl/stable/">BenchmarkTools</a> library to investigate the performance of our function with multiple trials. The <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> macro will run 10,000 trials or (roughly) 5 seconds whichever comes first. (These can be configured). There is also the <code class="docutils literal notranslate"><span class="pre">&#64;btime</span></code> macro which runs the same number of trials as <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> but has output similar to <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_global</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If your function takes parameters, be sure to “interpolate” them with a <code class="docutils literal notranslate"><span class="pre">$</span></code> when using <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> this tells BenchmarkTools to ignore the allocation and time required to allocate the parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Parameter is Interpolated</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">inv</span><span class="p">(</span><span class="o">$</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)));</span>
+<span class="c"># No Interpolation</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">inv</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reducing-memory-allocations">
+<h1>Reducing Memory Allocations<a class="headerlink" href="#reducing-memory-allocations" title="Link to this heading">#</a></h1>
+<p>One of the easiest ways to speed up your code is by removing all unnecessary memory allocations. In Python the end-user is not able to manage memory easily and the interprer or library (e.g. numpy) is trusted to handle things.</p>
+<p>Julia can also operate like Python, where we just trust the compiler to “do the right thing”. This is good for prototyping, but can result in inefficient code. Below we will look at the basics of memory allocations and how to reduce them.</p>
+<hr class="docutils" />
+<p>Lets start by allocating a small array of 10,000 <code class="docutils literal notranslate"><span class="pre">Float64</span></code>s. Each <code class="docutils literal notranslate"><span class="pre">Float64</span></code> is 8 bytes (64 bits), so the total size should be 80,000 bytes or 80kB (78.125 kiB). Note there will be a slight overhead for some internal machinery associated with each allocation (e.g. a pointer to the array).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In Julia, all arrays are heap-allocated since they are re-sizeable. This just means that the array is further away from the CPU and it can be slow(er) to allocate and access. The first strategy to mitigate this penalty is to simply allocate memory as little as possible. To check this we can use BenchmarkTools to understand the allocations in our function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">allocates_alot</span><span class="p">()</span>
+<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="c"># ALLOCATION EVERY LOOP ITERATION</span>
+<span class="w">        </span><span class="n">res</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">allocates_once</span><span class="p">()</span>
+<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">    </span><span class="n">storage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
+<span class="w">        </span><span class="c"># The ! means it mutates the input</span>
+<span class="w">        </span><span class="c"># In this case it overwrites `storage` with new random values</span>
+<span class="w">        </span><span class="n">rand!</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span>
+<span class="w">        </span><span class="n">res</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">&#64;btime</span></code> macro, we can measure the performace uplift and the number of allocations from each function. You’ll find that the function which allocates a new array each loop iteration will be slower and allocate far more memory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">allocates_alot</span><span class="p">()</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">allocates_once</span><span class="p">()</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A more subtle, yet very common place where allocations occur is array slices (e.g. <code class="docutils literal notranslate"><span class="pre">arr[1:10]</span></code>). In Julia, these slices allocate a new array by default. We can get around this by telling Julia that we only want to read the data inside the arr. To do this we use an “array view” which can be acheived with the <code class="docutils literal notranslate"><span class="pre">view(...)</span></code> function or the <code class="docutils literal notranslate"><span class="pre">&#64;views</span></code> macro.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">slices_allocate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Int</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">N</span><span class="p">])</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">view_slices</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Int</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="c">#The view function takes the array</span>
+<span class="w">    </span><span class="c"># and the indicies you want a view of.</span>
+<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">N</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">view_macro_slices</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Int</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># The @views macro tells Julia all array slices in</span>
+<span class="w">    </span><span class="c"># this line should be array views.</span>
+<span class="w">    </span><span class="nd">@views</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">N</span><span class="p">])</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we see a large speed increase and the number of allocations drop!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">slices_allocate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">view_slices</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="nd">@btime</span><span class="w"> </span><span class="n">view_macro_slices</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-block alert-warning">
+<h3>Exercise</h3>
+Create your own array and define a view into the first 2 elements
+<p>Solution:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">arr_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@views</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">arr_v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">view</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></section>
+<section id="staticarrays">
+<h1>StaticArrays<a class="headerlink" href="#staticarrays" title="Link to this heading">#</a></h1>
+<p>Earlier, we mentioned that Julia arrays are heap-allocated because they have variable length (i.e., you can append to them). If you know the length of your array beforehand, you can use the <a class="reference external" href="https://juliaarrays.github.io/StaticArrays.jl/stable/">StaticArrays</a> library.</p>
+<p>StaticArrays has many types you can use, but the main types are <code class="docutils literal notranslate"><span class="pre">SVector</span></code> for 1D arrays, <code class="docutils literal notranslate"><span class="pre">SMatrix</span></code> for 2D arrays, and <code class="docutils literal notranslate"><span class="pre">SArray</span></code> for n-dimensional arrays (all types have equivalent macros e.g., <code class="docutils literal notranslate"><span class="pre">&#64;SMatrix</span></code>).</p>
+<p>To initialize a NxN <code class="docutils literal notranslate"><span class="pre">SMatrix</span></code> we must provide the size to the constructor: <code class="docutils literal notranslate"><span class="pre">SMatrix{N,N}(...)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">SMatrix</span><span class="p">{</span><span class="mi">25</span><span class="p">,</span><span class="mi">25</span><span class="p">}(</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A common pattern in atomistic simulation packages is to have an array of <code class="docutils literal notranslate"><span class="pre">SVectors</span></code> which represent atomic properties, like their position. Storing the data for each atom as an SVector can be much faster than using the default Julia <code class="docutils literal notranslate"><span class="pre">Vector</span></code>. This is because the compiler is able to allocate the <code class="docutils literal notranslate"><span class="pre">SVectors</span></code> next to eachother in memory (better locality) whereas with a <code class="docutils literal notranslate"><span class="pre">Vector</span></code> of <code class="docutils literal notranslate"><span class="pre">Vector</span></code> the compiler will not store the data adjacent in memory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">N_atoms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="n">static_positions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="kt">SVector</span><span class="p">{</span><span class="mi">3</span><span class="p">}(</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">N_atoms</span><span class="p">];</span>
+<span class="n">dynamic_positions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">N_atoms</span><span class="p">];</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+<span class="w">    </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+<span class="w">    </span><span class="n">dists</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">N</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">i</span><span class="o">:</span><span class="n">N</span>
+<span class="w">            </span><span class="n">dists</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="w">            </span><span class="n">dists</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dists</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">dists</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Dynamic Array Benchmark:&quot;</span><span class="p">)</span>
+<span class="nd">@benchmark</span><span class="w"> </span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">dynamic_positions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Static Vector Benchmark:&quot;</span><span class="p">)</span>
+<span class="nd">@benchmark</span><span class="w"> </span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">static_positions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">SVector</span></code>s etc. are statically sized and immutable. The StaticArrays package also provides statically sized but mutable variants, which are prefixed with <code class="docutils literal notranslate"><span class="pre">M</span></code> instead of <code class="docutils literal notranslate"><span class="pre">S</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">MMatrix</span></code>.</p>
+</section>
+<section id="type-stability">
+<h1>Type Stability<a class="headerlink" href="#type-stability" title="Link to this heading">#</a></h1>
+<p>Julia will do its best to infer the data types of your variables, but if the compiler cannot infer the type of all your variables this leads to type instability and will slow down your code. We can check type stability with the <code class="docutils literal notranslate"><span class="pre">&#64;code_warntype</span></code> macro. For today’s purposes, if this macro returns any red text, then your code has unstable types.</p>
+<p>In the example below, the functions are equivalent except one relies on a global variable and the other takes that variable as a parameter. Because of the global variable, the compiler must assume that the variables inside the <em>unstable</em> function have <code class="docutils literal notranslate"><span class="pre">Any</span></code> type. Whereas in the type-stable code, the compiler can create a specialized version of the stable function for the specific type you passed into it. This is not the only unstable pattern, so if you really care about speed, check your code with <code class="docutils literal notranslate"><span class="pre">&#64;code_warntype</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">global_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+<span class="k">function</span><span class="w"> </span><span class="n">unstable</span><span class="p">()</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">global_x</span>
+<span class="w">      </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">stable</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">  </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">x</span>
+<span class="w">     </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">unstable</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">stable</span><span class="p">(</span><span class="n">global_x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">unstable</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">stable</span><span class="p">(</span><span class="o">$</span><span class="n">global_x</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia_kernel-1.11"
+        },
+        kernelOptions: {
+            name: "julia_kernel-1.11",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia_kernel-1.11'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="4_numericaldata.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Linear Algebra</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="6_advanced.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Multi-Threading</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Row/Column Major:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-code">Benchmarking Code</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-memory-allocations">Reducing Memory Allocations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#staticarrays">StaticArrays</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#type-stability">Type Stability</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Molecular Sciences Software Institute
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

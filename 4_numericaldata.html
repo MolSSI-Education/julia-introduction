@@ -1,0 +1,1230 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Linear Algebra &#8212; Introduction to Julia</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=aaa2fd12" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '4_numericaldata';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Row/Column Major:" href="5_optimization.html" />
+    <link rel="prev" title="Variables and Types" href="2_syntax.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/molssi_main_logo.png" class="logo__image only-light" alt="Introduction to Julia - Home"/>
+    <img src="_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark pst-js-only" alt="Introduction to Julia - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Variables and Types</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Algebra</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Row/Column Major:</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Multi-Threading</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/4_numericaldata.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Algebra</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Algebra</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrices">Special Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-number-and-more-generation">Random Number (and more!) generation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-plot-examples">More plot examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unitful">Unitful</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-units">Converting between units</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioless-quantities">Dimensioless quantities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatching-on-units">Dispatching on units</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-units">Creating your own units</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delimited-files"><strong>Delimited Files</strong></a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+
+<span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span><span class="w"> </span><span class="c"># change path if you haven&#39;t launched notebook from base of repo</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>project at `~/work/julia-introduction/julia-introduction/book`
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/work/julia-introduction/julia-introduction/book/Project.toml`
+<span class=" -Color -Color-Bold -Color-Bold-Green">  No Changes</span> to `~/work/julia-introduction/julia-introduction/book/Manifest.toml`
+</pre></div>
+</div>
+</div>
+</div>
+<section id="linear-algebra">
+<h1>Linear Algebra<a class="headerlink" href="#linear-algebra" title="Link to this heading">#</a></h1>
+<p>Here we’ll demonstrate some basic linear algebraic functionality using the Base (i.e. built into Julia and doesn’t need to be installed, only imported) <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/">LinearAlgebra</a> package.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s initialize a nice matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Int64}:
+ 1  2  3
+ 4  5  6
+ 7  8  9
+</pre></div>
+</div>
+</div>
+</div>
+<p>What’s its determinant? (Oops, maybe it’s not so nice)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Okay, let’s make a new matrix and take the inverse:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="n">inv</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
+  0.75  -0.25  -0.25
+ -0.25   0.75  -0.25
+ -0.25  -0.25   0.75
+</pre></div>
+</div>
+</div>
+</div>
+<p>How about eigendecomposition?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eig_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eigen</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eigen{Float64, Float64, Matrix{Float64}, Vector{Float64}}
+values:
+3-element Vector{Float64}:
+ 0.9999999999999998
+ 1.0
+ 3.9999999999999987
+vectors:
+3×3 Matrix{Float64}:
+ -0.408248   0.707107  -0.57735
+ -0.408248  -0.707107  -0.57735
+  0.816497   0.0       -0.57735
+</pre></div>
+</div>
+</div>
+</div>
+<p>By default an <code class="docutils literal notranslate"><span class="pre">Eigen</span></code> object is returned, which we can pull out the fields of as <code class="docutils literal notranslate"><span class="pre">eig_B.values</span></code> or <code class="docutils literal notranslate"><span class="pre">eig_B.vectors</span></code>, but we can also pre-assign them like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vals</span><span class="p">,</span><span class="w"> </span><span class="n">vecs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eigen</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eigen{Float64, Float64, Matrix{Float64}, Vector{Float64}}
+values:
+3-element Vector{Float64}:
+ 0.9999999999999998
+ 1.0
+ 3.9999999999999987
+vectors:
+3×3 Matrix{Float64}:
+ -0.408248   0.707107  -0.57735
+ -0.408248  -0.707107  -0.57735
+  0.816497   0.0       -0.57735
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the eigenvectors are the columns…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">vecs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
+ -0.408248   0.707107  -0.57735
+ -0.408248  -0.707107  -0.57735
+  0.816497   0.0       -0.57735
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have a backslash like in MATLAB, too…</p>
+<p><strong>NOTE</strong>: the backslash operator divides the argument on its right by the one on its left, commonly used to solve matrix equations</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">SingularException</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">checknonsingular</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.3</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">factorization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">69</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">_check_lu_success</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.3</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">84</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="c1">#lu!#182</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.3</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">lu</span><span class="err">!</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.3</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">90</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">lu</span><span class="err">!</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.3</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">89</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">_lu</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.3</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">347</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">lu</span><span class="p">(::</span><span class="n">Matrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">};</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
+    <span class="o">@</span> <span class="n">LinearAlgebra</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.3</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">341</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">lu</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.3</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">341</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> \<span class="p">(</span><span class="n">A</span><span class="p">::</span><span class="n">Matrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">B</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
+    <span class="o">@</span> <span class="n">LinearAlgebra</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.3</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">generic</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1132</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>More things!</p>
+<p>We will solve the following system of equations:</p>
+<div class="highlight-math notranslate"><div class="highlight"><pre><span></span>x_1 + 2x_2 - x_3 + x_4 = 1 \\
+2x_1 - x_2 + 3x_3 - 2x_4 = 5 \\
+-3x_1 + 4x_2 + 2x_3 + x_4 = 7 \\
+x_1 - 3x_2 + 2x_3 - 4x_4 = -2 \\
+</pre></div>
+</div>
+<p>This can be written in matrix form <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code> as:</p>
+<div class="highlight-math notranslate"><div class="highlight"><pre><span></span>A =
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 1 \\
+2 &amp; -1 &amp; 3 &amp; -2 \\
+-3 &amp; 4 &amp; 2 &amp; 1 \\
+1 &amp; -3 &amp; 2 &amp; -4 \\
+\end{bmatrix}
+x =
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+x_4 \\
+\end{bmatrix}
+b =
+\begin{bmatrix}
+1 \\
+5 \\
+7 \\
+-2 \\
+\end{bmatrix}
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Define matrix A and vector b</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c"># Solve for x using the backslash operator</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">b</span>
+
+<span class="c"># Compute the rank of A</span>
+<span class="n">rank_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c"># Compute the null space of A</span>
+<span class="n">null_space_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nullspace</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c"># Compute the condition number of A</span>
+<span class="n">cond_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c"># Display results</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Solution x: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Rank of A: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rank_A</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Null space of A: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">null_space_A</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Condition number of A: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cond_A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="special-matrices">
+<h2>Special Matrices<a class="headerlink" href="#special-matrices" title="Link to this heading">#</a></h2>
+<p>Julia provides for a bunch of special matrix types on which standard operations are further optimized; you can read more about them <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/#Special-matrices">here</a>. We explore a few examples below.</p>
+<p><strong>Symmetric Matrices</strong>: Julia provides the <code class="docutils literal notranslate"><span class="pre">Symmetric</span></code> type for creating symmetric matrices, where the matrix is equal to its transpose. This saves storage space by storing only the upper triangular part of the matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Create a symmetric matrix</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+<span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Symmetric</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">println</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Sparse Matrices</strong>: Sparse matrices are useful when you have a large matrix with mostly zero elements. Julia provides efficient storage and operations for sparse matrices via the <code class="docutils literal notranslate"><span class="pre">SparseArrays</span></code> package.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SparseArrays</span>
+
+<span class="c"># Create a sparse matrix</span>
+<span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sparse</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">],</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">println</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Diagonal Matrices</strong>: Julia has a <code class="docutils literal notranslate"><span class="pre">Diagonal</span></code> type that stores only the diagonal elements of the matrix, making it memory-efficient and fast for certain operations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Create a diagonal matrix</span>
+<span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Diagonal</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">println</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Block Diagonal Matrices</strong>: Using the <code class="docutils literal notranslate"><span class="pre">BlockDiagonals</span></code> package (or other similar libraries), you can create block diagonal matrices that store each diagonal block separately.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BlockDiagonals</span>
+
+<span class="c"># Create a block diagonal matrix</span>
+<span class="n">D1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Diagonal</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+<span class="n">D2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Diagonal</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
+<span class="n">BD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BlockDiagonal</span><span class="p">([</span><span class="n">D1</span><span class="p">,</span><span class="w"> </span><span class="n">D2</span><span class="p">])</span>
+
+<span class="n">println</span><span class="p">(</span><span class="n">BD</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Hermitian Matrices</strong>: The <code class="docutils literal notranslate"><span class="pre">Hermitian</span></code> type in Julia is used for Hermitian matrices, which are complex square matrices that are equal to their own conjugate transpose.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Create a Hermitian matrix</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="nb">im</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="o">-</span><span class="nb">im</span><span class="p">]</span>
+<span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Hermitian</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+<span class="n">println</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="dataframes">
+<h1>DataFrames<a class="headerlink" href="#dataframes" title="Link to this heading">#</a></h1>
+<p>The <a class="reference external" href="https://github.com/JuliaData/DataFrames.jl">DataFrames</a> package provides a similar set of functionality to pandas in Python. We’ll import the package and start by creating a simple DataFrame to experiment with.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span><span class="p">,</span><span class="w"> </span><span class="n">Statistics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Jane&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Jim&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">Age</span><span class="o">=</span><span class="p">[</span><span class="mi">28</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">],</span><span class="w"> </span><span class="n">Salary</span><span class="o">=</span><span class="p">[</span><span class="mi">50000</span><span class="p">,</span><span class="w"> </span><span class="mi">62000</span><span class="p">,</span><span class="w"> </span><span class="mi">72000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add a new column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Single&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Married&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Single&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s filter for people over 30…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="n">Age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">describe</span></code> function gives us some summary statistics…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">describe</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There’s also grouping and aggregate calculation functionality…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">grouped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="ss">:Status</span><span class="p">)</span>
+<span class="n">agg_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">combine</span><span class="p">(</span><span class="n">grouped</span><span class="p">,</span><span class="w"> </span><span class="ss">:Salary</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">:AvgSalary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="random-number-and-more-generation">
+<h1>Random Number (and more!) generation<a class="headerlink" href="#random-number-and-more-generation" title="Link to this heading">#</a></h1>
+<p>As with any self-respecting scientific programming language, Julia has extensive functionality for randomness. The core base function is <code class="docutils literal notranslate"><span class="pre">rand</span></code>, which we demonstrate in a few (of <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/Random/">many</a>) variations below…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="c"># without arguments, will draw a single float from U(0,1)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c"># now make it a matrix</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c"># we can also specify a type; now it will draw from the full range of values for that type</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span><span class="p">([</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">])</span><span class="w"> </span><span class="c"># can also draw from a provided collection of objects</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">rand</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">2</span><span class="o">:</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="c"># anything iterable counts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="c"># draw from standard normal</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us use <code class="docutils literal notranslate"><span class="pre">rand</span></code> and <code class="docutils literal notranslate"><span class="pre">randn</span></code> to generate and plot distributions…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Generate sample data for plotting</span>
+<span class="n">normal_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mi">5</span><span class="w">    </span><span class="c"># Normal distribution N(5, 2)</span>
+<span class="n">uniform_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w">       </span><span class="c"># Uniform distribution U(0, 10)</span>
+
+<span class="c"># Plot histograms for comparison</span>
+<span class="n">histogram</span><span class="p">(</span><span class="n">normal_samples</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Normal(5, 2)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Value&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">histogram!</span><span class="p">(</span><span class="n">uniform_samples</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Uniform(0, 10)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, we see the use of <code class="docutils literal notranslate"><span class="pre">!</span></code> in a slightly different way than was explored in the syntax section, though conceptually the same. The <code class="docutils literal notranslate"><span class="pre">histogram!</span></code> function modifies the existing plot, but we don’t actually have to pass it as an argument (though we can), so the thing being modified “in-place” is not explicitly being passed in this case.</p>
+<section id="more-plot-examples">
+<h2>More plot examples<a class="headerlink" href="#more-plot-examples" title="Link to this heading">#</a></h2>
+<p><strong>Line Plot</strong>: A basic line plot with labels and title.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Generate some data</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mi">2</span>
+
+<span class="c"># Line plot</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;y = x^2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Line Plot&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Scatter Plot</strong>: A scatter plot to show individual points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Scatter plot</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Scatter&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Scatter Plot&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Bar Plot</strong>: A bar plot to visualize categorical data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Bar plot</span>
+<span class="n">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;D&quot;</span><span class="p">]</span>
+<span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">]</span>
+
+<span class="n">bar</span><span class="p">(</span><span class="n">categories</span><span class="p">,</span><span class="w"> </span><span class="n">values</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Values&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Bar Plot&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Category&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;Value&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Heatmap</strong>: A heatmap to show a matrix of values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Heatmap data</span>
+<span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c"># Heatmap plot</span>
+<span class="n">heatmap</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Heatmap&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;X-axis&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;Y-axis&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Pie Chart</strong>: A pie chart for visualizing proportions of categories.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Pie chart data</span>
+<span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Category 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Category 2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Category 3&quot;</span><span class="p">]</span>
+<span class="n">sizes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span>
+
+<span class="c"># Pie chart</span>
+<span class="n">pie</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Pie Chart&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>3D Plot</strong>: A 3D plot to visualize functions or data in three dimensions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># 3D plot data</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mi">5</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mi">5</span>
+<span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xi</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">yi</span><span class="o">^</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">xi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">yi</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">y</span><span class="p">]</span>
+
+<span class="c"># 3D surface plot</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">st</span><span class="o">=</span><span class="ss">:surface</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;3D Plot&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;X&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;Y&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">zlabel</span><span class="o">=</span><span class="s">&quot;Z&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong>: The <code class="docutils literal notranslate"><span class="pre">Plots</span></code> package is a powerful and flexible plotting library in Julia, and it supports many different plot types and customization options. You can refer to the <a class="reference external" href="http://docs.juliaplots.org/latest/">Plots.jl documentation</a> for more information on how to create different types of plots and customize them to suit your needs.</p>
+</section>
+<section id="unitful">
+<h2>Unitful<a class="headerlink" href="#unitful" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://painterqubits.github.io/Unitful.jl/stable/">Unitful.jl</a> is a Julia package for handling units and dimensions. It can be very useful for doing unit conversions and catching dimensional errors, but is also sometimes more trouble than it’s worth to actually store every quantity in your code with units…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Unitful</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0</span><span class="sa">u</span><span class="s">&quot;m/s&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0</span><span class="sa">u</span><span class="s">&quot;N*m&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="sa">u</span><span class="s">&quot;m,kg,s&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="mf">1.0</span><span class="sa">u</span><span class="s">&quot;m/s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="sa">u</span><span class="s">&quot;ħ&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="converting-between-units">
+<h3>Converting between units<a class="headerlink" href="#converting-between-units" title="Link to this heading">#</a></h3>
+<p>Convert a <code class="docutils literal notranslate"><span class="pre">Unitful.Quantity</span></code> to different units. The conversion will fail if the target units a have a different dimension than the dimension of the quantity <code class="docutils literal notranslate"><span class="pre">x</span></code>. You can use this method to switch between equivalent representations of the same unit, like <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">m</span></code> and <code class="docutils literal notranslate"><span class="pre">J</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">uconvert</span><span class="p">(</span><span class="sa">u</span><span class="s">&quot;hr&quot;</span><span class="p">,</span><span class="mi">3602</span><span class="sa">u</span><span class="s">&quot;s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">uconvert</span><span class="p">(</span><span class="sa">u</span><span class="s">&quot;m/s&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="sa">u</span><span class="s">&quot;km/hr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another useful function is: <code class="docutils literal notranslate"><span class="pre">upreferred</span></code>, which converts a quantity to the preferred unit for its dimension. In this case, units are converted to the preferred SI representation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">upreferred</span><span class="p">(</span><span class="sa">u</span><span class="s">&quot;J&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also make <code class="docutils literal notranslate"><span class="pre">Unitful.Units</span></code> callable with a Number as an argument, for a unit conversion shorthand:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="sa">u</span><span class="s">&quot;cm&quot;</span><span class="p">(</span><span class="mi">1</span><span class="sa">u</span><span class="s">&quot;m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For syntax simplicity, we can use <code class="docutils literal notranslate"><span class="pre">|+&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">|&gt;</span></code>) to chain unit conversions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="sa">u</span><span class="s">&quot;m&quot;</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="sa">u</span><span class="s">&quot;cm&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dimensioless-quantities">
+<h3>Dimensioless quantities<a class="headerlink" href="#dimensioless-quantities" title="Link to this heading">#</a></h3>
+<p>For dimensionless quantities, we can use <code class="docutils literal notranslate"><span class="pre">NoUnits</span></code> as an argumert to <code class="docutils literal notranslate"><span class="pre">uconvert</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">uconvert</span><span class="p">(</span><span class="n">NoUnits</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="sa">u</span><span class="s">&quot;μm/m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also check if an object represents “no units” by doing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">unit</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">NoUnits</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is also possible to convert a quantity to a subtype of <code class="docutils literal notranslate"><span class="pre">Real</span></code> or <code class="docutils literal notranslate"><span class="pre">Complex</span></code> to obtain the numerical value without units:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">convert</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="sa">u</span><span class="s">&quot;μm/m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dispatching-on-units">
+<h3>Dispatching on units<a class="headerlink" href="#dispatching-on-units" title="Link to this heading">#</a></h3>
+<p>The following example shows how the <code class="docutils literal notranslate"><span class="pre">whatsit</span></code> function takes different types into account and returns the correct unit:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">whatsit</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Unitful</span><span class="o">.</span><span class="n">Voltage</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;voltage!&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">whatsit</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Unitful</span><span class="o">.</span><span class="n">Length</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;length!&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">whatsit</span><span class="p">(</span><span class="mi">1</span><span class="sa">u</span><span class="s">&quot;mm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">whatsit</span><span class="p">(</span><span class="mi">1</span><span class="sa">u</span><span class="s">&quot;kV&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="creating-your-own-units">
+<h4>Creating your own units<a class="headerlink" href="#creating-your-own-units" title="Link to this heading">#</a></h4>
+<p>If a different set of default units or dimensions is desired, macros for generating units and dimensions are provided. To create new units interactively, most users will be happy with the <code class="docutils literal notranslate"><span class="pre">&#64;unit</span></code> macro and the <code class="docutils literal notranslate"><span class="pre">Unitful.register</span></code> function, which makes units defined in a module available to the <code class="docutils literal notranslate"><span class="pre">&#64;u_str</span></code> string macro.</p>
+<p>An example of defining units in a module:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">module</span><span class="w"> </span><span class="n">MyUnits</span><span class="p">;</span><span class="w"> </span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">Unitful</span><span class="p">;</span>
+
+<span class="nd">@unit</span><span class="w"> </span><span class="n">myMeter</span><span class="w"> </span><span class="s">&quot;m&quot;</span><span class="w"> </span><span class="n">MyMeter</span><span class="w"> </span><span class="mi">1</span><span class="sa">u</span><span class="s">&quot;m&quot;</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
+
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">MyUnits</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Unitful</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After creating your own units in a module, you can try to use them, but this WILL NOT work until you register them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="sa">u</span><span class="s">&quot;myMeter&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Unitful</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">MyUnits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="sa">u</span><span class="s">&quot;myMeter&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create your own units and use them:</p>
+</section>
+</section>
+</section>
+<section id="delimited-files">
+<h2><strong>Delimited Files</strong><a class="headerlink" href="#delimited-files" title="Link to this heading">#</a></h2>
+<p>Still in the context of manipulating numerical data, the <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/">DelimitedFiles</a> package provides functionality for reading and writing files with delimited values (Originally a Julia stdlib)</p>
+<p>Let’s read the file you just created:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">DelimitedFiles</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">readdlm</span><span class="p">(</span><span class="s">&quot;data/read_test.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also remove the header and specify the delimiter:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">readdlm</span><span class="p">(</span><span class="s">&quot;data/read_test.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">comments</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia_kernel-1.11"
+        },
+        kernelOptions: {
+            name: "julia_kernel-1.11",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia_kernel-1.11'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2_syntax.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Variables and Types</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="5_optimization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Row/Column Major:</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Algebra</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrices">Special Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-number-and-more-generation">Random Number (and more!) generation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-plot-examples">More plot examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unitful">Unitful</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-units">Converting between units</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioless-quantities">Dimensioless quantities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatching-on-units">Dispatching on units</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-units">Creating your own units</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delimited-files"><strong>Delimited Files</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Molecular Sciences Software Institute
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
