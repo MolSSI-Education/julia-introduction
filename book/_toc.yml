@@ -1,17 +1,9 @@
 format: jb-book
 root: intro
-parts:
-  - caption: Syntax
-    chapters:
-    - file : 2_syntax.ipynb
-
+chapters:
+  - file: setup.ipynb
+  - file : 2_syntax.ipynb
   # - file : 3_whyjulia.ipynb
-  - caption: Numerical Computing
-    chapters:
-    - file : 4_numericaldata.ipynb
-  - caption: Optimizing Code
-    chapters:
-    - file : 5_optimization.ipynb
-  - caption: Advanced Topics
-    chapters:
-    - file : 6_advanced.ipynb
+  - file : 4_numericaldata.ipynb
+  - file : 5_optimization.ipynb
+  - file : 6_advanced.ipynb

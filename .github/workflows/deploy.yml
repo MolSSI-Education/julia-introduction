@@ -42,7 +42,7 @@ jobs:
       # JULIA_VERSION is appened by IJulia automatically
       - name: Setup IJulia 
         run: |
-          julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; installkernel("${{ env.KERNEL_NAME }}")'
+          julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; installkernel("${{ env.KERNEL_NAME }}", env=Dict("JULIA_NUM_THREADS"=>"2"))'
 
       # Manually set kernel in notebooks
       - name: Manually Set Kernels in Jupyter Notebooks
