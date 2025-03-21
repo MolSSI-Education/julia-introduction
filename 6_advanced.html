@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Multi-Threading &#8212; Introduction to Julia</title>
+    <title>Advanced Topics &#8212; Introduction to Julia</title>
   
   
   
@@ -62,7 +62,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Row/Column Major:" href="5_optimization.html" />
+    <link rel="prev" title="Optimizating Code" href="5_optimization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,14 +174,7 @@
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Variables and Types</a></li>
-
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
 
 
@@ -189,13 +182,8 @@
 <li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Linear Algebra</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Row/Column Major:</a></li>
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Multi-Threading</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizating Code</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Advanced Topics</a></li>
 </ul>
 
     </div>
@@ -334,7 +322,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Multi-Threading</h1>
+    <h1>Advanced Topics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -344,10 +332,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Multi-Threading</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-array-programming">GPU Array Programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-threading">Multi-Threading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-array-programming">GPU Array Programming</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -358,7 +345,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="alert alert-block alert-info"> 
+  <section class="tex2jax_ignore mathjax_ignore" id="advanced-topics">
+<h1>Advanced Topics<a class="headerlink" href="#advanced-topics" title="Link to this heading">#</a></h1>
+<div class="alert alert-block alert-info"> 
 <h2>Overview</h2>
 This notebook will cover basic multi-threading and programming Nvidia GPUs in Julia.
 <p>Check out the <a class="reference external" href="https://juliagpu.org/">JuliaGPU</a> orginization page for more on how to program GPUs in Julia as well as how to program GPUs from other vendors like AMD and Intel.</p>
@@ -370,22 +359,12 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
-
-<span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
 <span class="k">using</span><span class="w"> </span><span class="n">OhMyThreads</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> 
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>project at `~/work/julia-introduction/julia-introduction/book`
-</pre></div>
-</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Package BenchmarkTools not found in current path.
 <span class="o">-</span> <span class="n">Run</span> <span class="err">`</span><span class="kn">import</span><span class="w"> </span><span class="nn">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;BenchmarkTools&quot;</span><span class="p">)</span><span class="err">`</span> <span class="n">to</span> <span class="n">install</span> <span class="n">the</span> <span class="n">BenchmarkTools</span> <span class="n">package</span><span class="o">.</span>
 
@@ -407,12 +386,18 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </div>
 </div>
 <section id="multi-threading">
-<h1>Multi-Threading<a class="headerlink" href="#multi-threading" title="Link to this heading">#</a></h1>
+<h2>Multi-Threading<a class="headerlink" href="#multi-threading" title="Link to this heading">#</a></h2>
 <p>Julia’s base <a class="reference external" href="https://docs.julialang.org/en/v1/manual/multi-threading/">Threads</a> library provides the <code class="docutils literal notranslate"><span class="pre">Threads.&#64;threads</span></code> macro to turn any for loop into a parallel for loop. To change the number of threads Julia has access to we can define the environment variable <code class="docutils literal notranslate"><span class="pre">JULIA_NUM_THREADS</span></code>. This must be done before starting the notebook (e.g. <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">JULIA_NUM_THREADS=4</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Julia has access to &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot; threads</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="nb">ENV</span><span class="p">[</span><span class="s">&quot;JULIA_NUM_THREADS&quot;</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Julia has access to </span><span class="si">$</span><span class="p">(</span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">())</span><span class="s"> threads&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="nb">ENV</span><span class="p">[</span><span class="s">&quot;JULIA_NUM_THREADS&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Julia has access to 2 threads
+2
 </pre></div>
 </div>
 </div>
@@ -440,6 +425,11 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>broadcasted! (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -454,6 +444,13 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@benchmark` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -461,10 +458,24 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@benchmark` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">all_threads!</span><span class="p">(</span><span class="o">$</span><span class="n">vals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@benchmark` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -483,6 +494,13 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@tasks` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -490,10 +508,17 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@benchmark` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="gpu-array-programming">
-<h1>GPU Array Programming<a class="headerlink" href="#gpu-array-programming" title="Link to this heading">#</a></h1>
+<h2>GPU Array Programming<a class="headerlink" href="#gpu-array-programming" title="Link to this heading">#</a></h2>
 <p>With the power of dynamic dispacth, we can perform many operations on the GPU just by changing the type of our data from <code class="docutils literal notranslate"><span class="pre">Array</span></code> to <code class="docutils literal notranslate"><span class="pre">CuArray</span></code> (or the analagous type for AMD, Intel, or Apple). The packge environment does not have access to a GPU so the test the cells below install the <code class="docutils literal notranslate"><span class="pre">CUDA.jl</span></code> package and try running the code yourself!</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># This example is for CUDA but is the same principle for all the GPU libraries</span>
 <span class="c">#using CUDA or AMDGPU or oneAPI or Metal or KernelAbstractions</span>
@@ -522,6 +547,7 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 <span class="n">sum_of_C_squared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapreduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">+</span><span class="p">,</span><span class="w"> </span><span class="n">cu_C</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -560,7 +586,7 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Row/Column Major:</p>
+        <p class="prev-next-title">Optimizating Code</p>
       </div>
     </a>
 </div>
@@ -579,10 +605,9 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Multi-Threading</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-array-programming">GPU Array Programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-threading">Multi-Threading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-array-programming">GPU Array Programming</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

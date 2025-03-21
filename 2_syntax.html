@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Variables and Types &#8212; Introduction to Julia</title>
+    <title>Syntax &#8212; Introduction to Julia</title>
   
   
   
@@ -175,14 +175,7 @@
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Variables and Types</a></li>
-
-
-
-
-
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
 
 
@@ -190,13 +183,8 @@
 <li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Linear Algebra</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Row/Column Major:</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Multi-Threading</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizating Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
 </ul>
 
     </div>
@@ -335,7 +323,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Variables and Types</h1>
+    <h1>Syntax</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -345,16 +333,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Variables and Types</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays">Arrays</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loops-conditionals">Loops &amp; Conditionals</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-types-structs">Custom Types : Structs</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#file-i-o">File I/O</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#macros">Macros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-types">Variables and Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays">Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops-conditionals">Loops &amp; Conditionals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structs">Structs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-i-o">File I/O</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macros">Macros</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -365,7 +352,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="alert alert-block alert-info"> 
+  <section class="tex2jax_ignore mathjax_ignore" id="syntax">
+<h1>Syntax<a class="headerlink" href="#syntax" title="Link to this heading">#</a></h1>
+<div class="alert alert-block alert-info"> 
 <h2>Overview</h2>
 If you're familiar with Python and MATLAB, Julia syntax is a combination with some extra features and syntax sugar.
 <p><strong>Questions:</strong></p>
@@ -382,7 +371,7 @@ If you're familiar with Python and MATLAB, Julia syntax is a combination with so
 </ul>
 </div>
 <section id="variables-and-types">
-<h1>Variables and Types<a class="headerlink" href="#variables-and-types" title="Link to this heading">#</a></h1>
+<h2>Variables and Types<a class="headerlink" href="#variables-and-types" title="Link to this heading">#</a></h2>
 <p>Julia is strongly typed, but providing type information is optional. The compiler will try to infer type information, and will throw an error when it fails.</p>
 <p>Like in MATLAB, a semicolon at the end of a line will suppress output.</p>
 <div class="cell docutils container">
@@ -441,10 +430,15 @@ If you're familiar with Python and MATLAB, Julia syntax is a combination with so
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.011111111111111112
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="arrays">
-<h1>Arrays<a class="headerlink" href="#arrays" title="Link to this heading">#</a></h1>
+<h2>Arrays<a class="headerlink" href="#arrays" title="Link to this heading">#</a></h2>
 <p>Arrays in Julia are mutable and dynamically sized. They behave a lot like numpy and MATLAB arrays and allow you to broadcast operations over the entire array and use index slicing. The <code class="docutils literal notranslate"><span class="pre">Array</span></code> type has several sub-types for conveinece, such as <code class="docutils literal notranslate"><span class="pre">Vector</span></code> for 1D arrays and <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> for 2D arrays.</p>
 <p>Important to note is that <code class="docutils literal notranslate"><span class="pre">Array</span></code>s are column major and one-indexed and slices allocate a new array. We will discuss these facts more later.</p>
 <div class="cell docutils container">
@@ -452,6 +446,15 @@ If you're familiar with Python and MATLAB, Julia syntax is a combination with so
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="c"># arrays are 1-indexed</span>
 <span class="n">arr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 5
+ 2
+ 3
+ 4
 </pre></div>
 </div>
 </div>
@@ -463,11 +466,25 @@ If you're familiar with Python and MATLAB, Julia syntax is a combination with so
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
+ 1.0  1.0  1.0
+ 1.0  1.0  1.0
+ 1.0  1.0  1.0
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="c"># note slice range is inclusive</span>
 <span class="n">println</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="k">end</span><span class="p">])</span><span class="w"> </span><span class="c"># CANNOT just do [3:] like in Python</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5, 2, 3]
+[3, 4]
 </pre></div>
 </div>
 </div>
@@ -480,16 +497,29 @@ If you're familiar with Python and MATLAB, Julia syntax is a combination with so
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:2:10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 2, 4, 6, 8, 10]
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h1>
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
 <p>Julia functions are defined with the <code class="docutils literal notranslate"><span class="pre">function</span></code> keyword and wrapped with <code class="docutils literal notranslate"><span class="pre">end</span></code>. If type information is not provided in the function signature then function specializations are created at compile time depending on the data passed to the function. Learn more about functions in the Julia documentation <a class="reference external" href="https://docs.julialang.org/en/v1/manual/functions/">here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">mult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span>
 <span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mult (generic function with 1 method)
 </pre></div>
 </div>
 </div>
@@ -504,11 +534,17 @@ If you're familiar with Python and MATLAB, Julia syntax is a combination with so
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integer multiplication: 2 with type Int64
+Float multiplication: 2.0 with type Float64
+</pre></div>
+</div>
+</div>
 </div>
 <div class="alert alert-block alert-warning">
-<h3>Exercise</h3>
+<h3>Exercise:</h3>
 Please define a function named `get_last` that takes an array and returns the last element.
-<p>Solution:</p>
+<h3>Solution:</h3>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">get_last</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="k">end</span><span class="p">]</span>
 <span class="k">end</span>
@@ -529,11 +565,22 @@ Please define a function named `get_last` that takes an array and returns the la
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>add (generic function with 2 methods)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">z_int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 <span class="n">z_float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Adding integers
+Adding floats
 </pre></div>
 </div>
 </div>
@@ -549,11 +596,21 @@ Please define a function named `get_last` that takes an array and returns the la
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>multiple_return (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">multiple_return</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
 <span class="n">println</span><span class="p">(</span><span class="s">&quot;Sum: </span><span class="si">$</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span><span class="s">, Product: </span><span class="si">$</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sum: 7, Product: 12
 </pre></div>
 </div>
 </div>
@@ -566,6 +623,11 @@ Please define a function named `get_last` that takes an array and returns the la
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -575,14 +637,16 @@ Please define a function named `get_last` that takes an array and returns the la
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
 </div>
 <div class="alert alert-block alert-warning">
 <h3>Exercise</h3>
-Orange for exercises.
-</div><div class="alert alert-block alert-warning">
-<h3>Exercise</h3>
 Define a one line function called `cube` that takes a `Float32` and returns the cube of that number.
-<p>Solution:</p>
+<h3>Solution:</h3>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">cube</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Float32</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
 <span class="k">end</span>
@@ -605,11 +669,17 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before: [1, 2, 3]
+After: [336, 2, 3]
+</pre></div>
+</div>
+</div>
 </div>
 <p>For more about scope of variables, see <a class="reference external" href="https://docs.julialang.org/en/v1/manual/variables-and-scoping/">this page</a>. Read lots more about functions in Julia in general in the docs <a class="reference external" href="https://docs.julialang.org/en/v1/manual/functions/">here</a>.</p>
 </section>
 <section id="loops-conditionals">
-<h1>Loops &amp; Conditionals<a class="headerlink" href="#loops-conditionals" title="Link to this heading">#</a></h1>
+<h2>Loops &amp; Conditionals<a class="headerlink" href="#loops-conditionals" title="Link to this heading">#</a></h2>
 <p>The syntax here is very similar to Python without the <code class="docutils literal notranslate"><span class="pre">:</span></code>, you just need an <code class="docutils literal notranslate"><span class="pre">end</span></code> to denote the end of the block. As in Python, indentation doesn’t formally matter, but most style guides strongly suggest it for readability.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -633,6 +703,13 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 2 3 
+1 2 3 
+1 2 3 
+</pre></div>
+</div>
+</div>
 </div>
 <p>Similarly, the if-else syntax is similar to Python. Just remove the <code class="docutils literal notranslate"><span class="pre">:</span></code> and add an <code class="docutils literal notranslate"><span class="pre">end</span></code></p>
 <div class="cell docutils container">
@@ -653,11 +730,17 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x is less than y.
+x is equal to y.
+</pre></div>
+</div>
+</div>
 </div>
 <p>For more about control flow in Julia, see <a class="reference external" href="https://docs.julialang.org/en/v1/manual/control-flow/">this docs section</a>.</p>
 </section>
-<section id="custom-types-structs">
-<h1>Custom Types : Structs<a class="headerlink" href="#custom-types-structs" title="Link to this heading">#</a></h1>
+<section id="structs">
+<h2>Structs<a class="headerlink" href="#structs" title="Link to this heading">#</a></h2>
 <p>Structs are like classes in Python and MATLAB. By default structs are immutable. Providing type information in a struct is common but not required. More info can be found in the Julia documentation <a class="reference external" href="https://docs.julialang.org/en/v1/manual/types/#Composite-Types">here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -675,10 +758,30 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyType(3, 1.0)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">MyType</span><span class="p">(</span><span class="mf">3.4</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">InexactError</span>: Int64(3.4)
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Int64</span>
+   <span class="o">@</span> <span class="o">./</span><span class="nb">float</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">994</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">convert</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">number</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">7</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">MyType</span><span class="p">(</span><span class="n">a</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">b</span><span class="p">::</span><span class="n">Float64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span><span class="mi">2</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -693,6 +796,11 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyType
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -700,12 +808,19 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MyType(3, 3.0)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="alert alert-block alert-warning">
 <h3>Exercise</h3>
-- Define a struct for a circle that contains its radius. 
-- Define a method that returns the area of a circle
-<p>Solution</p>
+<ul>
+    <li>Define a struct for a circle that contains its radius.</li>
+    <li>Define a method that returns the area of a circle</li>
+</ul>
+<h3>Solution:</h3>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">Circle</span>
 <span class="w">    </span><span class="n">radius</span><span class="o">::</span><span class="kt">Float64</span>
 <span class="k">end</span>
@@ -738,15 +853,33 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ParametricType{
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Int64}
+ParametricType{Float64}
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="broadcasting">
-<h1>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h1>
+<h2>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h2>
 <p>Like in MATLAB you can broadcast operations like, <code class="docutils literal notranslate"><span class="pre">+</span></code>, with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax. In Julia you can also broadcast functions with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x_vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">x_vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_vals</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Float64}:
+ 3.0
+ 3.0
+ 3.0
+ 3.0
 </pre></div>
 </div>
 </div>
@@ -758,11 +891,41 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching +(::Vector{Float64}, ::Int64)
+<span class="n">For</span> <span class="n">element</span><span class="o">-</span><span class="n">wise</span> <span class="n">addition</span><span class="p">,</span> <span class="n">use</span> <span class="n">broadcasting</span> <span class="k">with</span> <span class="n">dot</span> <span class="n">syntax</span><span class="p">:</span> <span class="n">array</span> <span class="o">.+</span> <span class="n">scalar</span>
+<span class="n">The</span> <span class="n">function</span> <span class="err">`</span><span class="o">+</span><span class="err">`</span> <span class="n">exists</span><span class="p">,</span> <span class="n">but</span> <span class="n">no</span> <span class="n">method</span> <span class="ow">is</span> <span class="n">defined</span> <span class="k">for</span> <span class="n">this</span> <span class="n">combination</span> <span class="n">of</span> <span class="n">argument</span> <span class="n">types</span><span class="o">.</span>
+
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="o">+</span><span class="p">(::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="o">...</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">596</span>
+  <span class="o">+</span><span class="p">(::</span><span class="n">BigInt</span><span class="p">,</span> <span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Int16</span><span class="p">,</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">Int8</span><span class="p">})</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">gmp</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">550</span>
+  <span class="o">+</span><span class="p">(::</span><span class="n">BigFloat</span><span class="p">,</span> <span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Int16</span><span class="p">,</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">Int8</span><span class="p">})</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">mpfr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">506</span>
+  <span class="o">...</span>
+
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>However, multiplication does work:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x_vals</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Float64}:
+ 6.0
+ 6.0
+ 6.0
+ 6.0
 </pre></div>
 </div>
 </div>
@@ -775,11 +938,29 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Float64}:
+ 6.0
+ 7.0
+ 8.0
+ 9.0
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">y_vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">y_vals</span><span class="w"> </span><span class="o">.+=</span><span class="w"> </span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Float64}:
+ 3.0
+ 3.0
+ 3.0
+ 3.0
 </pre></div>
 </div>
 </div>
@@ -796,17 +977,26 @@ Define a one line function called `cube` that takes a `Float32` and returns the 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5
+</pre></div>
+</div>
+</div>
 </div>
 <div class="alert alert-block alert-warning">
 <h3>Exercise</h3>
 Broadcast the `square` function defined earlier over any array.
-<p>Solution:</p>
+<h3>Solution:</h3>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">square</span><span class="o">.</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 </pre></div>
 </div>
 </div></section>
 <section id="file-i-o">
-<h1>File I/O<a class="headerlink" href="#file-i-o" title="Link to this heading">#</a></h1>
+<h2>File I/O<a class="headerlink" href="#file-i-o" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Writing files</span>
@@ -814,6 +1004,31 @@ Broadcast the `square` function defined earlier over any array.
 <span class="n">open</span><span class="p">(</span><span class="n">outpath</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;w&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">file</span>
 <span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
 <span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">SystemError</span>: opening file &quot;/home/runner/work/julia-introduction/julia-introduction/book/data/write_test.txt&quot;: No such file or directory
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">systemerror</span><span class="p">(</span><span class="n">p</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">errno</span><span class="p">::</span><span class="n">Int32</span><span class="p">;</span> <span class="n">extrainfo</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">176</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">systemerror</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">175</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">lock</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">read</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">write</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">create</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">truncate</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">append</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">295</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="nb">open</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">277</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">mode</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">lock</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">358</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">mode</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">357</span>
+ <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="nb">open</span><span class="p">(::</span><span class="n">var</span><span class="s2">&quot;#3#4&quot;</span><span class="p">,</span> <span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="n">Vararg</span><span class="p">{</span><span class="n">String</span><span class="p">};</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">408</span>
+ <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="nb">open</span><span class="p">(::</span><span class="n">Function</span><span class="p">,</span> <span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">407</span>
+ <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">]:</span><span class="mi">3</span>
 </pre></div>
 </div>
 </div>
@@ -853,10 +1068,37 @@ Broadcast the `square` function defined earlier over any array.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">SystemError</span>: opening file &quot;/home/runner/work/julia-introduction/julia-introduction/book/data/read_test.txt&quot;: No such file or directory
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">systemerror</span><span class="p">(</span><span class="n">p</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">errno</span><span class="p">::</span><span class="n">Int32</span><span class="p">;</span> <span class="n">extrainfo</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">176</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">systemerror</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">175</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">lock</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">read</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">write</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">create</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">truncate</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">append</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">295</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="nb">open</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">277</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">mode</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">lock</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">358</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">mode</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">357</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="nb">open</span><span class="p">(::</span><span class="n">var</span><span class="s2">&quot;#5#6&quot;</span><span class="p">{</span><span class="n">Vector</span><span class="p">{</span><span class="n">Any</span><span class="p">}},</span> <span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="n">Vararg</span><span class="p">{</span><span class="n">String</span><span class="p">};</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">408</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="nb">open</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">407</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">parse_file</span><span class="p">(</span><span class="n">inpath</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span><span class="mi">4</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span><span class="mi">29</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="macros">
-<h1>Macros<a class="headerlink" href="#macros" title="Link to this heading">#</a></h1>
+<h2>Macros<a class="headerlink" href="#macros" title="Link to this heading">#</a></h2>
 <p>Julia has a special feature called <a class="reference external" href="https://docs.julialang.org/en/v1/manual/metaprogramming/#man-macros">macros</a>, which act upon your code to generate new code. The details of how macros work are complicated, but as an end-user, there are plenty of useful macros available to use.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> : Measures the run time, allocations, compile time, and garbage collection time of a piece of code</p></li>
@@ -864,6 +1106,17 @@ Broadcast the `square` function defined earlier over any array.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000003 seconds (2 allocations: 144 bytes)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
+ 0.858108  0.720194  0.753428
+ 0.52406   0.574793  0.0316191
+ 0.457705  0.447705  0.494195
 </pre></div>
 </div>
 </div>
@@ -877,12 +1130,22 @@ Broadcast the `square` function defined earlier over any array.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>May I have your attention please!
+</pre></div>
+</div>
+</div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">&#64;show</span></code> : Prints a quick debug statement with the variable name and value</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>value = 1234
 </pre></div>
 </div>
 </div>
@@ -897,6 +1160,7 @@ Broadcast the `square` function defined earlier over any array.
   <li>Macros modify your code to obtain a new, useful outcome (e.g. timing your code) </li>
 </ul> 
 </div></section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -962,16 +1226,15 @@ Broadcast the `square` function defined earlier over any array.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Variables and Types</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays">Arrays</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loops-conditionals">Loops &amp; Conditionals</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-types-structs">Custom Types : Structs</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#file-i-o">File I/O</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#macros">Macros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-types">Variables and Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays">Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops-conditionals">Loops &amp; Conditionals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structs">Structs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-i-o">File I/O</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macros">Macros</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

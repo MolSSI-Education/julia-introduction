@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Row/Column Major: &#8212; Introduction to Julia</title>
+    <title>Optimizating Code &#8212; Introduction to Julia</title>
   
   
   
@@ -62,7 +62,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Multi-Threading" href="6_advanced.html" />
+    <link rel="next" title="Advanced Topics" href="6_advanced.html" />
     <link rel="prev" title="Linear Algebra" href="4_numericaldata.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,14 +175,7 @@
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Variables and Types</a></li>
-
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
 
 
@@ -190,13 +183,8 @@
 <li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Linear Algebra</a></li>
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Row/Column Major:</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Multi-Threading</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Optimizating Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
 </ul>
 
     </div>
@@ -335,7 +323,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Row/Column Major:</h1>
+    <h1>Optimizating Code</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -345,13 +333,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Row/Column Major:</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-code">Benchmarking Code</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-memory-allocations">Reducing Memory Allocations</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#staticarrays">StaticArrays</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#type-stability">Type Stability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#row-column-major">Row/Column Major:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-code">Benchmarking Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-memory-allocations">Reducing Memory Allocations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#staticarrays">StaticArrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-stability">Type Stability</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -362,7 +349,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="alert alert-block alert-info"> 
+  <section class="tex2jax_ignore mathjax_ignore" id="optimizating-code">
+<h1>Optimizating Code<a class="headerlink" href="#optimizating-code" title="Link to this heading">#</a></h1>
+<div class="alert alert-block alert-info"> 
 <h2>Overview</h2>
 This notebook will cover techniques for going from "Julia code that runs" to "Julia code that runs *fast*(er)!"
 <p>Another useful “one-stop-shop” resource in this category (there are many more!) is the <a class="reference external" href="https://modernjuliaworkflows.org/optimizing/">Optimization post on Modern Julia Workflows</a>.</p>
@@ -385,25 +374,14 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">instantiate</span><span class="p">()</span>
-
-<span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
 <span class="k">using</span><span class="w"> </span><span class="n">StaticArrays</span>
 <span class="k">using</span><span class="w"> </span><span class="n">Random</span>
-<span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
 <span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> 
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>project at `~/work/julia-introduction/julia-introduction/book`
-</pre></div>
-</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Package BenchmarkTools not found in current path.
 <span class="o">-</span> <span class="n">Run</span> <span class="err">`</span><span class="kn">import</span><span class="w"> </span><span class="nn">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;BenchmarkTools&quot;</span><span class="p">)</span><span class="err">`</span> <span class="n">to</span> <span class="n">install</span> <span class="n">the</span> <span class="n">BenchmarkTools</span> <span class="n">package</span><span class="o">.</span>
 
@@ -425,11 +403,11 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 </div>
 </div>
 <section id="row-column-major">
-<h1>Row/Column Major:<a class="headerlink" href="#row-column-major" title="Link to this heading">#</a></h1>
+<h2>Row/Column Major:<a class="headerlink" href="#row-column-major" title="Link to this heading">#</a></h2>
 <p>Julia is column-major, which means columns are contiguous in memory. This is the same as MATLAB and Fortran, but Numpy is row-major by default. Remeber this fact when looping over data as looping incorrectly comes with a big performance penalty!</p>
 </section>
 <section id="benchmarking-code">
-<h1>Benchmarking Code<a class="headerlink" href="#benchmarking-code" title="Link to this heading">#</a></h1>
+<h2>Benchmarking Code<a class="headerlink" href="#benchmarking-code" title="Link to this heading">#</a></h2>
 <p>Julia is just in time (JIT) compiled, so the first time you run code there will be a penalty to first compile the code before it can be run. We can use the <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> macro to see this effect. (If you run the cell more than once, the effect will go away since it has already been compiled!)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -452,11 +430,24 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.011263 seconds (3.77 k allocations: 82.344 KiB, 98.72% compilation time)
+  0.000149 seconds (3.49 k allocations: 70.156 KiB)
+</pre></div>
+</div>
+</div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> macro is convenient, but only executes the function once. We can use the <a class="reference external" href="https://juliaci.github.io/BenchmarkTools.jl/stable/">BenchmarkTools</a> library to investigate the performance of our function with multiple trials. The <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> macro will run 10,000 trials or (roughly) 5 seconds whichever comes first. (These can be configured). There is also the <code class="docutils literal notranslate"><span class="pre">&#64;btime</span></code> macro which runs the same number of trials as <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> but has output similar to <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_global</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@benchmark` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -471,10 +462,17 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@btime` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="reducing-memory-allocations">
-<h1>Reducing Memory Allocations<a class="headerlink" href="#reducing-memory-allocations" title="Link to this heading">#</a></h1>
+<h2>Reducing Memory Allocations<a class="headerlink" href="#reducing-memory-allocations" title="Link to this heading">#</a></h2>
 <p>One of the easiest ways to speed up your code is by removing all unnecessary memory allocations. In Python the end-user is not able to manage memory easily and the interprer or library (e.g. numpy) is trusted to handle things.</p>
 <p>Julia can also operate like Python, where we just trust the compiler to “do the right thing”. This is good for prototyping, but can result in inefficient code. Below we will look at the basics of memory allocations and how to reduce them.</p>
 <hr class="docutils" />
@@ -482,6 +480,11 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000016 seconds (3 allocations: 78.203 KiB)
 </pre></div>
 </div>
 </div>
@@ -512,12 +515,24 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>allocates_once (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">&#64;btime</span></code> macro, we can measure the performace uplift and the number of allocations from each function. You’ll find that the function which allocates a new array each loop iteration will be slower and allocate far more memory.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">allocates_alot</span><span class="p">()</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">allocates_once</span><span class="p">()</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@btime` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -549,6 +564,11 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>view_macro_slices (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Again, we see a large speed increase and the number of allocations drop!</p>
 <div class="cell docutils container">
@@ -557,6 +577,13 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 <span class="nd">@btime</span><span class="w"> </span><span class="n">slices_allocate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">view_slices</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">view_macro_slices</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@btime` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -572,13 +599,23 @@ Create your own array and define a view into the first 2 elements
 </div>
 </div></section>
 <section id="staticarrays">
-<h1>StaticArrays<a class="headerlink" href="#staticarrays" title="Link to this heading">#</a></h1>
+<h2>StaticArrays<a class="headerlink" href="#staticarrays" title="Link to this heading">#</a></h2>
 <p>Earlier, we mentioned that Julia arrays are heap-allocated because they have variable length (i.e., you can append to them). If you know the length of your array beforehand, you can use the <a class="reference external" href="https://juliaarrays.github.io/StaticArrays.jl/stable/">StaticArrays</a> library.</p>
 <p>StaticArrays has many types you can use, but the main types are <code class="docutils literal notranslate"><span class="pre">SVector</span></code> for 1D arrays, <code class="docutils literal notranslate"><span class="pre">SMatrix</span></code> for 2D arrays, and <code class="docutils literal notranslate"><span class="pre">SArray</span></code> for n-dimensional arrays (all types have equivalent macros e.g., <code class="docutils literal notranslate"><span class="pre">&#64;SMatrix</span></code>).</p>
 <p>To initialize a NxN <code class="docutils literal notranslate"><span class="pre">SMatrix</span></code> we must provide the size to the constructor: <code class="docutils literal notranslate"><span class="pre">SMatrix{N,N}(...)</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">SMatrix</span><span class="p">{</span><span class="mi">25</span><span class="p">,</span><span class="mi">25</span><span class="p">}(</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">SMatrix</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">}(</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `SMatrix` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -604,11 +641,37 @@ Create your own array and define a view into the first 2 elements
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `SVector` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">(::</span><span class="n">var</span><span class="s2">&quot;#1#2&quot;</span><span class="p">)(</span><span class="n">i</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">none</span><span class="p">:</span><span class="mi">0</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">iterate</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">generator</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">48</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">collect</span><span class="p">(</span><span class="n">itr</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Generator</span><span class="p">{</span><span class="n">UnitRange</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">var</span><span class="s2">&quot;#1#2&quot;</span><span class="p">})</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">array</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">791</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Dynamic Array Benchmark:&quot;</span><span class="p">)</span>
 <span class="nd">@benchmark</span><span class="w"> </span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">dynamic_positions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dynamic Array Benchmark:
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@benchmark` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -620,11 +683,21 @@ Create your own array and define a view into the first 2 elements
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Static Vector Benchmark:
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@benchmark` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">SVector</span></code>s etc. are statically sized and immutable. The StaticArrays package also provides statically sized but mutable variants, which are prefixed with <code class="docutils literal notranslate"><span class="pre">M</span></code> instead of <code class="docutils literal notranslate"><span class="pre">S</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">MMatrix</span></code>.</p>
 </section>
 <section id="type-stability">
-<h1>Type Stability<a class="headerlink" href="#type-stability" title="Link to this heading">#</a></h1>
+<h2>Type Stability<a class="headerlink" href="#type-stability" title="Link to this heading">#</a></h2>
 <p>Julia will do its best to infer the data types of your variables, but if the compiler cannot infer the type of all your variables this leads to type instability and will slow down your code. We can check type stability with the <code class="docutils literal notranslate"><span class="pre">&#64;code_warntype</span></code> macro. For today’s purposes, if this macro returns any red text, then your code has unstable types.</p>
 <p>In the example below, the functions are equivalent except one relies on a global variable and the other takes that variable as a parameter. Because of the global variable, the compiler must assume that the variables inside the <em>unstable</em> function have <code class="docutils literal notranslate"><span class="pre">Any</span></code> type. Whereas in the type-stable code, the compiler can create a specialized version of the stable function for the specific type you passed into it. This is not the only unstable pattern, so if you really care about speed, check your code with <code class="docutils literal notranslate"><span class="pre">&#64;code_warntype</span></code>.</p>
 <div class="cell docutils container">
@@ -648,10 +721,66 @@ Create your own array and define a view into the first 2 elements
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stable (generic function with 1 method)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_warntype</span><span class="w"> </span><span class="n">unstable</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for unstable()
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  from unstable() @ Main In[15]:2
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(Main.unstable)</span>
+Locals
+  @_2<span class=" -Color -Color-Bold">::Any</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  s<span class=" -Color -Color-Bold">::Any</span>
+  val<span class=" -Color -Color-Bold">::Any</span>
+Body<span class=" -Color -Color-Bold">::Any</span>
+1 ─
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       (s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> = 0)
+│   %
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2  = Main.global_x<span class=" -Color -Color-Bold">::Any</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>│         (@_2 = Base.iterate(%2))
+│   %4  = @_2<span class=" -Color -Color-Bold">::Any</span>
+│   %5  = (%4 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %6  = Base.not_int(%5)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %6
+2 ┄ %8  = @_2<span class=" -Color -Color-Bold">::Any</span>
+│         (val = Core.getfield(%8, 1))
+│   %10 = Core.getfield(%8, 2)<span class=" -Color -Color-Bold">::Any</span>
+│   %11 = s<span class=" -Color -Color-Bold">::Any</span>
+│   %12 = val<span class=" -Color -Color-Bold">::Any</span>
+│         (s = %11 + %12)
+│         (@_2 = Base.iterate(%2, %10))
+│   %15 = @_2<span class=" -Color -Color-Bold">::Any</span>
+│   %16 = (%15 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %17 = Base.not_int(%16)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %17
+3 ─       goto #2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 ┄ %20 = s<span class=" -Color -Color-Bold">::Any</span>
+└──       return %20
 </pre></div>
 </div>
 </div>
@@ -662,10 +791,55 @@ Create your own array and define a view into the first 2 elements
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MethodInstance for stable(::Vector{Float64})
+  from stable(x) @ Main In[15]:10
+Arguments
+  #self#<span class=" -Color -Color-Cyan">::Core.Const(Main.stable)</span>
+  x<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+Locals
+  @_3<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Float64, Int64}}</span>
+  s<span class=" -Color -Color-Cyan">::Float64</span>
+  val<span class=" -Color -Color-Cyan">::Float64</span>
+Body<span class=" -Color -Color-Cyan">::Float64</span>
+1 ─ %1  = Main.zero<span class=" -Color -Color-Cyan">::Core.Const(zero)</span>
+│   %2  = Main.eltype<span class=" -Color -Color-Cyan">::Core.Const(eltype)</span>
+│   %3  = (%2)(x)<span class=" -Color -Color-Cyan">::Core.Const(Float64)</span>
+│         (s = (%1)(%3))
+│   %5  = x<span class=" -Color -Color-Cyan">::Vector{Float64}</span>
+│         (@_3 = Base.iterate(%5))
+│   %7  = @_3<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Float64, Int64}}</span>
+│   %8  = (%7 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %9  = Base.not_int(%8)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %9
+2 ┄ %11 = @_3<span class=" -Color -Color-Cyan">::Tuple{Float64, Int64}</span>
+│         (val = Core.getfield(%11, 1))
+│   %13 = Core.getfield(%11, 2)<span class=" -Color -Color-Cyan">::Int64</span>
+│   %14 = s<span class=" -Color -Color-Cyan">::Float64</span>
+│   %15 = val<span class=" -Color -Color-Cyan">::Float64</span>
+│         (s = %14 + %15)
+│         (@_3 = Base.iterate(%5, %13))
+│   %18 = @_3<span class=" -Color -Color-Bold -Color-Bold-Yellow">::Union{Nothing, Tuple{Float64, Int64}}</span>
+│   %19 = (%18 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
+│   %20 = Base.not_int(%19)<span class=" -Color -Color-Cyan">::Bool</span>
+└──       goto #4 if not %20
+3 ─       goto #2
+4 ┄ %23 = s<span class=" -Color -Color-Cyan">::Float64</span>
+└──       return %23
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">unstable</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@btime` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -676,7 +850,15 @@ Create your own array and define a view into the first 2 elements
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@btime` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
 </div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -723,7 +905,7 @@ Create your own array and define a view into the first 2 elements
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Multi-Threading</p>
+        <p class="prev-next-title">Advanced Topics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -743,13 +925,12 @@ Create your own array and define a view into the first 2 elements
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Row/Column Major:</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-code">Benchmarking Code</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-memory-allocations">Reducing Memory Allocations</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#staticarrays">StaticArrays</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#type-stability">Type Stability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#row-column-major">Row/Column Major:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking-code">Benchmarking Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-memory-allocations">Reducing Memory Allocations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#staticarrays">StaticArrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-stability">Type Stability</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
