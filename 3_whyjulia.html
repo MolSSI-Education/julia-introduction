@@ -1,0 +1,1270 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Why Julia? &#8212; Introduction to Julia</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=aaa2fd12" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3_whyjulia';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Linear Algebra" href="4_numericaldata.html" />
+    <link rel="prev" title="Variables and Types" href="2_syntax.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/molssi_main_logo.png" class="logo__image only-light" alt="Introduction to Julia - Home"/>
+    <script>document.write(`<img src="_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark" alt="Introduction to Julia - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Variables and Types</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Why Julia?</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Linear Algebra</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Row/Column Major:</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Multi-Threading</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/3_whyjulia.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Why Julia?</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Why Julia?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-s-speed-and-performance">Julia’s Speed and Performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-stability-and-code-introspection-at-a-glance"><strong>Type-stability and Code Introspection (at a glance…)</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-dispatch-in-julia">Multiple Dispatch in Julia</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects-don-t-have-methods-functions-do"><strong>Objects don’t have methods, functions do!</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-multiple-dispatch">Example of Multiple Dispatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-benefits-of-multiple-dispatch">Performance Benefits of Multiple Dispatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-interfaces-with-multiple-dispatch">Custom Interfaces with Multiple Dispatch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-would-this-work-in-python"><strong>How would this work in Python?</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-advantages-of-julia-dispatch">Extra: Advantages of Julia Dispatch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#caution-method-ambiguity"><strong>Caution</strong>: Method Ambiguity</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="alert alert-block alert-info"> 
+<h2>Overview</h2>
+This notebook will provide an introduction into Julia, highlighting its uniqueness and features, such as:
+<ul class="simple">
+<li><p>High-level syntax</p></li>
+<li><p>Performance comparable to C</p></li>
+<li><p>Multiple dispatch</p></li>
+<li><p>Dynamic typing</p></li>
+<li><p>Method overloading</p></li>
+</ul>
+</div><p><img alt="image.png" src="attachment:image.png" /></p>
+<section id="why-julia">
+<h1>Why Julia?<a class="headerlink" href="#why-julia" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Julia language is a compiled programming language released in 2012!
+<img alt="image.png" src="attachment:image.png" /></p></li>
+</ul>
+<p>Julia is known for its speed, ease of use, and strong support for scientific computing. Let’s break it down with examples.</p>
+<ul class="simple">
+<li><p>Speed</p></li>
+<li><p>Multiple dispatch</p></li>
+<li><p>Interoperability</p></li>
+<li><p>Dynamic type system</p></li>
+<li><p>Metaprogramming</p></li>
+<li><p>Built-in package manager</p></li>
+<li><p>Built-in test</p></li>
+<li><p>Built-in documentation</p></li>
+<li><p>Built-in parallelism</p></li>
+<li><p>Built-in distributed computing</p></li>
+<li><p>Built-in GPU support</p></li>
+<li><p>Built-in multithreading</p></li>
+</ul>
+<section id="julia-s-speed-and-performance">
+<h2>Julia’s Speed and Performance<a class="headerlink" href="#julia-s-speed-and-performance" title="Link to this heading">#</a></h2>
+<p>Julia compiles code just-in-time (“JIT”) using LLVM, which allows it to achieve speeds similar to low-level languages like C.</p>
+<p><img alt="image.png" src="attachment:image.png" /></p>
+<blockquote>
+<div><p><strong>Reference</strong>: <a class="reference external" href="https://github.com/Datseris/whyjulia-manifesto/tree/main">Why Julia? A manifesto</a></p>
+</div></blockquote>
+<p>Julia has a just-in-time (JIT) compilation. This means that the code is dynamically compiled during the execution of the program, also known as the program run time. In this way, the previous step of compiling the code into an executable is completely excluded from consideration.</p>
+<p>The idea behind JIT compilation is to bring the benefits of both (static) compilation and interpretation.</p>
+<blockquote>
+<div><p><strong>Reference</strong>: <a class="reference external" href="https://testsubjector.github.io/blog/2020/03/26/The-Julia-Compilation-Process">The Julia Compilation Process</a></p>
+</div></blockquote>
+<p>Julia is fast because of its design decisions. The core design decision, <strong>type-stability through specialization via multiple-dispatch</strong> is what allows Julia to be very easy for a compiler to make into efficient code, but also allow the code to be very concise and “look like a scripting language”.</p>
+<section id="type-stability-and-code-introspection-at-a-glance">
+<h3><strong>Type-stability and Code Introspection (at a glance…)</strong><a class="headerlink" href="#type-stability-and-code-introspection-at-a-glance" title="Link to this heading">#</a></h3>
+<p><strong>Type stability</strong>: the reasonable type to output from <code class="docutils literal notranslate"><span class="pre">*(::Int64,::Int64)</span></code> is an <code class="docutils literal notranslate"><span class="pre">Int64</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a₁</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">b₁</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">c₁</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a₁</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b₁</span>
+
+<span class="n">typeof</span><span class="p">(</span><span class="n">a₁</span><span class="p">),</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">b₁</span><span class="p">),</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">c₁</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Int64, Int64, Int64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In Julia, both <code class="docutils literal notranslate"><span class="pre">&#64;code_llvm</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;code_native</span></code> macros are used to inspect the generated code at different stages of compilation. However, they provide output at different levels of abstraction:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;code_llvm</span></code> provides a high-level view of the LLVM Intermediate Representation (IR) code generated by the Julia compiler.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">a₁</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b₁</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>; Function Signature: *(Int64, Int64)
+;  @ int.jl:88 within `*`
+define <span class=" -Color -Color-Cyan">i64</span> @&quot;julia_*_4636&quot;<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %&quot;x::Int64&quot;, <span class=" -Color -Color-Cyan">i64</span> signext %&quot;y::Int64&quot;<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+  %0 = <span class=" -Color -Color-Bold">mul</span> <span class=" -Color -Color-Cyan">i64</span> %&quot;y::Int64&quot;, %&quot;x::Int64&quot;
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">i64</span> %0
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;code-native</span></code> shows the native assembly code generated for the target machine.</p>
+<p><strong>NOTE</strong>: The output of <code class="docutils literal notranslate"><span class="pre">&#64;code_native</span></code> can vary between different machines, depending on several factors related to the hardware and the Julia installation.</p>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">a₁</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b₁</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.text
+	.file	&quot;*&quot;
+	.globl	&quot;julia_*_4837&quot;                  # -- Begin function julia_*_4837
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	&quot;julia_*_4837&quot;,@function
+&quot;julia_*_4837&quot;:                         # @&quot;julia_*_4837&quot;
+; Function Signature: *(Int64, Int64)
+; ┌ @ int.jl:88 within `*`
+# %bb.0:                                # %top
+; │ @ int.jl within `*`
+	#DEBUG_VALUE: *:x &lt;- $rdi
+	#DEBUG_VALUE: *:y &lt;- $rsi
+	<span class=" -Color -Color-Bold">push</span>	rbp
+	<span class=" -Color -Color-Bold">mov</span>	rax, rdi
+	<span class=" -Color -Color-Bold">mov</span>	rbp, rsp
+; │ @ int.jl:88 within `*`
+	<span class=" -Color -Color-Bold">imul</span>	rax, rsi
+	<span class=" -Color -Color-Bold">pop</span>	rbp
+	<span class=" -Color -Color-Bold">ret</span>
+.Lfunc_end0:
+	.size	&quot;julia_*_4837&quot;, .Lfunc_end0-&quot;julia_*_4837&quot;
+; └
+                                        # -- End function
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
+</pre></div>
+</div>
+</div>
+</div>
+<p>The reasonable type to output from <code class="docutils literal notranslate"><span class="pre">*(::Float64,::Float64)</span></code> is a <code class="docutils literal notranslate"><span class="pre">Float64</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a₂</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span>
+<span class="n">b₂</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span>
+<span class="n">c₂</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a₂</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b₂</span>
+
+<span class="n">typeof</span><span class="p">(</span><span class="n">a₂</span><span class="p">),</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">b₂</span><span class="p">),</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">c₂</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Float64, Float64, Float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">a₂</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b₂</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>; Function Signature: *(Float64, Float64)
+;  @ float.jl:493 within `*`
+define <span class=" -Color -Color-Cyan">double</span> @&quot;julia_*_4904&quot;<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %&quot;x::Float64&quot;, <span class=" -Color -Color-Cyan">double</span> %&quot;y::Float64&quot;<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+  %0 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %&quot;x::Float64&quot;, %&quot;y::Float64&quot;
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> %0
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">a₂</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b₂</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;*&quot;
+	.globl	&quot;julia_*_4908&quot;                  # -- Begin function julia_*_4908
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	&quot;julia_*_4908&quot;,@function
+&quot;julia_*_4908&quot;:                         # @&quot;julia_*_4908&quot;
+; Function Signature: *(Float64, Float64)
+; ┌ @ float.jl:493 within `*`
+# %bb.0:                                # %top
+; │ @ float.jl within `*`
+	#DEBUG_VALUE: *:x &lt;- $xmm0
+	#DEBUG_VALUE: *:y &lt;- $xmm1
+	<span class=" -Color -Color-Bold">push</span>	rbp
+	<span class=" -Color -Color-Bold">mov</span>	rbp, rsp
+; │ @ float.jl:493 within `*`
+	<span class=" -Color -Color-Bold">vmulsd</span>	xmm0, xmm0, xmm1
+	<span class=" -Color -Color-Bold">pop</span>	rbp
+	<span class=" -Color -Color-Bold">ret</span>
+.Lfunc_end0:
+	.size	&quot;julia_*_4908&quot;, .Lfunc_end0-&quot;julia_*_4908&quot;
+; └
+                                        # -- End function
+	.type	&quot;.L+Core.Float64#4910&quot;,@object  # @&quot;+Core.Float64#4910&quot;
+	.section	.rodata,&quot;a&quot;,@progbits
+	.p2align	<span class=" -Color -Color-Yellow">3</span>, <span class=" -Color -Color-Yellow">0x0</span>
+&quot;.L+Core.Float64#4910&quot;:
+	.quad	&quot;.L+Core.Float64#4910.jit&quot;
+	.size	&quot;.L+Core.Float64#4910&quot;, <span class=" -Color -Color-Yellow">8</span>
+
+.set &quot;.L+Core.Float64#4910.jit&quot;, <span class=" -Color -Color-Yellow">140228826434816</span>
+	.size	&quot;.L+Core.Float64#4910.jit&quot;, <span class=" -Color -Color-Yellow">8</span>
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
+</pre></div>
+</div>
+</div>
+</div>
+<p>What happens if the code is <strong>not type-stable</strong>? The compiler has to generate code that can handle any type, which is slower than generating code that can handle a specific type. (More on this in the optimization section!)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a₃</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">b₃</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span>
+<span class="n">c₃</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a₃</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b₃</span>
+
+<span class="n">typeof</span><span class="p">(</span><span class="n">a₃</span><span class="p">),</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">b₃</span><span class="p">),</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">c₃</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Int64, Float64, Float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_llvm</span><span class="w"> </span><span class="n">a₃</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b₃</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>; Function Signature: *(Int64, Float64)
+;  @ promotion.jl:430 within `*`
+define <span class=" -Color -Color-Cyan">double</span> @&quot;julia_*_4917&quot;<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">i64</span> signext %&quot;x::Int64&quot;, <span class=" -Color -Color-Cyan">double</span> %&quot;y::Float64&quot;<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+; ┌ @ promotion.jl:400 within `promote`
+; │┌ @ promotion.jl:375 within `_promote`
+; ││┌ @ number.jl:7 within `convert`
+; │││┌ @ float.jl:239 within `Float64`
+      %0 = <span class=" -Color -Color-Bold">sitofp</span> <span class=" -Color -Color-Cyan">i64</span> %&quot;x::Int64&quot; to <span class=" -Color -Color-Cyan">double</span>
+; └└└└
+;  @ promotion.jl:430 within `*` @ float.jl:493
+  %1 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, %&quot;y::Float64&quot;
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> %1
+<span class=" -Color -Color-Yellow">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@code_native</span><span class="w"> </span><span class="n">a₃</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b₃</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	.text
+	.file	&quot;*&quot;
+	.globl	&quot;julia_*_4922&quot;                  # -- Begin function julia_*_4922
+	.p2align	<span class=" -Color -Color-Yellow">4</span>, <span class=" -Color -Color-Yellow">0x90</span>
+	.type	&quot;julia_*_4922&quot;,@function
+&quot;julia_*_4922&quot;:                         # @&quot;julia_*_4922&quot;
+; Function Signature: *(Int64, Float64)
+; ┌ @ promotion.jl:430 within `*`
+# %bb.0:                                # %top
+; │ @ promotion.jl within `*`
+	#DEBUG_VALUE: *:x &lt;- $rdi
+	#DEBUG_VALUE: *:y &lt;- $xmm0
+	<span class=" -Color -Color-Bold">push</span>	rbp
+; │ @ promotion.jl:430 within `*`
+; │┌ @ promotion.jl:400 within `promote`
+; ││┌ @ promotion.jl:375 within `_promote`
+; │││┌ @ number.jl:7 within `convert`
+; ││││┌ @ float.jl:239 within `Float64`
+	<span class=" -Color -Color-Bold">vcvtsi2sd</span>	xmm1, xmm1, rdi
+	<span class=" -Color -Color-Bold">mov</span>	rbp, rsp
+; │└└└└
+; │ @ promotion.jl:430 within `*` @ float.jl:493
+	<span class=" -Color -Color-Bold">vmulsd</span>	xmm0, xmm1, xmm0
+	<span class=" -Color -Color-Bold">pop</span>	rbp
+	<span class=" -Color -Color-Bold">ret</span>
+.Lfunc_end0:
+	.size	&quot;julia_*_4922&quot;, .Lfunc_end0-&quot;julia_*_4922&quot;
+; └
+                                        # -- End function
+	.type	&quot;.L+Core.Float64#4924&quot;,@object  # @&quot;+Core.Float64#4924&quot;
+	.section	.rodata,&quot;a&quot;,@progbits
+	.p2align	<span class=" -Color -Color-Yellow">3</span>, <span class=" -Color -Color-Yellow">0x0</span>
+&quot;.L+Core.Float64#4924&quot;:
+	.quad	&quot;.L+Core.Float64#4924.jit&quot;
+	.size	&quot;.L+Core.Float64#4924&quot;, <span class=" -Color -Color-Yellow">8</span>
+
+.set &quot;.L+Core.Float64#4924.jit&quot;, <span class=" -Color -Color-Yellow">140228826434816</span>
+	.size	&quot;.L+Core.Float64#4924.jit&quot;, <span class=" -Color -Color-Yellow">8</span>
+	.section	&quot;.note.GNU-stack&quot;,&quot;&quot;,@progbits
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="image.png" src="attachment:image.png" /></p>
+<p>Julia’s type system is dynamic, but gains some of the advantages of static type systems by making it possible to indicate that certain values are of specific types. This can be of great assistance in generating efficient code, but even more significantly, it allows method dispatch on the types of function arguments to be deeply integrated with the language.</p>
+<p><strong>Type hierarchy</strong>: Abstract types cannot be instantiated, and serve only as nodes in the type graph, thereby describing sets of related concrete types: those concrete types which are their descendants. We begin with abstract types even though they have no instantiation because they are the backbone of the type system: they form the conceptual hierarchy which makes Julia’s type system more than just a collection of object implementations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">Number</span><span class="w"> </span><span class="k">end</span>
+<span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">Real</span><span class="w">          </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Number</span><span class="w"> </span><span class="k">end</span>
+<span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractFloat</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="w"> </span><span class="k">end</span>
+<span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">Integer</span><span class="w">       </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="w"> </span><span class="k">end</span>
+<span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">Signed</span><span class="w">        </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Integer</span><span class="w"> </span><span class="k">end</span>
+<span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">Unsigned</span><span class="w">      </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Integer</span><span class="w"> </span><span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">subtypes</span><span class="p">(</span><span class="kt">Number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-element Vector{Any}:
+ Real
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">subtypes</span><span class="p">(</span><span class="kt">Real</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Any}:
+ AbstractFloat
+ Integer
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">supertype</span><span class="p">(</span><span class="kt">Real</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Composite Types</strong>: A composite type is a collection of named fields, an instance of which can be treated as a single value. In many languages, composite types are the only kind of user-definable type, and they are by far the most commonly used user-defined type in Julia as well. (See discussion of structs in the previous notebook covering syntax)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">subtypes</span><span class="p">(</span><span class="kt">Any</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>651-element Vector{Any}:
+ AbstractArray
+ AbstractChannel
+ AbstractChar
+ AbstractDict
+ AbstractDisplay
+ AbstractMatch
+ AbstractPattern
+ AbstractSet
+ AbstractString
+ Any
+ Base.ANSIDelimiter
+ Base.ANSIIterator
+ Base.AbstractBroadcasted
+ ⋮
+ Tuple
+ Type
+ TypeVar
+ UndefInitializer
+ Val
+ VecElement
+ VersionNumber
+ WeakRef
+ ZMQ.Context
+ ZMQ.Socket
+ ZMQ.lib.zmq_msg_t
+ ZMQ.lib.zmq_pollitem_t
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">length</span><span class="p">(</span><span class="n">subtypes</span><span class="p">(</span><span class="kt">Any</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>651
+</pre></div>
+</div>
+</div>
+</div>
+<p>All types in Julia are subtypes of <code class="docutils literal notranslate"><span class="pre">Any</span></code>, which is the top of the type hierarchy. <code class="docutils literal notranslate"><span class="pre">Any</span></code> is the default supertype of any type that is not explicitly declared to be a subtype of some other type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">Foo</span>
+<span class="w">    </span><span class="n">bar</span>
+<span class="w">    </span><span class="n">baz</span><span class="o">::</span><span class="kt">Int</span>
+<span class="w">    </span><span class="n">qux</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="kt">Foo</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Any</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
+</pre></div>
+</div>
+</div>
+</div>
+<p>In Julia, all values are objects, but functions are not bundled with the objects they operate on. This is necessary since Julia chooses which method of a function to use by multiple dispatch, meaning that the types of all of a function’s arguments are considered when selecting a method, rather than just the first one</p>
+<blockquote>
+<div><p>More information on <a class="reference external" href="https://docs.julialang.org/en/v1/manual/types/">Julia’s Type System</a></p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="multiple-dispatch-in-julia">
+<h1>Multiple Dispatch in Julia<a class="headerlink" href="#multiple-dispatch-in-julia" title="Link to this heading">#</a></h1>
+<p>One of the most powerful features of Julia is multiple dispatch, where functions are chosen based on the types of all arguments, making Julia highly flexible and extensible. The dispatch system will generally choose the most specific applicable dispatch:</p>
+<p><img alt="image.png" src="attachment:image.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s use the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator as an example to illustrate multiple dispatch in Julia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">length</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="o">+</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>198
+</pre></div>
+</div>
+</div>
+</div>
+<section id="objects-don-t-have-methods-functions-do">
+<h2><strong>Objects don’t have methods, functions do!</strong><a class="headerlink" href="#objects-don-t-have-methods-functions-do" title="Link to this heading">#</a></h2>
+<p><strong>Multiple dispatch</strong> allows for a language to dispatch function calls onto type-stable functions.
+This is what Julia is all about, so let’s take some time to dig into it. If you have type stability inside of a function (meaning, any function call within the function is also type-stable), then the compiler can know the types of the variables at every step. Therefore, it can compile the function with the full amount of optimizations since at this point the code is essentially the same as C/Fortran code. Multiple dispatch works into this story because it means that * can be a type-stable function: it just means different things for different inputs. But if the compiler can know the types of a and b before calling <em>, then it knows which * method to use, and therefore it knows the output type of c=a</em>b.</p>
+</section>
+<section id="example-of-multiple-dispatch">
+<h2>Example of Multiple Dispatch<a class="headerlink" href="#example-of-multiple-dispatch" title="Link to this heading">#</a></h2>
+<p>Let’s define a simple function that behaves differently based on the types of its arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Define functions using multiple dispatch</span>
+<span class="k">function</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">::</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>add (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we define a function with the same name, but to concatenate strings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">::</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">::</span><span class="kt">String</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="c"># Concatenates strings</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>add (generic function with 2 methods)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Test multiple dispatch</span>
+<span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">))</span><span class="w">       </span><span class="c"># Int addition</span>
+<span class="n">println</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World!&quot;</span><span class="p">))</span><span class="w">  </span><span class="c"># String concatenation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+Hello, World!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, Julia selects the appropriate function to run based on the type of the inputs, whether it’s integers or strings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">methods</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"># 2 methods for generic function <b>add</b> from [35mMain[39m:<ul><li> add(a::<b>String</b>, b::<b>String</b>) in Main at In[22]:1</li> <li> add(a::<b>Int64</b>, b::<b>Int64</b>) in Main at In[21]:2</li> </ul></div></div>
+</div>
+</section>
+<section id="performance-benefits-of-multiple-dispatch">
+<h2>Performance Benefits of Multiple Dispatch<a class="headerlink" href="#performance-benefits-of-multiple-dispatch" title="Link to this heading">#</a></h2>
+<p>In Julia, multiple dispatch allows highly optimized code paths to be selected at runtime, providing both flexibility and performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Example of more complex dispatch based on argument types</span>
+<span class="k">function</span><span class="w"> </span><span class="n">process_data</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Array</span><span class="p">{</span><span class="kt">Int</span><span class="p">})</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Processing integer array&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>process_data (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">process_data</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">})</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Processing float array&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>process_data (generic function with 2 methods)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Test with different types</span>
+<span class="n">process_data</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span><span class="w">         </span><span class="c"># Dispatches to integer array method</span>
+<span class="n">process_data</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="mf">2.2</span><span class="p">,</span><span class="w"> </span><span class="mf">3.3</span><span class="p">])</span><span class="w">   </span><span class="c"># Dispatches to float array method</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing integer array
+Processing float array
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create an example of multiple dispatch (i.e. a function with at least two call signatures) below.</p>
+</section>
+<section id="custom-interfaces-with-multiple-dispatch">
+<h2>Custom Interfaces with Multiple Dispatch<a class="headerlink" href="#custom-interfaces-with-multiple-dispatch" title="Link to this heading">#</a></h2>
+<p>We can also use multiple dispatch to define custom interfaces by implementing functions for specific types. Let’s see how this works by defining an abstract type called <code class="docutils literal notranslate"><span class="pre">Shape</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Define an abstract type and a concrete subtype</span>
+<span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">Shape</span><span class="w"> </span><span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will work now define composite types for <code class="docutils literal notranslate"><span class="pre">Circle</span></code> and <code class="docutils literal notranslate"><span class="pre">Square</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">Circle</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Shape</span>
+<span class="w">    </span><span class="n">radius</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">Square</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Shape</span>
+<span class="w">    </span><span class="n">side</span><span class="o">::</span><span class="kt">Float64</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s define a function that calculates the area of a shape using multiple dispatch:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Define a generic area function using dispatch</span>
+<span class="n">area</span><span class="p">(</span><span class="n">s</span><span class="o">::</span><span class="kt">Circle</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">π</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">s</span><span class="o">.</span><span class="n">radius</span><span class="o">^</span><span class="mi">2</span>
+<span class="n">area</span><span class="p">(</span><span class="n">s</span><span class="o">::</span><span class="kt">Square</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">.</span><span class="n">side</span><span class="o">^</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>area (generic function with 2 methods)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check that the function works as we expect:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">circle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Circle</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="n">square</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Square</span><span class="p">(</span><span class="mf">4.0</span><span class="p">)</span>
+
+<span class="c"># Test the area function</span>
+<span class="n">println</span><span class="p">(</span><span class="n">area</span><span class="p">(</span><span class="n">circle</span><span class="p">))</span><span class="w">  </span><span class="c"># Circle with radius 5</span>
+<span class="n">println</span><span class="p">(</span><span class="n">area</span><span class="p">(</span><span class="n">square</span><span class="p">))</span><span class="w">  </span><span class="c"># Square with side 4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78.53981633974483
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now here are a few examples of the power, expressiveness, and conciseness afforded by the multiple dispatch paradigm:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">area_squared</span><span class="p">(</span><span class="n">s</span><span class="o">::</span><span class="kt">Shape</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">area</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span>
+<span class="n">area_squared</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
+<span class="c"># area_squared(square)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6168.502750680849
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">area</span><span class="o">.</span><span class="p">([</span><span class="n">circle</span><span class="p">,</span><span class="w"> </span><span class="n">square</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Float64}:
+ 78.53981633974483
+ 16.0
+</pre></div>
+</div>
+</div>
+</div>
+<section id="how-would-this-work-in-python">
+<h3><strong>How would this work in Python?</strong><a class="headerlink" href="#how-would-this-work-in-python" title="Link to this heading">#</a></h3>
+<p>In Python, we need to use <code class="docutils literal notranslate"><span class="pre">isinstance</span></code>, which checks to determine the type of an object and then call the appropriate method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="c1"># Define the base class Shape</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Define Circle as a subclass of Shape</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+<span class="c1"># Define Square as a subclass of Shape</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Square</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">side</span>
+
+<span class="c1"># Define an area function that attempts to mimic Julia&#39;s multiple dispatch</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">Circle</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">shape</span><span class="o">.</span><span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">Square</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">shape</span><span class="o">.</span><span class="n">side</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unknown shape!&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create instances of Circle and Square</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="n">square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">(</span><span class="mf">4.0</span><span class="p">)</span>
+
+<span class="c1"># Test the area function</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area of Circle with radius 5: </span><span class="si">{</span><span class="n">area</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area of Square with side 4: </span><span class="si">{</span><span class="n">area</span><span class="p">(</span><span class="n">square</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Attempt to handle multiple shapes in a list (mimic dispatch over arrays of shapes)</span>
+<span class="n">shapes</span> <span class="o">=</span> <span class="p">[</span><span class="n">circle</span><span class="p">,</span> <span class="n">square</span><span class="p">]</span>
+
+<span class="c1"># This part is manual in Python unlike Julia</span>
+<span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area: </span><span class="si">{</span><span class="n">area</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In Julia, this combination – the idea of a shape (and potentially, though not crucially, a corresponding abstract type) and functions like <code class="docutils literal notranslate"><span class="pre">area</span></code> that dispatch on it – is a very simple example of a powerful idea that is enabled by multiple dispatch: that of an <a class="reference external" href="https://docs.julialang.org/en/v1/manual/interfaces/"><strong>interface</strong></a>. The core idea of an interface is an informal contract that says, effectively, “if you dispatch these functions on your object, then a bunch of other functionality that depends only on those functions will just work!”</p>
+<p>Other interfaces in Julia include:</p>
+<ul class="simple">
+<li><p>Indexing and iteration, upon which operations like sorting and slicing are built in a generalized way</p></li>
+<li><p><a class="reference external" href="https://juliagraphs.org/Graphs.jl/v1.5/">Graphs</a> (the mathematical objects with nodes and edges), which allows for functionality like graph traversal, computation of centrality measures, etc. on a wide variety of graph types</p></li>
+<li><p>AtomsBase, for specifying atomistic system geometries (we’ll explore this extensively tomorrow!)</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="extra-advantages-of-julia-dispatch">
+<h1>Extra: Advantages of Julia Dispatch<a class="headerlink" href="#extra-advantages-of-julia-dispatch" title="Link to this heading">#</a></h1>
+<p><strong>Improved extensibility</strong>: With Multiple Dispatch, it becomes easier to extend functionality by adding new functions or methods that handle specific argument types. This makes it straightforward to accommodate new types without modifying existing code, resulting in better code organization and modularity.</p>
+<p><strong>Avoidance of complex branching and conditionals</strong>: When dealing with different argument types, traditional approaches often involve long chains of if-else or switch-case statements to determine the appropriate action. Multiple Dispatch eliminates the need for such complex branching, leading to cleaner, more readable code.</p>
+</section>
+<section id="caution-method-ambiguity">
+<h1><strong>Caution</strong>: Method Ambiguity<a class="headerlink" href="#caution-method-ambiguity" title="Link to this heading">#</a></h1>
+<p><img alt="image.png" src="attachment:image.png" /></p>
+<blockquote>
+<div><p><strong>Reference</strong>: <a class="reference external" href="https://blog.glcs.io/multiple-dispatch">More about multiple dispatch</a></p>
+</div></blockquote>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia_kernel-1.11"
+        },
+        kernelOptions: {
+            name: "julia_kernel-1.11",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia_kernel-1.11'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2_syntax.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Variables and Types</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4_numericaldata.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linear Algebra</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Why Julia?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-s-speed-and-performance">Julia’s Speed and Performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-stability-and-code-introspection-at-a-glance"><strong>Type-stability and Code Introspection (at a glance…)</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-dispatch-in-julia">Multiple Dispatch in Julia</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objects-don-t-have-methods-functions-do"><strong>Objects don’t have methods, functions do!</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-multiple-dispatch">Example of Multiple Dispatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-benefits-of-multiple-dispatch">Performance Benefits of Multiple Dispatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-interfaces-with-multiple-dispatch">Custom Interfaces with Multiple Dispatch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-would-this-work-in-python"><strong>How would this work in Python?</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-advantages-of-julia-dispatch">Extra: Advantages of Julia Dispatch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#caution-method-ambiguity"><strong>Caution</strong>: Method Ambiguity</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Molecular Sciences Software Institute
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
