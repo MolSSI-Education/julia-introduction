@@ -1,6 +1,6 @@
 format: jb-book
 root: intro
-sections:
+chapters:
 - file : setup.ipynb
 - file : 2_syntax.ipynb
 - file : 3_whyjulia.ipynb
