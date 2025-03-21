@@ -7,6 +7,7 @@ copyright: "2024"
 
 execute:
   execute_notebooks: force
+  allow_errors: true
 
 latex:
   latex_documents:
