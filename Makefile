@@ -20,7 +20,7 @@ LOCAL_INSTALL_DIR := $(SCRIPT_DIR)/venv/share/jupyter/kernels
 html:
 	export JUPYTER="/mnt/c/users/ejmei/Documents/GitHub/julia-introduction/venv/share/jupyter"
 	sh patch_kernel_versions.sh "$(FULL_VERSION)" "$(IJULIA_KERNEL_NAME)"
-	julia -e 'using Pkg; Pkg.activate("."); Pkg.build("IJulia"); using IJulia; installkernel("$(KERNEL_NAME)")'
+	julia -e 'using Pkg; Pkg.activate("."); Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; installkernel("$(KERNEL_NAME)")'
 	jupyter-book build book/
 
 clean: book/_build
