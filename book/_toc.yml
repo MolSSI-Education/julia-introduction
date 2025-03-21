@@ -3,7 +3,7 @@ root: intro
 sections:
 - file : setup.ipynb
 - file : 2_syntax.ipynb
-# - file : 3_whyjulia.ipynb
+- file : 3_whyjulia.ipynb
 - file : 4_numericaldata.ipynb
 - file : 5_optimization.ipynb
 - file : 6_advanced.ipynb
