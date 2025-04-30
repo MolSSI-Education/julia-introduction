@@ -177,13 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Linear Algebra</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizating Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizing Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
 </ul>
 
@@ -357,27 +352,27 @@ document.write(`
 <div class="alert alert-block alert-info"> 
 <h2>Overview</h2>
 If you're familiar with Python and MATLAB, Julia syntax is a combination with some extra features and syntax sugar.
-<p><strong>Questions:</strong></p>
+<p><strong>Objectives:</strong>
+Learn…</p>
 <ul class="simple">
-<li><p>How do I define varibles, functions and new types?</p></li>
-<li><p>How do I use control flow?</p></li>
-<li><p>How do I broadcast functions and operations?</p></li>
-<li><p>How do I read and write from files?</p></li>
-<li><p>What is a macro?</p></li>
-</ul>
-<p><strong>Objectives:</strong></p>
-<ul class="simple">
-<li><p>Learn the basic syntax of Julia like declaring variables, functions and structs as well as some unique features like the broadcasting syntax and macros.</p></li>
+<li><p>The basic syntax of Julia like declaring variables, functions and structs</p></li>
+<li><p>Broadcasting operations over arrays</p></li>
+<li><p>Basic File IO</p></li>
+<li><p>Common macros</p></li>
 </ul>
 </div>
 <section id="variables-and-types">
 <h2>Variables and Types<a class="headerlink" href="#variables-and-types" title="Link to this heading">#</a></h2>
 <p>Julia is strongly typed, but providing type information is optional. The compiler will try to infer type information, and will throw an error when it fails.</p>
-<p>Like in MATLAB, a semicolon at the end of a line will suppress output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="n">y</span><span class="o">::</span><span class="kt">Int64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">y</span><span class="o">::</span><span class="kt">Int64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
 </pre></div>
 </div>
 </div>
@@ -439,8 +434,14 @@ If you're familiar with Python and MATLAB, Julia syntax is a combination with so
 </section>
 <section id="arrays">
 <h2>Arrays<a class="headerlink" href="#arrays" title="Link to this heading">#</a></h2>
-<p>Arrays in Julia are mutable and dynamically sized. They behave a lot like numpy and MATLAB arrays and allow you to broadcast operations over the entire array and use index slicing. The <code class="docutils literal notranslate"><span class="pre">Array</span></code> type has several sub-types for conveinece, such as <code class="docutils literal notranslate"><span class="pre">Vector</span></code> for 1D arrays and <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> for 2D arrays.</p>
-<p>Important to note is that <code class="docutils literal notranslate"><span class="pre">Array</span></code>s are column major and one-indexed and slices allocate a new array. We will discuss these facts more later.</p>
+<p>Arrays in Julia are:</p>
+<ul class="simple">
+<li><p>Dynamically sized</p></li>
+<li><p>One-indexed</p></li>
+<li><p>Column-major</p></li>
+<li><p>Slices allocate a new array (see <a class="reference external" href="https://docs.julialang.org/en/v1/base/arrays/#Views-(SubArrays-and-other-view-types)">views</a>)</p></li>
+</ul>
+<p>Julia Arrays behave a lot like numpy and MATLAB arrays and allow you to broadcast operations over the entire array and use index slicing. The <code class="docutils literal notranslate"><span class="pre">Array</span></code> type has several sub-types for conveinece, such as <code class="docutils literal notranslate"><span class="pre">Vector</span></code> for 1D arrays and <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> for 2D arrays. Check out the <code class="docutils literal notranslate"><span class="pre">Array</span></code> <a class="reference external" href="https://docs.julialang.org/en/v1/base/arrays/">documentation</a> for more details.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
@@ -499,7 +500,9 @@ If you're familiar with Python and MATLAB, Julia syntax is a combination with so
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:2:10
-[0, 2, 4, 6, 8, 10]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 2, 4, 6, 8, 10]
 </pre></div>
 </div>
 </div>
@@ -541,7 +544,7 @@ Float multiplication: 2.0 with type Float64
 </div>
 <div class="alert alert-block alert-warning">
 <h3>Exercise:</h3>
-Please define a function named `get_last` that takes an array and returns the last element.
+Please define a function named <tt>get_last</tt> that takes an array and returns the last element.
 <h3>Solution:</h3>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">get_last</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="k">end</span><span class="p">]</span>
@@ -643,7 +646,7 @@ Adding floats
 </div>
 <div class="alert alert-block alert-warning">
 <h3>Exercise</h3>
-Define a one line function called `cube` that takes a `Float32` and returns the cube of that number.
+Define a one line function called <tt>cube</tt> that takes a <tt>Float32</tt> and returns the cube of that number.
 <h3>Solution:</h3>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">cube</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Float32</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
@@ -678,7 +681,7 @@ After: [336, 2, 3]
 </section>
 <section id="loops-conditionals">
 <h2>Loops &amp; Conditionals<a class="headerlink" href="#loops-conditionals" title="Link to this heading">#</a></h2>
-<p>The syntax here is very similar to Python without the <code class="docutils literal notranslate"><span class="pre">:</span></code>, you just need an <code class="docutils literal notranslate"><span class="pre">end</span></code> to denote the end of the block. As in Python, indentation doesn’t formally matter, but most style guides strongly suggest it for readability.</p>
+<p>The syntax here is very similar to Python without the <code class="docutils literal notranslate"><span class="pre">:</span></code>, you just need an <code class="docutils literal notranslate"><span class="pre">end</span></code> to denote the end of the block. As in Python, indentation doesn’t formally matter, but most style guides strongly suggest it for readability. The documentation on looping data can be found <a class="reference external" href="https://docs.julialang.org/en/v1/manual/control-flow/#man-loops">here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># For loops</span>
@@ -864,7 +867,7 @@ ParametricType{Float64}
 </section>
 <section id="broadcasting">
 <h2>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h2>
-<p>Like in MATLAB you can broadcast operations like, <code class="docutils literal notranslate"><span class="pre">+</span></code>, with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax. In Julia you can also broadcast functions with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax.</p>
+<p>Like in MATLAB you can broadcast operations like, <code class="docutils literal notranslate"><span class="pre">+</span></code>, with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax. In Julia you can also broadcast functions with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax. See the <a class="reference external" href="https://docs.julialang.org/en/v1/manual/arrays/#Broadcasting">docs</a> for more info.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x_vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -897,10 +900,10 @@ ParametricType{Float64}
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
   <span class="o">+</span><span class="p">(::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="o">...</span><span class="p">)</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">596</span>
+  <span class="o">+</span><span class="p">(::</span><span class="n">Complex</span><span class="p">{</span><span class="n">Bool</span><span class="p">},</span> <span class="p">::</span><span class="n">Real</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="nb">complex</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">323</span>
   <span class="o">+</span><span class="p">(::</span><span class="n">BigInt</span><span class="p">,</span> <span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Int16</span><span class="p">,</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">Int8</span><span class="p">})</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="n">gmp</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">550</span>
-  <span class="o">+</span><span class="p">(::</span><span class="n">BigFloat</span><span class="p">,</span> <span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Int16</span><span class="p">,</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">Int8</span><span class="p">})</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="n">mpfr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">506</span>
   <span class="o">...</span>
 
 
@@ -987,7 +990,7 @@ ParametricType{Float64}
 </div>
 <div class="alert alert-block alert-warning">
 <h3>Exercise</h3>
-Broadcast the `square` function defined earlier over any array.
+Broadcast the <tt>square</tt> function defined earlier over any array.
 <h3>Solution:</h3>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">square</span><span class="o">.</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 </pre></div>
@@ -1041,7 +1044,7 @@ Broadcast the `square` function defined earlier over any array.
 <span class="w">        </span><span class="c"># eachline returns an iterator over lines in the file</span>
 <span class="w">        </span><span class="c"># this avoids loading the entire file into memory. </span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eachline</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-<span class="w">            </span><span class="c"># stip() removes whitespace</span>
+<span class="w">            </span><span class="c"># strip() removes whitespace</span>
 <span class="w">            </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strip</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c"># Checks if the line starts</span>
@@ -1108,13 +1111,44 @@ Broadcast the `square` function defined earlier over any array.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000003 seconds (2 allocations: 144 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000001 seconds (2 allocations: 144 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
- 0.713335  0.757784  0.849
- 0.699548  0.290571  0.741127
- 0.261569  0.204818  0.830398
+ 0.860948  0.855272  0.00447448
+ 0.688968  0.136781  0.930878
+ 0.66677   0.633124  0.938454
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;views</span></code>: Converts all array slices in the same line/block into views. This is very useful for avoiding unnecessary allocations</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@views</span><span class="w"> </span><span class="mf">3.1</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="k">end</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: Cannot `convert` an object of type Vector{Float64} to an object of type Float64
+<span class="n">The</span> <span class="n">function</span> <span class="err">`</span><span class="n">convert</span><span class="err">`</span> <span class="n">exists</span><span class="p">,</span> <span class="n">but</span> <span class="n">no</span> <span class="n">method</span> <span class="ow">is</span> <span class="n">defined</span> <span class="k">for</span> <span class="n">this</span> <span class="n">combination</span> <span class="n">of</span> <span class="n">argument</span> <span class="n">types</span><span class="o">.</span>
+
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">number</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">6</span>
+  <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">126</span>
+  <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">Number</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">number</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">7</span>
+  <span class="o">...</span>
+
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1134,7 +1168,9 @@ Broadcast the `square` function defined earlier over any array.
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">&#64;show</span></code> : Prints a quick debug statement with the variable name and value</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;show</span></code> : Prints a quick debug statement with the variable name and value</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span>

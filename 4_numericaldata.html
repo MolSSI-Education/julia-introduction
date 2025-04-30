@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Linear Algebra &#8212; Introduction to Julia</title>
+    <title>Numerical Data &#8212; Introduction to Julia</title>
   
   
   
@@ -58,11 +58,13 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '4_numericaldata';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Optimizating Code" href="5_optimization.html" />
+    <link rel="next" title="Optimizing Code" href="5_optimization.html" />
     <link rel="prev" title="Why Julia?" href="3_whyjulia.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -177,13 +179,8 @@
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Algebra</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizating Code</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizing Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
 </ul>
 
@@ -323,7 +320,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Linear Algebra</h1>
+    <h1>Numerical Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -333,27 +330,26 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Algebra</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrices">Special Matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra">Linear Algebra</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrices">Special Matrices</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-number-and-more-generation">Random Number (and more!) generation</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-plot-examples">More plot examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unitful">Unitful</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-units">Converting between units</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioless-quantities">Dimensioless quantities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatching-on-units">Dispatching on units</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-units">Creating your own units</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delimited-files"><strong>Delimited Files</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-number-and-more-generation">Random Number (and more!) generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-plot-examples">More plot examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unitful">Unitful</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-units">Converting between units</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioless-quantities">Dimensioless quantities</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatching-on-units">Dispatching on units</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-units">Creating your own units</a></li>
 </ul>
 </li>
 </ul>
-
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delimited-files"><strong>Delimited Files</strong></a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
@@ -364,43 +360,20 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="alert alert-block alert-info"> 
+  <section class="tex2jax_ignore mathjax_ignore" id="numerical-data">
+<h1>Numerical Data<a class="headerlink" href="#numerical-data" title="Link to this heading">#</a></h1>
+<div class="alert alert-block alert-info"> 
 <h2>Overview</h2>
 This notebook focuses on the use of libraries in Julia to manipulate numerical data, such as matrices and vectors. It covers the basics of creating and manipulating arrays, as well as performing mathematical operations on them.
-<p>Besides that, we also explore the use of <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> for handling tabular data, and <code class="docutils literal notranslate"><span class="pre">Plots</span></code> for visualizing data.</p>
+<p>Besides that, we also explore the use of DataFrames for handling tabular data, and Plots for visualizing data.</p>
 <h2>Key Libraries</h2>
-- `LinearAlgebra`: For linear algebra operations.
-- `DataFrames`: For handling tabular data.
-- `Plots`: For data visualization.
-</div><div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">class</span><span class="o">=</span><span class="s">&quot;alert alert-block alert-info&quot;</span><span class="o">&gt;</span><span class="w"> </span>
-<span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="n">Overview</span><span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
-<span class="n">This</span><span class="w"> </span><span class="n">notebook</span><span class="w"> </span><span class="n">provides</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">quick</span><span class="w"> </span><span class="n">rundown</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">most</span><span class="w"> </span><span class="n">powerful</span><span class="w"> </span><span class="n">numerical</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Julia</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">LinearAlgebra</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">DataFrames</span>
-
-
-<span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">Objectives</span><span class="o">:&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
-<span class="o">*</span><span class="w"> </span><span class="n">Learn</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">common</span><span class="w"> </span><span class="n">Julia</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">numerical</span><span class="w"> </span><span class="n">computing</span><span class="o">.</span>
-
-<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ParseError</span>:
-<span class="c1"># Error @ ]8;;file:///home/runner/work/julia-introduction/julia-introduction/book/In[1]#1:1\In[1]:1:1]8;;\</span>
-<span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert alert-block alert-info&quot;</span><span class="o">&gt;</span> 
-<span class="err">╙</span> <span class="err">──</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">unary</span> <span class="n">operator</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="linear-algebra">
-<h1>Linear Algebra<a class="headerlink" href="#linear-algebra" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>LinearAlgebra: For linear algebra operations.</p></li>
+<li><p>DataFrames: For handling tabular data.</p></li>
+<li><p>Plots: For data visualization.</p></li>
+</ul>
+</div><section id="linear-algebra">
+<h2>Linear Algebra<a class="headerlink" href="#linear-algebra" title="Link to this heading">#</a></h2>
 <p>Here we’ll demonstrate some basic linear algebraic functionality using the Base (i.e. built into Julia and doesn’t need to be installed, only imported) <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/">LinearAlgebra</a> package.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -438,7 +411,7 @@ This notebook focuses on the use of libraries in Julia to manipulate numerical d
 </div>
 </div>
 </div>
-<p>Okay, let’s make a new matrix and take the inverse:</p>
+<p>Okay, let’s make a new matrix and take the inverse (NB: this should of course be avoided in numerical computing generally, but the function does exist so we’re showing it to you):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
@@ -518,7 +491,6 @@ vectors:
 </div>
 </div>
 <p>We have a backslash like in MATLAB, too…</p>
-<p><strong>NOTE</strong>: the backslash operator divides the argument on its right by the one on its left, commonly used to solve matrix equations</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
@@ -531,31 +503,30 @@ vectors:
 
 <span class="ne">Stacktrace</span>:
   <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">checknonsingular</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">factorization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">69</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">factorization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">69</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
   <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">_check_lu_success</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">84</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">84</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
   <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="c1">#lu!#182</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
   <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">lu</span><span class="err">!</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">90</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">90</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
   <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">lu</span><span class="err">!</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">89</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">89</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
   <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">_lu</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">347</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">347</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
   <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">lu</span><span class="p">(::</span><span class="n">Matrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">};</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
-    <span class="o">@</span> <span class="n">LinearAlgebra</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">341</span>
+    <span class="o">@</span> <span class="n">LinearAlgebra</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">341</span>
   <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">lu</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">341</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">341</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
   <span class="p">[</span><span class="mi">9</span><span class="p">]</span> \<span class="p">(</span><span class="n">A</span><span class="p">::</span><span class="n">Matrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">B</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
-    <span class="o">@</span> <span class="n">LinearAlgebra</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">generic</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1132</span>
+    <span class="o">@</span> <span class="n">LinearAlgebra</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">generic</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1132</span>
  <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span><span class="mi">2</span>
+    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>More things!</p>
-<p>We will solve the following system of equations:</p>
+<p>Let’s say we want to solve the following system of equations (and maybe find out some other things about the matrix <span class="math notranslate nohighlight">\(A\)</span> while we’re at it…):</p>
 <div class="highlight-math notranslate"><div class="highlight"><pre><span></span>x_1 + 2x_2 - x_3 + x_4 = 1 \\
 2x_1 - x_2 + 3x_3 - 2x_4 = 5 \\
 -3x_1 + 4x_2 + 2x_3 + x_4 = 7 \\
@@ -628,7 +599,7 @@ Condition number of A: 7.463516139995443
 </div>
 </div>
 <section id="special-matrices">
-<h2>Special Matrices<a class="headerlink" href="#special-matrices" title="Link to this heading">#</a></h2>
+<h3>Special Matrices<a class="headerlink" href="#special-matrices" title="Link to this heading">#</a></h3>
 <p>Julia provides for a bunch of special matrix types on which standard operations are further optimized; you can read more about them <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/#Special-matrices">here</a>. We explore a few examples below.</p>
 <p><strong>Symmetric Matrices</strong>: Julia provides the <code class="docutils literal notranslate"><span class="pre">Symmetric</span></code> type for creating symmetric matrices, where the matrix is equal to its transpose. This saves storage space by storing only the upper triangular part of the matrix.</p>
 <div class="cell docutils container">
@@ -719,7 +690,7 @@ Condition number of A: 7.463516139995443
 </div>
 </div>
 </div>
-<p><strong>Hermitian Matrices</strong>: The <code class="docutils literal notranslate"><span class="pre">Hermitian</span></code> type in Julia is used for Hermitian matrices, which are complex square matrices that are equal to their own conjugate transpose.</p>
+<p><strong>Hermitian Matrices</strong>: (for the quantum mechanicians among you) The <code class="docutils literal notranslate"><span class="pre">Hermitian</span></code> type in Julia is used for Hermitian matrices, which are complex square matrices that are equal to their own conjugate transpose.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Create a Hermitian matrix</span>
@@ -742,8 +713,8 @@ Condition number of A: 7.463516139995443
 </section>
 </section>
 <section id="dataframes">
-<h1>DataFrames<a class="headerlink" href="#dataframes" title="Link to this heading">#</a></h1>
-<p>The <a class="reference external" href="https://github.com/JuliaData/DataFrames.jl">DataFrames</a> package provides a similar set of functionality to pandas in Python. We’ll import the package and start by creating a simple DataFrame to experiment with.</p>
+<h2>DataFrames<a class="headerlink" href="#dataframes" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://github.com/JuliaData/DataFrames.jl">DataFrames</a> package provides a similar set of functionality to pandas in Python (albeit with fairly different and arguably more principled syntax). We’ll import the package and start by creating a simple DataFrame to experiment with.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span><span class="p">,</span><span class="w"> </span><span class="n">Statistics</span>
@@ -783,7 +754,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -801,7 +772,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -819,7 +790,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -837,7 +808,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -856,14 +827,14 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="random-number-and-more-generation">
-<h1>Random Number (and more!) generation<a class="headerlink" href="#random-number-and-more-generation" title="Link to this heading">#</a></h1>
+<h2>Random Number (and more!) generation<a class="headerlink" href="#random-number-and-more-generation" title="Link to this heading">#</a></h2>
 <p>As with any self-respecting scientific programming language, Julia has extensive functionality for randomness. The core base function is <code class="docutils literal notranslate"><span class="pre">rand</span></code>, which we demonstrate in a few (of <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/Random/">many</a>) variations below…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -872,7 +843,7 @@ Condition number of A: 7.463516139995443
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.31701660655305997
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25006141143873706
 </pre></div>
 </div>
 </div>
@@ -885,9 +856,9 @@ Condition number of A: 7.463516139995443
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×2 Matrix{Float64}:
- 0.291872  0.553238
- 0.605624  0.78193
- 0.579101  0.333345
+ 0.832316  0.48948
+ 0.522031  0.897479
+ 0.609625  0.819179
 </pre></div>
 </div>
 </div>
@@ -900,8 +871,8 @@ Condition number of A: 7.463516139995443
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Int64}:
-  4947918940231763301   8118753426623148058
- -7554244924082347089  -7151242703628766139
+ -8522877022131237848  -6871358748179709772
+  1567719678029836224   4157292215403458722
 </pre></div>
 </div>
 </div>
@@ -913,7 +884,7 @@ Condition number of A: 7.463516139995443
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;a&#39;: ASCII/Unicode U+0061 (category Ll: Letter, lowercase)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;c&#39;: ASCII/Unicode U+0063 (category Ll: Letter, lowercase)
 </pre></div>
 </div>
 </div>
@@ -925,7 +896,7 @@ Condition number of A: 7.463516139995443
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98
 </pre></div>
 </div>
 </div>
@@ -938,7 +909,7 @@ Condition number of A: 7.463516139995443
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×4 Matrix{Float64}:
- -0.360121  -0.370273  0.867234  1.27585
+ -0.306526  -0.0201221  -1.14722  -1.51437
 </pre></div>
 </div>
 </div>
@@ -989,14 +960,15 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span><span class="mi">6</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">]:</span><span class="mi">6</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>In this case, we see the use of <code class="docutils literal notranslate"><span class="pre">!</span></code> in a slightly different way than was explored in the syntax section, though conceptually the same. The <code class="docutils literal notranslate"><span class="pre">histogram!</span></code> function modifies the existing plot, but we don’t actually have to pass it as an argument (though we can), so the thing being modified “in-place” is not explicitly being passed in this case.</p>
 <section id="more-plot-examples">
-<h2>More plot examples<a class="headerlink" href="#more-plot-examples" title="Link to this heading">#</a></h2>
+<h3>More plot examples<a class="headerlink" href="#more-plot-examples" title="Link to this heading">#</a></h3>
+<p>(there are many more available, these are just a few examples of commonly-desired plot types!)</p>
 <p><strong>Line Plot</strong>: A basic line plot with labels and title.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1015,7 +987,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">30</span><span class="p">]:</span><span class="mi">6</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span><span class="mi">6</span>
 </pre></div>
 </div>
 </div>
@@ -1034,7 +1006,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">31</span><span class="p">]:</span><span class="mi">2</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">30</span><span class="p">]:</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -1056,7 +1028,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">32</span><span class="p">]:</span><span class="mi">5</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">31</span><span class="p">]:</span><span class="mi">5</span>
 </pre></div>
 </div>
 </div>
@@ -1078,30 +1050,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">]:</span><span class="mi">5</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Pie Chart</strong>: A pie chart for visualizing proportions of categories.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Pie chart data</span>
-<span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Category 1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Category 2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Category 3&quot;</span><span class="p">]</span>
-<span class="n">sizes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span>
-
-<span class="c"># Pie chart</span>
-<span class="n">pie</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Pie Chart&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `pie` not defined in `Main`
-<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span><span class="mi">6</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">32</span><span class="p">]:</span><span class="mi">5</span>
 </pre></div>
 </div>
 </div>
@@ -1125,7 +1074,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span><span class="mi">7</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">]:</span><span class="mi">7</span>
 </pre></div>
 </div>
 </div>
@@ -1133,7 +1082,7 @@ Condition number of A: 7.463516139995443
 <p><strong>Note</strong>: The <code class="docutils literal notranslate"><span class="pre">Plots</span></code> package is a powerful and flexible plotting library in Julia, and it supports many different plot types and customization options. You can refer to the <a class="reference external" href="http://docs.juliaplots.org/latest/">Plots.jl documentation</a> for more information on how to create different types of plots and customize them to suit your needs.</p>
 </section>
 <section id="unitful">
-<h2>Unitful<a class="headerlink" href="#unitful" title="Link to this heading">#</a></h2>
+<h3>Unitful<a class="headerlink" href="#unitful" title="Link to this heading">#</a></h3>
 <p><a class="reference external" href="https://painterqubits.github.io/Unitful.jl/stable/">Unitful.jl</a> is a Julia package for handling units and dimensions. It can be very useful for doing unit conversions and catching dimensional errors, but is also sometimes more trouble than it’s worth to actually store every quantity in your code with units…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1171,7 +1120,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">37</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1185,7 +1134,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">38</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1199,7 +1148,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">39</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">37</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1162,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">38</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1227,13 +1176,13 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">41</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">39</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="converting-between-units">
-<h3>Converting between units<a class="headerlink" href="#converting-between-units" title="Link to this heading">#</a></h3>
+<h4>Converting between units<a class="headerlink" href="#converting-between-units" title="Link to this heading">#</a></h4>
 <p>Convert a <code class="docutils literal notranslate"><span class="pre">Unitful.Quantity</span></code> to different units. The conversion will fail if the target units a have a different dimension than the dimension of the quantity <code class="docutils literal notranslate"><span class="pre">x</span></code>. You can use this method to switch between equivalent representations of the same unit, like <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">m</span></code> and <code class="docutils literal notranslate"><span class="pre">J</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1244,7 +1193,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">42</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1258,7 +1207,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">43</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">41</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1273,7 +1222,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">44</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">42</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1288,7 +1237,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">45</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">43</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1303,14 +1252,14 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">46</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">44</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="dimensioless-quantities">
-<h3>Dimensioless quantities<a class="headerlink" href="#dimensioless-quantities" title="Link to this heading">#</a></h3>
+<h4>Dimensioless quantities<a class="headerlink" href="#dimensioless-quantities" title="Link to this heading">#</a></h4>
 <p>For dimensionless quantities, we can use <code class="docutils literal notranslate"><span class="pre">NoUnits</span></code> as an argumert to <code class="docutils literal notranslate"><span class="pre">uconvert</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1321,7 +1270,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">47</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">45</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1339,7 +1288,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">48</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">46</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1354,15 +1303,30 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">49</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">47</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is instructive to compare the output of the cell above with the <code class="docutils literal notranslate"><span class="pre">ustrip</span></code> function, which merely strips the unit annotation but keeps the numerical value the same:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ustrip</span><span class="p">(</span><span class="mf">1.0</span><span class="sa">u</span><span class="s">&quot;μm/m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
+<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">48</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="dispatching-on-units">
-<h3>Dispatching on units<a class="headerlink" href="#dispatching-on-units" title="Link to this heading">#</a></h3>
-<p>The following example shows how the <code class="docutils literal notranslate"><span class="pre">whatsit</span></code> function takes different types into account and returns the correct unit:</p>
+<h4>Dispatching on units<a class="headerlink" href="#dispatching-on-units" title="Link to this heading">#</a></h4>
+<p>Of course (you get the idea by now), we can also dispatch on units!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">whatsit</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Unitful</span><span class="o">.</span><span class="n">Voltage</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;voltage!&quot;</span>
@@ -1375,7 +1339,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">50</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">49</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1392,7 +1356,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">51</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">50</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1406,7 +1370,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">52</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">51</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1420,140 +1384,20 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">53</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">52</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="creating-your-own-units">
-<h4>Creating your own units<a class="headerlink" href="#creating-your-own-units" title="Link to this heading">#</a></h4>
-<p>If a different set of default units or dimensions is desired, macros for generating units and dimensions are provided. To create new units interactively, most users will be happy with the <code class="docutils literal notranslate"><span class="pre">&#64;unit</span></code> macro and the <code class="docutils literal notranslate"><span class="pre">Unitful.register</span></code> function, which makes units defined in a module available to the <code class="docutils literal notranslate"><span class="pre">&#64;u_str</span></code> string macro.</p>
-<p>An example of defining units in a module:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">module</span><span class="w"> </span><span class="n">MyUnits</span><span class="p">;</span><span class="w"> </span>
-
-<span class="k">using</span><span class="w"> </span><span class="n">Unitful</span><span class="p">;</span>
-
-<span class="nd">@unit</span><span class="w"> </span><span class="n">myMeter</span><span class="w"> </span><span class="s">&quot;m&quot;</span><span class="w"> </span><span class="n">MyMeter</span><span class="w"> </span><span class="mi">1</span><span class="sa">u</span><span class="s">&quot;m&quot;</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span>
-
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Package Unitful not found in current path.
-<span class="o">-</span> <span class="n">Run</span> <span class="err">`</span><span class="kn">import</span><span class="w"> </span><span class="nn">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Unitful&quot;</span><span class="p">)</span><span class="err">`</span> <span class="n">to</span> <span class="n">install</span> <span class="n">the</span> <span class="n">Unitful</span> <span class="n">package</span><span class="o">.</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2296</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">273</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">__require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2271</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">#invoke_in_world#3</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1089</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">invoke_in_world</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1086</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2260</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">MyUnits</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Main.MyUnits
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Unitful</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Package Unitful not found in current path.
-<span class="o">-</span> <span class="n">Run</span> <span class="err">`</span><span class="kn">import</span><span class="w"> </span><span class="nn">Pkg</span><span class="p">;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Unitful&quot;</span><span class="p">)</span><span class="err">`</span> <span class="n">to</span> <span class="n">install</span> <span class="n">the</span> <span class="n">Unitful</span> <span class="n">package</span><span class="o">.</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2296</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">lock</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">273</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">__require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2271</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">#invoke_in_world#3</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1089</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">invoke_in_world</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1086</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">require</span><span class="p">(</span><span class="n">into</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">mod</span><span class="p">::</span><span class="n">Symbol</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">2260</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>After creating your own units in a module, you can try to use them, but this WILL NOT work until you register them:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="sa">u</span><span class="s">&quot;myMeter&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
-<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">57</span><span class="p">]:</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Unitful</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">MyUnits</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: `Unitful` not defined in `Main`
-<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">58</span><span class="p">]:</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="sa">u</span><span class="s">&quot;myMeter&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
-<span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">59</span><span class="p">]:</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Create your own units and use them:</p>
+<h5>Creating your own units<a class="headerlink" href="#creating-your-own-units" title="Link to this heading">#</a></h5>
+<p>We will not cover this in detail here, but you can also do things like creating your own units and specifying how to convert them to others…(<a class="reference external" href="https://painterqubits.github.io/Unitful.jl/stable/newunits/">see docs</a>)</p>
 </section>
 </section>
 </section>
 <section id="delimited-files">
-<h2><strong>Delimited Files</strong><a class="headerlink" href="#delimited-files" title="Link to this heading">#</a></h2>
-<p>Still in the context of manipulating numerical data, the <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/">DelimitedFiles</a> package provides functionality for reading and writing files with delimited values (Originally a Julia stdlib)</p>
+<h3><strong>Delimited Files</strong><a class="headerlink" href="#delimited-files" title="Link to this heading">#</a></h3>
+<p>Still in the context of manipulating numerical data, the <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/">DelimitedFiles</a> (also in Julia Base) package provides functionality for reading and writing files with delimited values.</p>
 <p>Let’s read the file you just created:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1573,15 +1417,15 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">readdlm_auto</span><span class="p">(</span><span class="nb">input</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">dlm</span><span class="p">::</span><span class="n">Char</span><span class="p">,</span> <span class="n">T</span><span class="p">::</span><span class="n">Type</span><span class="p">,</span> <span class="n">eol</span><span class="p">::</span><span class="n">Char</span><span class="p">,</span> <span class="n">auto</span><span class="p">::</span><span class="n">Bool</span><span class="p">;</span> <span class="n">opts</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
-   <span class="o">@</span> <span class="n">DelimitedFiles</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
+   <span class="o">@</span> <span class="n">DelimitedFiles</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">readdlm_auto</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">233</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">233</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">readdlm</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">170</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">170</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">readdlm</span><span class="p">(</span><span class="nb">input</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">DelimitedFiles</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">118</span>
+   <span class="o">@</span> <span class="n">DelimitedFiles</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">118</span>
  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">61</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">54</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1598,19 +1442,20 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">readdlm_auto</span><span class="p">(</span><span class="nb">input</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">dlm</span><span class="p">::</span><span class="n">Char</span><span class="p">,</span> <span class="n">T</span><span class="p">::</span><span class="n">Type</span><span class="p">,</span> <span class="n">eol</span><span class="p">::</span><span class="n">Char</span><span class="p">,</span> <span class="n">auto</span><span class="p">::</span><span class="n">Bool</span><span class="p">;</span> <span class="n">opts</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{</span><span class="n">comments</span><span class="p">::</span><span class="n">Bool</span><span class="p">})</span>
-   <span class="o">@</span> <span class="n">DelimitedFiles</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
+   <span class="o">@</span> <span class="n">DelimitedFiles</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">readdlm_auto</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">233</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">233</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">readdlm</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">226</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">226</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">#readdlm#2</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.4</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">86</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">86</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">62</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">55</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 
@@ -1658,7 +1503,7 @@ Condition number of A: 7.463516139995443
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Optimizating Code</p>
+        <p class="prev-next-title">Optimizing Code</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1678,27 +1523,26 @@ Condition number of A: 7.463516139995443
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Linear Algebra</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrices">Special Matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra">Linear Algebra</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrices">Special Matrices</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-number-and-more-generation">Random Number (and more!) generation</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-plot-examples">More plot examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unitful">Unitful</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-units">Converting between units</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioless-quantities">Dimensioless quantities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatching-on-units">Dispatching on units</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-units">Creating your own units</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#delimited-files"><strong>Delimited Files</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframes">DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-number-and-more-generation">Random Number (and more!) generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-plot-examples">More plot examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unitful">Unitful</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-units">Converting between units</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioless-quantities">Dimensioless quantities</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatching-on-units">Dispatching on units</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-units">Creating your own units</a></li>
 </ul>
 </li>
 </ul>
-
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delimited-files"><strong>Delimited Files</strong></a></li>
+</ul>
+</li>
+</ul>
   </nav></div>
 
 </div></div>

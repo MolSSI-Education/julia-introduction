@@ -177,13 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Linear Algebra</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizating Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizing Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
 </ul>
 
@@ -334,7 +329,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-installation-and-setup">Julia Installation and Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-basics">Julia Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-basics">Julia Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome-to-the-repl">Welcome to the REPL</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-repl">Accessing the REPL</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#customization-of-the-repl">Customization of the REPL</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -346,7 +348,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="introduction-to-julia">
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-julia">
 <h1>Introduction to Julia<a class="headerlink" href="#introduction-to-julia" title="Link to this heading">#</a></h1>
 <section id="julia-installation-and-setup">
 <h2>Julia Installation and Setup<a class="headerlink" href="#julia-installation-and-setup" title="Link to this heading">#</a></h2>
@@ -362,31 +364,41 @@ document.write(`
 </section>
 <section id="julia-basics">
 <h2>Julia Basics<a class="headerlink" href="#julia-basics" title="Link to this heading">#</a></h2>
+<section id="welcome-to-the-repl">
+<h3>Welcome to the REPL<a class="headerlink" href="#welcome-to-the-repl" title="Link to this heading">#</a></h3>
+<p>Julia’s REPL (Read-Eval-Print Loop) is an interactive command-line interface that allows users to execute Julia code in real time. It provides a convenient way to experiment with code, test functions, and explore the language’s features.</p>
+<section id="accessing-the-repl">
+<h4>Accessing the REPL<a class="headerlink" href="#accessing-the-repl" title="Link to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Welcome to the REPL</p></li>
+<li><p>In VSCode, go to the command menu (<kbd>Cmd</kbd> + <kbd>⇧</kbd>+<kbd>P</kbd> on Mac, or <kbd>Ctrl</kbd> on Windows) and type <code class="docutils literal notranslate"><span class="pre">Julia:</span> <span class="pre">Start</span> <span class="pre">REPL</span></code></p></li>
+<li><p>In your terminal, type <code class="docutils literal notranslate"><span class="pre">julia</span></code> and hit Enter</p></li>
 </ul>
-<blockquote>
-<div><p>Julia’s REPL (Read-Eval-Print Loop) is an interactive command-line interface that allows users to execute Julia code in real time. It provides a convenient way to experiment with code, test functions, and explore the language’s features.</p>
-</div></blockquote>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- In VSCode, go to the search bar and type `Julia: Start REPL` to start the REPL.
-- In your terminal, type `julia` and hit Enter to start the Julia REPL.
+</section>
+<section id="customization-of-the-repl">
+<h4>Customization of the REPL<a class="headerlink" href="#customization-of-the-repl" title="Link to this heading">#</a></h4>
+<ul>
+<li><p><a class="reference external" href="https://github.com/KristofferC/OhMyREPL.jl"><code class="docutils literal notranslate"><span class="pre">OhMyREPL</span></code></a> is a package that adds some nice defaults for color-coding and syntax highlighting, you can add it to your environment by typing <code class="docutils literal notranslate"><span class="pre">]</span> <span class="pre">add</span> <span class="pre">OhMyREPL</span></code> from the REPL</p></li>
+<li><p>More customization:
+The <code class="docutils literal notranslate"><span class="pre">startup.jl</span></code> file in Julia is an optional file that can be used to execute custom code every time a Julia session starts. It can be useful for setting configurations, loading frequently used packages, or defining custom functions.</p>
+<ul>
+<li><p>Location of startup.jl on different operating systems:</p>
+<ul>
+<li><p>Linux/macOS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">startup</span><span class="o">.</span><span class="n">jl</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Customization of the REPL</p>
-<ul>
-<li><p>Add <a class="reference external" href="https://github.com/KristofferC/OhMyREPL.jl"><code class="docutils literal notranslate"><span class="pre">OhMyREPL</span></code></a> to your Julia environment by running <code class="docutils literal notranslate"><span class="pre">]</span> <span class="pre">add</span> <span class="pre">OhMyREPL</span></code> in the REPL.</p></li>
-<li><p>Customization:
-The <code class="docutils literal notranslate"><span class="pre">startup.jl</span></code> file in Julia is an optional file that can be used to execute custom code every time a Julia session starts. It can be useful for setting configurations, loading frequently used packages, or defining custom functions.
-- Location of startup.jl on Different Systems:
-- Linux/macOS:
-<code class="docutils literal notranslate">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">~/.julia/config/startup.jl</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; </code>
-- Windows:
-<code class="docutils literal notranslate">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">C:\Users\YourUsername\.julia\config\startup.jl</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; </code></p></li>
+</li>
+<li><p>Windows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">YourUsername</span>\<span class="o">.</span><span class="n">julia</span>\<span class="n">config</span>\<span class="n">startup</span><span class="o">.</span><span class="n">jl</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </li>
-<li><p>REPL modes:</p>
-<ul>
+</ul>
+</li>
+<li><p>Additional REPL modes:</p>
+<ul class="simple">
 <li><p>Help mode (accessed by <code class="docutils literal notranslate"><span class="pre">?</span></code>)</p></li>
 <li><p>Shell mode (accessed by <code class="docutils literal notranslate"><span class="pre">;</span></code>)</p></li>
 <li><p>Package mode (accessed by <code class="docutils literal notranslate"><span class="pre">]</span></code>)</p></li>
@@ -394,24 +406,22 @@ The <code class="docutils literal notranslate"><span class="pre">startup.jl</spa
 </li>
 <li><p>Package management</p></li>
 <li><p>Environment setup</p>
-<ul>
-<li><p>Julia uses the <code class="docutils literal notranslate"><span class="pre">Pkg</span></code> package manager to manage dependencies and environments.</p></li>
+<ul class="simple">
+<li><p>Julia uses the built-in package manager (which is itself a built-in package called <code class="docutils literal notranslate"><span class="pre">Pkg</span></code>) to manage dependencies and environments (any commands below that use calls of the form <code class="docutils literal notranslate"><span class="pre">Pkg.function()</span></code> can also be accessed in the REPL from <code class="docutils literal notranslate"><span class="pre">pkg&gt;</span></code> mode by prepending with <code class="docutils literal notranslate"><span class="pre">]</span></code> and just calling the function directly)</p></li>
 <li><p>To create a new project, use <code class="docutils literal notranslate"><span class="pre">]</span></code> to enter the package manager mode and then type <code class="docutils literal notranslate"><span class="pre">generate</span> <span class="pre">MyNewProject</span></code> to create a new project within the specified directory.</p></li>
 <li><p>Julia uses project-specific environments to manage dependencies by maintaining separate <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> files for each environment, ensuring that package versions are isolated and reproducible. You can activate and work within a specific environment using <code class="docutils literal notranslate"><span class="pre">Pkg.activate(&quot;path/to/project&quot;)</span></code>, allowing for flexible and independent package management across projects.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Pkg.instantiate()</span></code> is a Julia function used to install all the dependencies for a project, based on the information stored in the <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> files.</p>
-<ul>
-<li><p>Here’s what it does:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">Pkg.instantiate()</span></code> is a Julia function used to install all the dependencies for a project, based on the information stored in the <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> files. Here’s what it does:</p>
 <ul>
 <li><p>If your project has a <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> file, <code class="docutils literal notranslate"><span class="pre">Pkg.instantiate()</span></code> will install the exact versions of the packages listed there, ensuring that the environment is fully reproduced as specified.</p></li>
 <li><p>If there’s no <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> file, but there’s a <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code>, it will resolve and install the necessary package dependencies based on the <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> file, generating a new <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> in the process.</p></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><p>After doing this in our repo, we can do: <code class="docutils literal notranslate"><span class="pre">Pkg.status()</span></code>, which displays the current status of the project, listing installed packages and their versions.</p></li>
 </ul>
 </li>
 </ul>
+</section>
+</section>
 </section>
 </section>
 
@@ -462,7 +472,14 @@ The <code class="docutils literal notranslate"><span class="pre">startup.jl</spa
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-installation-and-setup">Julia Installation and Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-basics">Julia Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-basics">Julia Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome-to-the-repl">Welcome to the REPL</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-repl">Accessing the REPL</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#customization-of-the-repl">Customization of the REPL</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Optimizating Code &#8212; Introduction to Julia</title>
+    <title>Optimizing Code &#8212; Introduction to Julia</title>
   
   
   
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Advanced Topics" href="6_advanced.html" />
-    <link rel="prev" title="Linear Algebra" href="4_numericaldata.html" />
+    <link rel="prev" title="Numerical Data" href="4_numericaldata.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,13 +177,8 @@
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Linear Algebra</a></li>
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Optimizating Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Numerical Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Optimizing Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
 </ul>
 
@@ -323,7 +318,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Optimizating Code</h1>
+    <h1>Optimizing Code</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -349,8 +344,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="optimizating-code">
-<h1>Optimizating Code<a class="headerlink" href="#optimizating-code" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="optimizing-code">
+<h1>Optimizing Code<a class="headerlink" href="#optimizing-code" title="Link to this heading">#</a></h1>
 <div class="alert alert-block alert-info"> 
 <h2>Overview</h2>
 This notebook will cover techniques for going from "Julia code that runs" to "Julia code that runs *fast*(er)!"
@@ -431,13 +426,13 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.009368 seconds (3.77 k allocations: 82.344 KiB, 98.95% compilation time)
-  0.000093 seconds (3.49 k allocations: 70.156 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.009807 seconds (3.77 k allocations: 82.344 KiB, 98.61% compilation time)
+  0.000122 seconds (3.49 k allocations: 70.156 KiB)
 </pre></div>
 </div>
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> macro is convenient, but only executes the function once. We can use the <a class="reference external" href="https://juliaci.github.io/BenchmarkTools.jl/stable/">BenchmarkTools</a> library to investigate the performance of our function with multiple trials. The <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> macro will run 10,000 trials or (roughly) 5 seconds whichever comes first. (These can be configured). There is also the <code class="docutils literal notranslate"><span class="pre">&#64;btime</span></code> macro which runs the same number of trials as <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> but has output similar to <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> macro is convenient, but only executes the function once. We can use the <a class="reference external" href="https://juliaci.github.io/BenchmarkTools.jl/stable/">BenchmarkTools</a> library to investigate the performance of our function with multiple trials. The <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> macro will run 10,000 trials or (roughly) 5 seconds whichever comes first. (These can be <a class="reference external" href="https://juliaci.github.io/BenchmarkTools.jl/stable/manual/#Benchmark-Parameters">configured</a>). There is also the <code class="docutils literal notranslate"><span class="pre">&#64;btime</span></code> macro which runs the same number of trials as <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> but has output similar to <code class="docutils literal notranslate"><span class="pre">&#64;time</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_global</span><span class="p">()</span>
@@ -452,7 +447,7 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 </div>
 </div>
 </div>
-<p>If your function takes parameters, be sure to “interpolate” them with a <code class="docutils literal notranslate"><span class="pre">$</span></code> when using <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> this tells BenchmarkTools to ignore the allocation and time required to allocate the parameters.</p>
+<p>If your function takes parameters, be sure to “<a class="reference external" href="https://juliaci.github.io/BenchmarkTools.jl/stable/manual/#Interpolating-values-into-benchmark-expressions">interpolate</a>” them with a <code class="docutils literal notranslate"><span class="pre">$</span></code> when using <code class="docutils literal notranslate"><span class="pre">&#64;benchmark</span></code> this tells BenchmarkTools to ignore the allocation and time required to allocate the parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Parameter is Interpolated</span>
@@ -484,7 +479,7 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000013 seconds (3 allocations: 78.203 KiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000013 seconds (3 allocations: 78.211 KiB)
 </pre></div>
 </div>
 </div>
@@ -548,7 +543,7 @@ This notebook will cover techniques for going from "Julia code that runs" to "Ju
 
 <span class="k">function</span><span class="w"> </span><span class="n">view_slices</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="w">    </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Int</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="w">    </span><span class="c">#The view function takes the array</span>
+<span class="w">    </span><span class="c"># The view function takes the array</span>
 <span class="w">    </span><span class="c"># and the indicies you want a view of.</span>
 <span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">N</span><span class="p">))</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span>
@@ -620,7 +615,7 @@ Create your own array and define a view into the first 2 elements
 </div>
 </div>
 </div>
-<p>A common pattern in atomistic simulation packages is to have an array of <code class="docutils literal notranslate"><span class="pre">SVectors</span></code> which represent atomic properties, like their position. Storing the data for each atom as an SVector can be much faster than using the default Julia <code class="docutils literal notranslate"><span class="pre">Vector</span></code>. This is because the compiler is able to allocate the <code class="docutils literal notranslate"><span class="pre">SVectors</span></code> next to eachother in memory (better locality) whereas with a <code class="docutils literal notranslate"><span class="pre">Vector</span></code> of <code class="docutils literal notranslate"><span class="pre">Vector</span></code> the compiler will not store the data adjacent in memory.</p>
+<p>A common pattern in atomistic simulation packages is to have an array of <code class="docutils literal notranslate"><span class="pre">SVectors</span></code> which represent atomic attributes, like their position. Storing the data for each atom as an SVector can be much faster than using the default Julia <code class="docutils literal notranslate"><span class="pre">Vector</span></code>. This is because the compiler is able to allocate the <code class="docutils literal notranslate"><span class="pre">SVectors</span></code> next to eachother in memory (better locality) whereas with a <code class="docutils literal notranslate"><span class="pre">Vector</span></code> of <code class="docutils literal notranslate"><span class="pre">Vector</span></code> the compiler will not store the data adjacent in memory.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">N_atoms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
@@ -754,10 +749,10 @@ Body<span class=" -Color -Color-Bold">::Any</span>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> = 0)
-│   %2  = Main
+│   %
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.global_x<span class=" -Color -Color-Bold">::Any</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2  = Main.global_x<span class=" -Color -Color-Bold">::Any</span>
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>│         (@_2 = Base.iterate(%2))
@@ -771,15 +766,16 @@ Body<span class=" -Color -Color-Bold">::Any</span>
 │   %11 = s<span class=" -Color -Color-Bold">::Any</span>
 │   %12 = val<span class=" -Color -Color-Bold">::Any</span>
 │         (s = %11 + %12)
-│         (@_2 = Base.iterate(%2, %10))
+│         (@_2 = Base.iterate
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(%2, %10))
 │   %15 = @_2<span class=" -Color -Color-Bold">::Any</span>
 │   %16 = (%15 === nothing)<span class=" -Color -Color-Cyan">::Bool</span>
 │   %17 = Base.not_int(%16)<span class=" -Color -Color-Cyan">::Bool</span>
 └──       goto #4 if not %17
 3 ─       goto #2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 ┄ %20 = s<span class=" -Color -Color-Bold">::Any</span>
+4 ┄ %20 = s<span class=" -Color -Color-Bold">::Any</span>
 └──       return %20
 </pre></div>
 </div>
@@ -897,7 +893,7 @@ Body<span class=" -Color -Color-Cyan">::Float64</span>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Linear Algebra</p>
+        <p class="prev-next-title">Numerical Data</p>
       </div>
     </a>
     <a class="right-next"

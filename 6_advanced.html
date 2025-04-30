@@ -62,7 +62,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Optimizating Code" href="5_optimization.html" />
+    <link rel="prev" title="Optimizing Code" href="5_optimization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,13 +176,8 @@
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Linear Algebra</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizating Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Numerical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizing Code</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Advanced Topics</a></li>
 </ul>
 
@@ -519,7 +514,7 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </section>
 <section id="gpu-array-programming">
 <h2>GPU Array Programming<a class="headerlink" href="#gpu-array-programming" title="Link to this heading">#</a></h2>
-<p>With the power of dynamic dispacth, we can perform many operations on the GPU just by changing the type of our data from <code class="docutils literal notranslate"><span class="pre">Array</span></code> to <code class="docutils literal notranslate"><span class="pre">CuArray</span></code> (or the analagous type for AMD, Intel, or Apple). The packge environment does not have access to a GPU so the test the cells below install the <code class="docutils literal notranslate"><span class="pre">CUDA.jl</span></code> package and try running the code yourself!</p>
+<p>With the power of multiple dispatch, we can perform many operations on the GPU just by changing the type of our data from <code class="docutils literal notranslate"><span class="pre">Array</span></code> to <code class="docutils literal notranslate"><span class="pre">CuArray</span></code> (or the analagous type for AMD, Intel, or Apple). The packge environment does not have access to a GPU so the test the cells below install one of the <code class="docutils literal notranslate"><span class="pre">CUDA.jl</span></code>/<code class="docutils literal notranslate"><span class="pre">AMDGPU.jl</span></code>/<code class="docutils literal notranslate"><span class="pre">Metal.jl</span></code>/<code class="docutils literal notranslate"><span class="pre">OneAPI.jl</span></code> packages and try running the code yourself! The example below is written for CUDA enabled GPUs.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># This example is for CUDA but is the same principle for all the GPU libraries</span>
 <span class="c">#using CUDA or AMDGPU or oneAPI or Metal or KernelAbstractions</span>
 <span class="k">using</span><span class="w"> </span><span class="n">CUDA</span>
@@ -537,7 +532,7 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">cu_C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cu_B</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cu_B</span><span class="w"> </span>
 </pre></div>
 </div>
-<p>There are many more high-level functions that “just work” on the GPU. For example, all unary operations like <code class="docutils literal notranslate"><span class="pre">+</span></code>,<code class="docutils literal notranslate"><span class="pre">-</span></code>,<code class="docutils literal notranslate"><span class="pre">*</span></code> have GPU implementations. There are also abstractions such as <code class="docutils literal notranslate"><span class="pre">reduce</span></code> and <code class="docutils literal notranslate"><span class="pre">mapreduce</span></code> which allow you to apply an operation or function across an array. Note that all high-level GPU operations should act on an entire array and not a single element at a time.</p>
+<p>There are many more high-level functions that “just work” on the GPU. For example, most unary operations like <code class="docutils literal notranslate"><span class="pre">+</span></code>,<code class="docutils literal notranslate"><span class="pre">-</span></code>,<code class="docutils literal notranslate"><span class="pre">*</span></code>,<code class="docutils literal notranslate"><span class="pre">sin</span></code> have GPU implementations. There are also abstractions such as <code class="docutils literal notranslate"><span class="pre">reduce</span></code> and <code class="docutils literal notranslate"><span class="pre">mapreduce</span></code> which allow you to apply an operation or function across an array. Note that all high-level GPU operations should act on an entire array and not a single element at a time. Checkout the CUDA.jl <a class="reference external" href="https://cuda.juliagpu.org/stable/usage/array/">docs</a> on array programming for more complex examples.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">cu_C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUDA</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">sum_of_C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">cu_C</span><span class="p">)</span>
 <span class="n">sum_of_C_also</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="w"> </span><span class="n">cu_C</span><span class="p">)</span>
@@ -545,6 +540,18 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 <span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span>
 <span class="n">C_squared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">cu_C</span><span class="p">)</span>
 <span class="n">sum_of_C_squared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapreduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">+</span><span class="p">,</span><span class="w"> </span><span class="n">cu_C</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You’re also able to write custom GPU kernels inside of Julia. The <a class="reference external" href="https://github.com/JuliaGPU/KernelAbstractions.jl">KernelAbstractions</a> library unifies all GPU backends into a common interface. This allows you to write a single GPU kernel which can run on any GPU vendor’s hardware. Each vendor-specific library also has a kernel programming model. GPU kernels can get extremely complex, please read the full <a class="reference external" href="https://cuda.juliagpu.org/stable/development/kernel/">documentation</a> for more details. In general, you will define your kernel function, and invoke it with a macro that specifies the hardware topology:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">my_kernel</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="k">end</span>
+
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">CuArray</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+
+<span class="nd">@cuda</span><span class="w"> </span><span class="n">threads</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="n">my_kernel</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
@@ -586,7 +593,7 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Optimizating Code</p>
+        <p class="prev-next-title">Optimizing Code</p>
       </div>
     </a>
 </div>
