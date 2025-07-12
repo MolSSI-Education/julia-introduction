@@ -1,7 +1,7 @@
 format: jb-book
-root: intro
+root: setup
 chapters:
-- file : setup.ipynb
+- file : 1_juliarepl.md
 - file : 2_syntax.ipynb
 - file : 3_whyjulia.ipynb
 - file : 4_numericaldata.ipynb

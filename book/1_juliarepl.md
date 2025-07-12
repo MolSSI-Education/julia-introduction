@@ -1,15 +1,4 @@
-# Introduction to Julia
-
-## Julia Installation and Setup
-
-- [ ] Julia installation complete
-    - [ ] Which version?
-- [ ] Jupyter installation complete
-- [ ] VSCode
-
-## Julia Basics
-
-### Welcome to the REPL
+# Julia REPL
 
 Julia's REPL (Read-Eval-Print Loop) is an interactive command-line interface that allows users to execute Julia code in real time. It provides a convenient way to experiment with code, test functions, and explore the language's features.
 
