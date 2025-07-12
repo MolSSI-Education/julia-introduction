@@ -1,5 +1,5 @@
 format: jb-book
-root: setup
+root: setup.md
 chapters:
 - file : 1_juliarepl.md
 - file : 2_syntax.ipynb

@@ -3,7 +3,7 @@
 
 title: Introduction to Julia  # Name of the book
 author: The Molecular Sciences Software Institute
-copyright: "2024"
+copyright: "2025"
 
 execute:
   execute_notebooks: force
@@ -17,7 +17,7 @@ bibtex_bibfiles:
   - references.bib
 
 repository:
-  url: https://github.com/MolSSI-Education/julia-intro
+  url: https://github.com/MolSSI-Education/julia-introduction
   path_to_book: book/
   branch: main
 
@@ -38,3 +38,4 @@ sphinx:
       logo:
         image_light: images/molssi_main_logo.png
         image_dark: images/molssi_main_logo_inverted_white.png
+    nb_merge_streams: true
