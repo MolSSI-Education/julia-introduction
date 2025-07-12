@@ -69,14 +69,14 @@ using IJulia
 notebook()
 ```
 
-#### Active the Kernel
+#### Activate the Kernel
 
 Open VSCode and ensure that the Jupyter and Julia extensions are installed. Next open one of the Jupyter notebooks from the tutorial.
 
 If the Julia kernel is not automatically detected click the `Select Kernel` button and then choose `Julia` from the dropdown and choose your desired Julia kernel.
-<center><img src="images/select_kernel.png"/></center>
+<img src="./images/select_kernel.png"/>
 <br></br>
-<center><img src="images/select_julia.png"/></center>
+<img src="./images/select_julia.png"/>
 
 #### Install Dependencies
 
@@ -84,9 +84,9 @@ Some of the notebooks require external packages to run, so we have to download t
 - [Project.toml](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/Project.toml)
 
 Place this in the same directory as your jupyter notebooks. If the Julia VSCode extension is running you will see a button to select the environment in the bottom left of VSCode.
-<center><img src="images/julia_env.png"/></center>
+<img src="./images/julia_env.png"/>
 
 Click this button and then choose `(pick a folder)` or if auto-detected the correct environment. The first time you use an environment, Julia must download and precompile all of your packages. It should only take a minute or two.
-<center><img src="images/pick_a_folder.png"/></center>
+<img src="./images/pick_a_folder.png"/>
 
 You should be all set now!

@@ -8,7 +8,7 @@ Julia's REPL (Read-Eval-Print Loop) is an interactive command-line interface tha
 
 You should be greeted by this screen. You can now execute Julia code as you please!
 
-<center><img src="images/julia_repl.png"/></center>
+<img src="images/julia_repl.png"/
 
 
 ## REPL Modes
@@ -16,35 +16,35 @@ You should be greeted by this screen. You can now execute Julia code as you plea
 The Julia REPL has five modes of operation: Julian, Package, Help, Shell, and Search. All modes are activated by a specific key, and deactivated by pressing backspace. More details on each can be found [here](https://docs.julialang.org/en/v1/stdlib/REPL/#The-different-prompt-modes).
 
 #### Julian Mode (default):
-<center><img src="images/julia_default_mode.png"/> </center>
+<img src="images/julia_default_mode.png"/></br>
 In Julian mode you are able to write and execute Julia code. For example, you could define a function and then call it.
-<center><img src="images/code_exec.png"/></center>
+<img src="images/code_exec.png"/>
 
 #### Package Mode (activated by `]`):
-<center><img src="images/julia_pkg_mode.png"/></center>
+<img src="images/julia_pkg_mode.png"/></br>
 In the package mode you will see the currently active environment. The handle format is `(<env-name> pkg>)`. By default the global environment for your current Julia version is active (e.g., @v1.11). Packages in this environment are always available. The package mode grants quick access to methods in the `Pkg` package. For example, you can type `add <package-name>` to install a package. Other useful commands include, `activate <env-path>`, `st`, `up`, `resolve`, `instantiate`. For example, `st` and `status` list all packages in the current environment:
-<center><img src="images/my_env.png"/> </center>
+<img src="images/my_env.png"/>
 
 
 The full documentation for the package manager can be found [here](https://pkgdocs.julialang.org/v1/).
 
 #### Help Mode (activated by `?`):
-<center><img src="images/julia_help_mode.png"/> </center>
+<img src="images/julia_help_mode.png"/></br>
 
 In the help mode you can query the doc-string for any function or struct availaible in the current environment. For example, when querying `cos` you should see
 
-<center><img src="images/cos_help.png"/> </center>
+<img src="images/cos_help.png"/>
 
 
 #### Shell Mode (activated by `;`)
-<center><img src="images/julia_shell_mode.png"/> </center>
+<img src="images/julia_shell_mode.png"/>
 
 The shell mode allows you to execute system commands. Windows shell commands are not supported. However, Powershell or command prompt can be entered by typing `cmd` or `powershell`. Example usage of `ls` on a Linux machine:
-<center><img src="images/shell_ls.png"/> </center>
+<img src="images/shell_ls.png"/>
 
 #### Search Mode
 In all modes, the executed lines are saved and searchable. Just type `^R` (Ctrl + R for me) and it will open a reverse search prompt where you can search prior commands.
-<center><img src="images/rev_search.png"/> </center>
+<img src="images/rev_search.png"/>
 
 
 ## Customization of the REPL
