@@ -8,7 +8,7 @@ Julia's REPL (Read-Eval-Print Loop) is an interactive command-line interface tha
 
 You should be greeted by this screen. You can now execute Julia code as you please!
 
-<img src="images/julia_repl.png"/
+<img src="images/julia_repl.png"/>
 
 
 ## REPL Modes
