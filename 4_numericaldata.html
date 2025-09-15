@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3685a5b4" />
@@ -65,7 +65,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Optimizing Code" href="5_optimization.html" />
-    <link rel="prev" title="Why Julia?" href="3_whyjulia.html" />
+    <link rel="prev" title="Syntax" href="3_syntax.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -146,7 +146,7 @@
     
   
 
-<a class="navbar-brand logo" href="intro.html">
+<a class="navbar-brand logo" href="setup.html">
   
   
   
@@ -176,9 +176,9 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_whyjulia.html">Why Julia?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_juliarepl.html">Julia REPL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_syntax.html">Syntax</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Numerical Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizing Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
@@ -339,7 +339,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-plot-examples">More plot examples</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unitful">Unitful</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-units">Converting between units</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioless-quantities">Dimensioless quantities</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionless-quantities">Dimensionless quantities</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatching-on-units">Dispatching on units</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-units">Creating your own units</a></li>
 </ul>
@@ -490,73 +490,40 @@ vectors:
 </div>
 </div>
 </div>
-<p>We have a backslash like in MATLAB, too…</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
-<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">b</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">SingularException</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="ne">Stacktrace</span>:
-  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">checknonsingular</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">factorization</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">69</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">_check_lu_success</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">84</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="c1">#lu!#182</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">lu</span><span class="err">!</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">90</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">lu</span><span class="err">!</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">89</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">_lu</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">347</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">lu</span><span class="p">(::</span><span class="n">Matrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">};</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
-    <span class="o">@</span> <span class="n">LinearAlgebra</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">341</span>
-  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">lu</span>
-    <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">lu</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">341</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> \<span class="p">(</span><span class="n">A</span><span class="p">::</span><span class="n">Matrix</span><span class="p">{</span><span class="n">Int64</span><span class="p">},</span> <span class="n">B</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Int64</span><span class="p">})</span>
-    <span class="o">@</span> <span class="n">LinearAlgebra</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">generic</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1132</span>
- <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span><span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>Let’s say we want to solve the following system of equations (and maybe find out some other things about the matrix <span class="math notranslate nohighlight">\(A\)</span> while we’re at it…):</p>
-<div class="highlight-math notranslate"><div class="highlight"><pre><span></span>x_1 + 2x_2 - x_3 + x_4 = 1 \\
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x_1 + 2x_2 - x_3 + x_4 = 1 \\
 2x_1 - x_2 + 3x_3 - 2x_4 = 5 \\
 -3x_1 + 4x_2 + 2x_3 + x_4 = 7 \\
 x_1 - 3x_2 + 2x_3 - 4x_4 = -2 \\
-</pre></div>
-</div>
+\end{split}\]</div>
 <p>This can be written in matrix form <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code> as:</p>
-<div class="highlight-math notranslate"><div class="highlight"><pre><span></span>A =
+<div class="math notranslate nohighlight">
+\[\begin{split}A =
 \begin{bmatrix}
 1 &amp; 2 &amp; -1 &amp; 1 \\
 2 &amp; -1 &amp; 3 &amp; -2 \\
 -3 &amp; 4 &amp; 2 &amp; 1 \\
 1 &amp; -3 &amp; 2 &amp; -4 \\
-\end{bmatrix}
-x =
+\end{bmatrix} \end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}x =
 \begin{bmatrix}
 x_1 \\
 x_2 \\
 x_3 \\
 x_4 \\
-\end{bmatrix}
-b =
+\end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}b =
 \begin{bmatrix}
 1 \\
 5 \\
 7 \\
 -2 \\
-\end{bmatrix}
-</pre></div>
-</div>
+\end{bmatrix}\end{split}\]</div>
+<p>We can solve this with a backslash, just like in MATLAB.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Define matrix A and vector b</span>
@@ -584,15 +551,11 @@ b =
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solution x: 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.6235294117647058, 0.7176470588235293, 2.3529411764705883, 1.2941176470588236]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solution x:
+[0.6235294117647058, 0.7176470588235293, 2.3529411764705883, 1.2941176470588236]
 Rank of A: 4
 Null space of A: Matrix
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{Float64}(undef, 4, 0)
+{Float64}(undef, 4, 0)
 Condition number of A: 7.463516139995443
 </pre></div>
 </div>
@@ -623,18 +586,18 @@ Condition number of A: 7.463516139995443
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SparseArrays</span>
 
-<span class="c"># Create a sparse matrix</span>
-<span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sparse</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">],</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
-
-<span class="n">println</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+<span class="c"># Create a sparse matrix by specifying rows, columns, and values of nonzero entries as well as dimensions</span>
+<span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sparse</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">],</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sparse(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 1, 4], [1, 2, 3], [20, 10, 30], 5, 5)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 SparseMatrixCSC{Int64, Int64} with 3 stored entries:
+  ⋅  10   ⋅  ⋅  ⋅
+  ⋅   ⋅   ⋅  ⋅  ⋅
+ 20   ⋅   ⋅  ⋅  ⋅
+  ⋅   ⋅  30  ⋅  ⋅
+  ⋅   ⋅   ⋅  ⋅  ⋅
 </pre></div>
 </div>
 </div>
@@ -643,14 +606,15 @@ Condition number of A: 7.463516139995443
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Create a diagonal matrix</span>
-<span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Diagonal</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
-
-<span class="n">println</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Diagonal</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 0 0; 0 2 0; 0 0 3]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Diagonal{Int64, Vector{Int64}}:
+ 1  ⋅  ⋅
+ ⋅  2  ⋅
+ ⋅  ⋅  3
 </pre></div>
 </div>
 </div>
@@ -664,8 +628,6 @@ Condition number of A: 7.463516139995443
 <span class="n">D1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Diagonal</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
 <span class="n">D2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Diagonal</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
 <span class="n">BD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BlockDiagonal</span><span class="p">([</span><span class="n">D1</span><span class="p">,</span><span class="w"> </span><span class="n">D2</span><span class="p">])</span>
-
-<span class="n">println</span><span class="p">(</span><span class="n">BD</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -694,18 +656,16 @@ Condition number of A: 7.463516139995443
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Create a Hermitian matrix</span>
-<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="nb">im</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="o">-</span><span class="nb">im</span><span class="p">]</span>
-<span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Hermitian</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
-
-<span class="n">println</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="nb">im</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">5</span><span class="o">-</span><span class="nb">im</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="c"># not Hermitian as-written</span>
+<span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Hermitian</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="c"># but this constructor will enforce it...</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Complex{Int64}[
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 + 0im 2 + 0im 3 + 0im; 2 + 0im 4 + 0im 5 + 0im; 3 + 0im 5 + 0im 6 + 0im]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Hermitian{Complex{Int64}, Matrix{Complex{Int64}}}:
+ 1+0im  2+0im  3+0im
+ 2+0im  4+0im  5+0im
+ 3+0im  5+0im  6+0im
 </pre></div>
 </div>
 </div>
@@ -754,7 +714,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -772,7 +732,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -790,7 +750,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -808,7 +768,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -827,7 +787,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -843,7 +803,7 @@ Condition number of A: 7.463516139995443
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25006141143873706
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7095316656967551
 </pre></div>
 </div>
 </div>
@@ -856,9 +816,9 @@ Condition number of A: 7.463516139995443
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×2 Matrix{Float64}:
- 0.832316  0.48948
- 0.522031  0.897479
- 0.609625  0.819179
+ 0.422055  0.0983094
+ 0.962537  0.608826
+ 0.837478  0.119834
 </pre></div>
 </div>
 </div>
@@ -871,8 +831,8 @@ Condition number of A: 7.463516139995443
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Int64}:
- -8522877022131237848  -6871358748179709772
-  1567719678029836224   4157292215403458722
+ 5311453758166550211  6760856539812723184
+ 5819152376496174791  4956548221782099827
 </pre></div>
 </div>
 </div>
@@ -884,7 +844,7 @@ Condition number of A: 7.463516139995443
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;c&#39;: ASCII/Unicode U+0063 (category Ll: Letter, lowercase)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;a&#39;: ASCII/Unicode U+0061 (category Ll: Letter, lowercase)
 </pre></div>
 </div>
 </div>
@@ -896,7 +856,7 @@ Condition number of A: 7.463516139995443
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36
 </pre></div>
 </div>
 </div>
@@ -909,7 +869,7 @@ Condition number of A: 7.463516139995443
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×4 Matrix{Float64}:
- -0.306526  -0.0201221  -1.14722  -1.51437
+ 1.02499  -0.188177  -0.580597  -2.15703
 </pre></div>
 </div>
 </div>
@@ -960,7 +920,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">]:</span><span class="mi">6</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">27</span><span class="p">]:</span><span class="mi">6</span>
 </pre></div>
 </div>
 </div>
@@ -987,7 +947,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span><span class="mi">6</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">]:</span><span class="mi">6</span>
 </pre></div>
 </div>
 </div>
@@ -1006,7 +966,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">30</span><span class="p">]:</span><span class="mi">2</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -1028,7 +988,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">31</span><span class="p">]:</span><span class="mi">5</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">30</span><span class="p">]:</span><span class="mi">5</span>
 </pre></div>
 </div>
 </div>
@@ -1050,7 +1010,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">32</span><span class="p">]:</span><span class="mi">5</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">31</span><span class="p">]:</span><span class="mi">5</span>
 </pre></div>
 </div>
 </div>
@@ -1074,7 +1034,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">]:</span><span class="mi">7</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">32</span><span class="p">]:</span><span class="mi">7</span>
 </pre></div>
 </div>
 </div>
@@ -1120,7 +1080,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1134,7 +1094,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1148,7 +1108,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">37</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">36</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1162,7 +1122,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">38</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">37</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1176,7 +1136,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">39</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">38</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1193,7 +1153,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">39</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1207,7 +1167,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">41</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">40</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1222,7 +1182,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">42</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">41</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1237,7 +1197,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">43</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">42</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1252,14 +1212,14 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">44</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">43</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="dimensioless-quantities">
-<h4>Dimensioless quantities<a class="headerlink" href="#dimensioless-quantities" title="Link to this heading">#</a></h4>
+<section id="dimensionless-quantities">
+<h4>Dimensionless quantities<a class="headerlink" href="#dimensionless-quantities" title="Link to this heading">#</a></h4>
 <p>For dimensionless quantities, we can use <code class="docutils literal notranslate"><span class="pre">NoUnits</span></code> as an argumert to <code class="docutils literal notranslate"><span class="pre">uconvert</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1270,7 +1230,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">45</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">44</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1288,7 +1248,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">46</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">45</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1303,7 +1263,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">47</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">46</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1318,7 +1278,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">48</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">47</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1339,7 +1299,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">49</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">48</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1356,7 +1316,7 @@ Condition number of A: 7.463516139995443
 
 <span class="ne">Stacktrace</span>:
  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">50</span><span class="p">]:</span><span class="mi">1</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">49</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1370,7 +1330,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">51</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">50</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1384,7 +1344,7 @@ Condition number of A: 7.463516139995443
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: UndefVarError: `@u_str` not defined in `Main`
 <span class="ne">Suggestion</span>: check for spelling errors or missing imports.
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">52</span><span class="p">]:</span><span class="mi">1</span>
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">In</span><span class="p">[</span><span class="mi">51</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1398,7 +1358,7 @@ Condition number of A: 7.463516139995443
 <section id="delimited-files">
 <h3><strong>Delimited Files</strong><a class="headerlink" href="#delimited-files" title="Link to this heading">#</a></h3>
 <p>Still in the context of manipulating numerical data, the <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/">DelimitedFiles</a> (also in Julia Base) package provides functionality for reading and writing files with delimited values.</p>
-<p>Let’s read the file you just created:</p>
+<p>Let’s read the file you created in the previous notebook:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">DelimitedFiles</span>
@@ -1406,51 +1366,16 @@ Condition number of A: 7.463516139995443
 </div>
 </div>
 </div>
+<p>The second argument specifies the delimiter, the third the type to parse, and the <code class="docutils literal notranslate"><span class="pre">comments=true</span></code> kwargs says to ignore comment lines.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">readdlm</span><span class="p">(</span><span class="s">&quot;data/read_test.txt&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">readdlm</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">comments</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Cannot open &#39;data/read_test.txt&#39;: not a file
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">readdlm_auto</span><span class="p">(</span><span class="nb">input</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">dlm</span><span class="p">::</span><span class="n">Char</span><span class="p">,</span> <span class="n">T</span><span class="p">::</span><span class="n">Type</span><span class="p">,</span> <span class="n">eol</span><span class="p">::</span><span class="n">Char</span><span class="p">,</span> <span class="n">auto</span><span class="p">::</span><span class="n">Bool</span><span class="p">;</span> <span class="n">opts</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
-   <span class="o">@</span> <span class="n">DelimitedFiles</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">readdlm_auto</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">233</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">readdlm</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">170</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">readdlm</span><span class="p">(</span><span class="nb">input</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">DelimitedFiles</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">118</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">54</span><span class="p">]:</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can also remove the header and specify the delimiter:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">readdlm</span><span class="p">(</span><span class="s">&quot;data/read_test.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">comments</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ArgumentError</span>: Cannot open &#39;data/read_test.txt&#39;: not a file
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">readdlm_auto</span><span class="p">(</span><span class="nb">input</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">dlm</span><span class="p">::</span><span class="n">Char</span><span class="p">,</span> <span class="n">T</span><span class="p">::</span><span class="n">Type</span><span class="p">,</span> <span class="n">eol</span><span class="p">::</span><span class="n">Char</span><span class="p">,</span> <span class="n">auto</span><span class="p">::</span><span class="n">Bool</span><span class="p">;</span> <span class="n">opts</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{</span><span class="n">comments</span><span class="p">::</span><span class="n">Bool</span><span class="p">})</span>
-   <span class="o">@</span> <span class="n">DelimitedFiles</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">readdlm_auto</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">233</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">readdlm</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">226</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">#readdlm#2</span>
-   <span class="o">@</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="mf">1.11.5</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.11</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">DelimitedFiles</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">86</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">55</span><span class="p">]:</span><span class="mi">1</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1×3 Matrix{Float64}:
+ 1.0  2.0  3.0
 </pre></div>
 </div>
 </div>
@@ -1490,12 +1415,12 @@ Condition number of A: 7.463516139995443
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="3_whyjulia.html"
+       href="3_syntax.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Why Julia?</p>
+        <p class="prev-next-title">Syntax</p>
       </div>
     </a>
     <a class="right-next"
@@ -1532,7 +1457,7 @@ Condition number of A: 7.463516139995443
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-plot-examples">More plot examples</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unitful">Unitful</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-units">Converting between units</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioless-quantities">Dimensioless quantities</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionless-quantities">Dimensionless quantities</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatching-on-units">Dispatching on units</a><ul class="nav section-nav flex-column">
 <li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-your-own-units">Creating your own units</a></li>
 </ul>
@@ -1566,7 +1491,7 @@ By The Molecular Sciences Software Institute
 
   <p class="copyright">
     
-      © Copyright 2024.
+      © Copyright 2025.
       <br/>
     
   </p>

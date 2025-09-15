@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction to Julia &#8212; Introduction to Julia</title>
+    <title>Julia REPL &#8212; Introduction to Julia</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3685a5b4" />
@@ -58,10 +58,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '1_juliaintro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2_juliarepl';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Syntax" href="3_syntax.html" />
+    <link rel="prev" title="Why Julia?" href="1_whyjulia.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +126,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -144,7 +144,7 @@
     
   
 
-<a class="navbar-brand logo" href="intro.html">
+<a class="navbar-brand logo" href="setup.html">
   
   
   
@@ -173,10 +173,10 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_whyjulia.html">Why Julia?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Julia REPL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_syntax.html">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Numerical Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizing Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
@@ -234,7 +234,7 @@
       
       
       
-      <li><a href="_sources/1_juliaintro.md" target="_blank"
+      <li><a href="_sources/2_juliarepl.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -318,7 +318,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction to Julia</h1>
+    <h1>Julia REPL</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -328,15 +328,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-installation-and-setup">Julia Installation and Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-basics">Julia Basics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome-to-the-repl">Welcome to the REPL</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-repl">Accessing the REPL</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#customization-of-the-repl">Customization of the REPL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-repl">Accessing the REPL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repl-modes">REPL Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#julian-mode-default">Julian Mode (default):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-mode-activated-by">Package Mode (activated by <code class="docutils literal notranslate"><span class="pre">]</span></code>):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#help-mode-activated-by">Help Mode (activated by <code class="docutils literal notranslate"><span class="pre">?</span></code>):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-mode-activated-by">Shell Mode (activated by <code class="docutils literal notranslate"><span class="pre">;</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-mode">Search Mode</a></li>
 </ul>
 </li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization-of-the-repl">Customization of the REPL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 </ul>
             </nav>
         </div>
@@ -348,34 +350,54 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-julia">
-<h1>Introduction to Julia<a class="headerlink" href="#introduction-to-julia" title="Link to this heading">#</a></h1>
-<section id="julia-installation-and-setup">
-<h2>Julia Installation and Setup<a class="headerlink" href="#julia-installation-and-setup" title="Link to this heading">#</a></h2>
-<ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Julia installation complete</p>
-<ul class="contains-task-list">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Which version?</p></li>
-</ul>
-</li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Jupyter installation complete</p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> VSCode</p></li>
-</ul>
-</section>
-<section id="julia-basics">
-<h2>Julia Basics<a class="headerlink" href="#julia-basics" title="Link to this heading">#</a></h2>
-<section id="welcome-to-the-repl">
-<h3>Welcome to the REPL<a class="headerlink" href="#welcome-to-the-repl" title="Link to this heading">#</a></h3>
+  <section class="tex2jax_ignore mathjax_ignore" id="julia-repl">
+<h1>Julia REPL<a class="headerlink" href="#julia-repl" title="Link to this heading">#</a></h1>
 <p>Julia’s REPL (Read-Eval-Print Loop) is an interactive command-line interface that allows users to execute Julia code in real time. It provides a convenient way to experiment with code, test functions, and explore the language’s features.</p>
 <section id="accessing-the-repl">
-<h4>Accessing the REPL<a class="headerlink" href="#accessing-the-repl" title="Link to this heading">#</a></h4>
+<h2>Accessing the REPL<a class="headerlink" href="#accessing-the-repl" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>In VSCode, go to the command menu (<kbd>Cmd</kbd> + <kbd>⇧</kbd>+<kbd>P</kbd> on Mac, or <kbd>Ctrl</kbd> on Windows) and type <code class="docutils literal notranslate"><span class="pre">Julia:</span> <span class="pre">Start</span> <span class="pre">REPL</span></code></p></li>
 <li><p>In your terminal, type <code class="docutils literal notranslate"><span class="pre">julia</span></code> and hit Enter</p></li>
+<li><p>In VSCode, go to the command menu (<kbd>Cmd</kbd> + <kbd>⇧</kbd>+<kbd>P</kbd> on Mac, or <kbd>Ctrl</kbd> on Windows) and type <code class="docutils literal notranslate"><span class="pre">Julia:</span> <span class="pre">Start</span> <span class="pre">REPL</span></code></p></li>
 </ul>
+<p>You should be greeted by this screen. You can now execute Julia code as you please!</p>
+<img alt="_images/julia_repl.png" src="_images/julia_repl.png" />
+</section>
+<section id="repl-modes">
+<h2>REPL Modes<a class="headerlink" href="#repl-modes" title="Link to this heading">#</a></h2>
+<p>The Julia REPL has five modes of operation: Julian, Package, Help, Shell, and Search. All modes are activated by a specific key, and deactivated by pressing backspace. More details on each can be found <a class="reference external" href="https://docs.julialang.org/en/v1/stdlib/REPL/#The-different-prompt-modes">here</a>.</p>
+<section id="julian-mode-default">
+<h3>Julian Mode (default):<a class="headerlink" href="#julian-mode-default" title="Link to this heading">#</a></h3>
+<p><img alt="_images/julia_default_mode.png" src="_images/julia_default_mode.png" /></br>
+In Julian mode you are able to write and execute Julia code. For example, you could define a function and then call it.
+<img alt="_images/code_exec.png" src="_images/code_exec.png" /></p>
+</section>
+<section id="package-mode-activated-by">
+<h3>Package Mode (activated by <code class="docutils literal notranslate"><span class="pre">]</span></code>):<a class="headerlink" href="#package-mode-activated-by" title="Link to this heading">#</a></h3>
+<p><img alt="_images/julia_pkg_mode.png" src="_images/julia_pkg_mode.png" /></br>
+In the package mode, you will see the currently active environment. The handle format is <code class="docutils literal notranslate"><span class="pre">(&lt;env-name&gt;)</span> <span class="pre">pkg&gt;</span></code>. By default, the global environment for your current Julia version is active (e.g., &#64;v1.11). Packages in this environment are always available. The package mode grants quick access to methods in the <code class="docutils literal notranslate"><span class="pre">Pkg</span></code> package. For example, you can type <code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">&lt;package-name&gt;</span></code> to install a package. Other useful commands include, <code class="docutils literal notranslate"><span class="pre">activate</span> <span class="pre">&lt;env-path&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">st</span></code>, <code class="docutils literal notranslate"><span class="pre">up</span></code>, <code class="docutils literal notranslate"><span class="pre">resolve</span></code>, <code class="docutils literal notranslate"><span class="pre">instantiate</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">st</span></code> and <code class="docutils literal notranslate"><span class="pre">status</span></code> list all packages in the current environment:
+<img alt="_images/my_env.png" src="_images/my_env.png" /></p>
+<p>The full documentation for the package manager can be found <a class="reference external" href="https://pkgdocs.julialang.org/v1/">here</a>.</p>
+</section>
+<section id="help-mode-activated-by">
+<h3>Help Mode (activated by <code class="docutils literal notranslate"><span class="pre">?</span></code>):<a class="headerlink" href="#help-mode-activated-by" title="Link to this heading">#</a></h3>
+<p><img alt="_images/julia_help_mode.png" src="_images/julia_help_mode.png" /></br></p>
+<p>In the help mode you can query the docstring for any function or struct availaible in the current environment. For example, when querying <code class="docutils literal notranslate"><span class="pre">cos</span></code> you should see</p>
+<img alt="_images/cos_help.png" src="_images/cos_help.png" />
+</section>
+<section id="shell-mode-activated-by">
+<h3>Shell Mode (activated by <code class="docutils literal notranslate"><span class="pre">;</span></code>)<a class="headerlink" href="#shell-mode-activated-by" title="Link to this heading">#</a></h3>
+<img alt="_images/julia_shell_mode.png" src="_images/julia_shell_mode.png" />
+<p>The shell mode allows you to execute system commands. Windows shell commands are not supported. However, Powershell or command prompt can be entered by typing <code class="docutils literal notranslate"><span class="pre">cmd</span></code> or <code class="docutils literal notranslate"><span class="pre">powershell</span></code>. Example usage of <code class="docutils literal notranslate"><span class="pre">ls</span></code> on a Linux machine:
+<img alt="_images/shell_ls.png" src="_images/shell_ls.png" /></p>
+</section>
+<section id="search-mode">
+<h3>Search Mode<a class="headerlink" href="#search-mode" title="Link to this heading">#</a></h3>
+<p>In all modes, the executed lines are saved and searchable. Just type <code class="docutils literal notranslate"><span class="pre">^R</span></code> (Ctrl + R for me) and it will open a reverse search prompt where you can search prior commands.
+<img alt="_images/rev_search.png" src="_images/rev_search.png" /></p>
+</section>
 </section>
 <section id="customization-of-the-repl">
-<h4>Customization of the REPL<a class="headerlink" href="#customization-of-the-repl" title="Link to this heading">#</a></h4>
+<h2>Customization of the REPL<a class="headerlink" href="#customization-of-the-repl" title="Link to this heading">#</a></h2>
 <ul>
 <li><p><a class="reference external" href="https://github.com/KristofferC/OhMyREPL.jl"><code class="docutils literal notranslate"><span class="pre">OhMyREPL</span></code></a> is a package that adds some nice defaults for color-coding and syntax highlighting, you can add it to your environment by typing <code class="docutils literal notranslate"><span class="pre">]</span> <span class="pre">add</span> <span class="pre">OhMyREPL</span></code> from the REPL</p></li>
 <li><p>More customization:
@@ -397,17 +419,11 @@ The <code class="docutils literal notranslate"><span class="pre">startup.jl</spa
 </li>
 </ul>
 </li>
-<li><p>Additional REPL modes:</p>
-<ul class="simple">
-<li><p>Help mode (accessed by <code class="docutils literal notranslate"><span class="pre">?</span></code>)</p></li>
-<li><p>Shell mode (accessed by <code class="docutils literal notranslate"><span class="pre">;</span></code>)</p></li>
-<li><p>Package mode (accessed by <code class="docutils literal notranslate"><span class="pre">]</span></code>)</p></li>
 </ul>
-</li>
-<li><p>Package management</p></li>
-<li><p>Environment setup</p>
+</section>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Julia uses the built-in package manager (which is itself a built-in package called <code class="docutils literal notranslate"><span class="pre">Pkg</span></code>) to manage dependencies and environments (any commands below that use calls of the form <code class="docutils literal notranslate"><span class="pre">Pkg.function()</span></code> can also be accessed in the REPL from <code class="docutils literal notranslate"><span class="pre">pkg&gt;</span></code> mode by prepending with <code class="docutils literal notranslate"><span class="pre">]</span></code> and just calling the function directly)</p></li>
 <li><p>To create a new project, use <code class="docutils literal notranslate"><span class="pre">]</span></code> to enter the package manager mode and then type <code class="docutils literal notranslate"><span class="pre">generate</span> <span class="pre">MyNewProject</span></code> to create a new project within the specified directory.</p></li>
 <li><p>Julia uses project-specific environments to manage dependencies by maintaining separate <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> files for each environment, ensuring that package versions are isolated and reproducible. You can activate and work within a specific environment using <code class="docutils literal notranslate"><span class="pre">Pkg.activate(&quot;path/to/project&quot;)</span></code>, allowing for flexible and independent package management across projects.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Pkg.instantiate()</span></code> is a Julia function used to install all the dependencies for a project, based on the information stored in the <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">Manifest.toml</span></code> files. Here’s what it does:</p>
@@ -418,10 +434,6 @@ The <code class="docutils literal notranslate"><span class="pre">startup.jl</spa
 </li>
 <li><p>After doing this in our repo, we can do: <code class="docutils literal notranslate"><span class="pre">Pkg.status()</span></code>, which displays the current status of the project, listing installed packages and their versions.</p></li>
 </ul>
-</li>
-</ul>
-</section>
-</section>
 </section>
 </section>
 
@@ -455,6 +467,24 @@ The <code class="docutils literal notranslate"><span class="pre">startup.jl</spa
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="1_whyjulia.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Why Julia?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_syntax.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Syntax</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -471,15 +501,17 @@ The <code class="docutils literal notranslate"><span class="pre">startup.jl</spa
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-installation-and-setup">Julia Installation and Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#julia-basics">Julia Basics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome-to-the-repl">Welcome to the REPL</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-repl">Accessing the REPL</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#customization-of-the-repl">Customization of the REPL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-repl">Accessing the REPL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repl-modes">REPL Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#julian-mode-default">Julian Mode (default):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-mode-activated-by">Package Mode (activated by <code class="docutils literal notranslate"><span class="pre">]</span></code>):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#help-mode-activated-by">Help Mode (activated by <code class="docutils literal notranslate"><span class="pre">?</span></code>):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-mode-activated-by">Shell Mode (activated by <code class="docutils literal notranslate"><span class="pre">;</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-mode">Search Mode</a></li>
 </ul>
 </li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customization-of-the-repl">Customization of the REPL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 </ul>
   </nav></div>
 
@@ -504,7 +536,7 @@ By The Molecular Sciences Software Institute
 
   <p class="copyright">
     
-      © Copyright 2024.
+      © Copyright 2025.
       <br/>
     
   </p>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Set Up &#8212; Introduction to Julia</title>
+    <title>Installing Julia &#8212; Introduction to Julia</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3685a5b4" />
@@ -58,12 +58,13 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'setup';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Syntax" href="2_syntax.html" />
-    <link rel="prev" title="Workshop Template" href="intro.html" />
+    <link rel="next" title="Why Julia?" href="1_whyjulia.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,6 +127,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -144,7 +147,7 @@
     
   
 
-<a class="navbar-brand logo" href="intro.html">
+<a class="navbar-brand logo" href="#">
   
   
   
@@ -173,10 +176,10 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Set Up</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_whyjulia.html">Why Julia?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_juliarepl.html">Julia REPL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_syntax.html">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Numerical Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizing Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
@@ -234,7 +237,7 @@
       
       
       
-      <li><a href="_sources/setup.ipynb" target="_blank"
+      <li><a href="_sources/setup.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -244,7 +247,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -318,7 +321,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Set Up</h1>
+    <h1>Installing Julia</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -328,9 +331,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-julia">Installing Julia</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-lesson-materials">Obtain lesson materials</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Installing Julia</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-linux-freebsd">Mac/Linux/FreeBSD:</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-lesson-materials">Download Lesson Materials</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-ijulia">Install IJulia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-kernel">Activate the Kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-dependencies">Install Dependencies</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -341,18 +355,90 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="set-up">
-<h1>Set Up<a class="headerlink" href="#set-up" title="Link to this heading">#</a></h1>
-<p>This page should give directions for setting up the software environment for the lessons.</p>
-<section id="installing-julia">
-<h2>Installing Julia<a class="headerlink" href="#installing-julia" title="Link to this heading">#</a></h2>
-<p>Put Directions for installing Julia here.</p>
+  <section id="installing-julia">
+<h1>Installing Julia<a class="headerlink" href="#installing-julia" title="Link to this heading">#</a></h1>
+<p>We will install Julia using the <code class="docutils literal notranslate"><span class="pre">juliaup</span></code> version manager. To install <code class="docutils literal notranslate"><span class="pre">juliaup</span></code> run:</p>
+<section id="windows">
+<h2>Windows:<a class="headerlink" href="#windows" title="Link to this heading">#</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>winget<span class="w"> </span>install<span class="w"> </span>--name<span class="w"> </span>Julia<span class="w"> </span>--id<span class="w"> </span>9NJNWW8PVKMN<span class="w"> </span>-e<span class="w"> </span>-s<span class="w"> </span>msstore
+</pre></div>
+</div>
 </section>
-<section id="obtain-lesson-materials">
-<h2>Obtain lesson materials<a class="headerlink" href="#obtain-lesson-materials" title="Link to this heading">#</a></h2>
-<p>Give directions for obtaining any lesson materials here.
-These might be pre-filled notebooks or files to download.</p>
+<section id="mac-linux-freebsd">
+<h2>Mac/Linux/FreeBSD:<a class="headerlink" href="#mac-linux-freebsd" title="Link to this heading">#</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://install.julialang.org<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</pre></div>
+</div>
+<p>This will install the latest version of Julia by default. You can view all the installed julia versions by running (for you just one):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>juliaup<span class="w"> </span>status
+</pre></div>
+</div>
+<p>For me this looks like:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>C:<span class="se">\U</span>sers<span class="se">\e</span>jmei&gt;juliaup<span class="w"> </span>status
+<span class="w"> </span>Default<span class="w">  </span>Channel<span class="w">  </span>Version<span class="w">                   </span>Update
+-------------------------------------------------------------------------------------------
+<span class="w">          </span><span class="m">1</span>.10<span class="w">     </span><span class="m">1</span>.10.7+0.x64.w64.mingw32<span class="w">  </span>Update<span class="w"> </span>to<span class="w"> </span><span class="m">1</span>.10.10+0.x64.w64.mingw32<span class="w"> </span>available
+<span class="w">       </span>*<span class="w">  </span><span class="m">1</span>.11<span class="w">     </span><span class="m">1</span>.11.2+0.x64.w64.mingw32<span class="w">  </span>Update<span class="w"> </span>to<span class="w"> </span><span class="m">1</span>.11.5+0.x64.w64.mingw32<span class="w"> </span>available
+<span class="w">          </span>release<span class="w">  </span><span class="m">1</span>.11.2+0.x64.w64.mingw32<span class="w">  </span>Update<span class="w"> </span>to<span class="w"> </span><span class="m">1</span>.11.5+0.x64.w64.mingw32<span class="w"> </span>available
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">*</span></code> indicates the currently active version of Julia. You can switch the default by running <code class="docutils literal notranslate"><span class="pre">juliaup</span> <span class="pre">default</span> <span class="pre">&lt;channel&gt;</span></code>. For example,</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>juliaup<span class="w"> </span>default<span class="w"> </span><span class="m">1</span>.11
+</pre></div>
+</div>
+<p>We can list all available versions of Julia with <code class="docutils literal notranslate"><span class="pre">juliaup</span> <span class="pre">list</span></code> and choose one to install by running <code class="docutils literal notranslate"><span class="pre">juliaup</span> <span class="pre">add</span> <span class="pre">&lt;channel&gt;</span></code>. For more commands or non-default installations checkout the juliaup <a class="reference external" href="https://github.com/JuliaLang/juliaup">GitHub page</a>.</p>
 </section>
+</section>
+<section id="download-lesson-materials">
+<h1>Download Lesson Materials<a class="headerlink" href="#download-lesson-materials" title="Link to this heading">#</a></h1>
+<p>The raw Jupyter notebooks for this tutorial can be installed from the <a class="reference external" href="https://github.com/MolSSI-Education/julia-introduction/tree/main/book">GitHub page</a> or by clicking one of the specific links:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://github.com/MolSSI-Education/julia-introduction/blob/main/book/1_juliaintro.md">Introduction to Julia</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MolSSI-Education/julia-introduction/blob/main/book/2_syntax.ipynb">Julia Syntax</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MolSSI-Education/julia-introduction/blob/main/book/3_whyjulia.ipynb">Why Julia</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MolSSI-Education/julia-introduction/blob/main/book/4_numericaldata.ipynb">Numerical Data</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MolSSI-Education/julia-introduction/blob/main/book/5_optimization.ipynb">Optimizing Julia Code</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MolSSI-Education/julia-introduction/blob/main/book/6_advanced.ipynb">Advanced Topics</a></p></li>
+</ol>
+</section>
+<section id="environment-setup">
+<h1>Environment Setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h1>
+<p>If you wish to run the Juptyer notebooks locally, you will need to have Julia, VSCode, and Jupyter Notebook. Furthermore, we require the <a class="reference external" href="https://github.com/JuliaLang/IJulia.jl">IJulia</a> package, and two VSCode extensions: <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=julialang.language-julia">Julia extension</a> and <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter">Jupyter extension</a>.</p>
+<section id="install-ijulia">
+<h2>Install IJulia<a class="headerlink" href="#install-ijulia" title="Link to this heading">#</a></h2>
+<p>IJulia is a Julia package which automatically installs Julia as a Jupyter kernel. This package should generally be installed in Julia’s global package environment. To do so, open the Julia REPL by typing <code class="docutils literal notranslate"><span class="pre">julia</span></code> in the command prompt that you installed <code class="docutils literal notranslate"><span class="pre">juliaup</span></code> into. By default, the initial environment is the correct one. Install IJulia by running:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;IJulia&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This might take a few minutes to finish. Once it’s complete you can test by running:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">IJulia</span>
+<span class="n">notebook</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="activate-the-kernel">
+<h2>Activate the Kernel<a class="headerlink" href="#activate-the-kernel" title="Link to this heading">#</a></h2>
+<p>Open VSCode and ensure that the Jupyter and Julia extensions are installed. Next, open one of the Jupyter notebooks from the tutorial.</p>
+<p>If the Julia kernel is not automatically detected, click the <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">Kernel</span></code> button and then choose <code class="docutils literal notranslate"><span class="pre">Julia</span></code> from the dropdown and choose your desired Julia kernel.
+<img alt="_images/select_kernel.png" src="_images/select_kernel.png" />
+<br></br>
+<img alt="_images/select_julia.png" src="_images/select_julia.png" /></p>
+</section>
+<section id="install-dependencies">
+<h2>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading">#</a></h2>
+<p>Some of the notebooks require external packages to run, so we have to download those and tell VSCode where to find them by activating the proper environment. To do this, first install the <code class="docutils literal notranslate"><span class="pre">Project.toml</span></code> from the GitHub repo:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/MolSSI-Education/julia-introduction/blob/main/book/Project.toml">Project.toml</a></p></li>
+</ul>
+<p>Place this in the same directory as your jupyter notebooks. If the Julia VSCode extension is running, you will see a button to select the environment in the bottom left of VSCode.
+<img alt="_images/julia_env.png" src="_images/julia_env.png" /></p>
+<p>Click this button and then choose <code class="docutils literal notranslate"><span class="pre">(pick</span> <span class="pre">a</span> <span class="pre">folder)</span></code> or, if auto-detected, the correct environment. The first time you use an environment, Julia must download and precompile all of your packages. It should only take a minute or two.
+<img alt="_images/pick_a_folder.png" src="_images/pick_a_folder.png" /></p>
+<p>You should be all set now!</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -364,16 +450,16 @@ These might be pre-filled notebooks or files to download.</p>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia_kernel-1.11"
+            mode: "python"
         },
         kernelOptions: {
-            name: "julia_kernel-1.11",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia_kernel-1.11'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -385,21 +471,12 @@ These might be pre-filled notebooks or files to download.</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Workshop Template</p>
-      </div>
-    </a>
     <a class="right-next"
-       href="2_syntax.html"
+       href="1_whyjulia.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Syntax</p>
+        <p class="prev-next-title">Why Julia?</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -419,9 +496,20 @@ These might be pre-filled notebooks or files to download.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-julia">Installing Julia</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-lesson-materials">Obtain lesson materials</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Installing Julia</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-linux-freebsd">Mac/Linux/FreeBSD:</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#download-lesson-materials">Download Lesson Materials</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-ijulia">Install IJulia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-kernel">Activate the Kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-dependencies">Install Dependencies</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
@@ -445,7 +533,7 @@ By The Molecular Sciences Software Institute
 
   <p class="copyright">
     
-      © Copyright 2024.
+      © Copyright 2025.
       <br/>
     
   </p>

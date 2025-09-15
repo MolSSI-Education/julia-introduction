@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3685a5b4" />
@@ -58,12 +58,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '2_syntax';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3_syntax';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Why Julia?" href="3_whyjulia.html" />
-    <link rel="prev" title="Set Up" href="setup.html" />
+    <link rel="next" title="Numerical Data" href="4_numericaldata.html" />
+    <link rel="prev" title="Julia REPL" href="2_juliarepl.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -144,7 +144,7 @@
     
   
 
-<a class="navbar-brand logo" href="intro.html">
+<a class="navbar-brand logo" href="setup.html">
   
   
   
@@ -174,9 +174,9 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_whyjulia.html">Why Julia?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_juliarepl.html">Julia REPL</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Numerical Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizing Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_advanced.html">Advanced Topics</a></li>
@@ -234,7 +234,7 @@
       
       
       
-      <li><a href="_sources/2_syntax.ipynb" target="_blank"
+      <li><a href="_sources/3_syntax.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -411,7 +411,7 @@ Learn…</p>
 </div>
 </div>
 </div>
-<p>Julia lets you use any unicode character to define variables. Just type <code class="docutils literal notranslate"><span class="pre">\alpha</span></code> and hit <code class="docutils literal notranslate"><span class="pre">tab</span></code>. For underscores type <code class="docutils literal notranslate"><span class="pre">c\_p</span></code> and hit tab. Note that not all subscripts and superscripts are supported. For more details about allowed characters and variable names, see <a class="reference external" href="https://docs.julialang.org/en/v1/manual/variables/#man-allowed-variable-names">this docs page</a>.</p>
+<p>Julia lets you use any unicode character to define variables. Just type <code class="docutils literal notranslate"><span class="pre">\alpha</span></code> and hit <code class="docutils literal notranslate"><span class="pre">tab</span></code>. For underscores to create subscripts, type <code class="docutils literal notranslate"><span class="pre">c\_p</span></code> and hit tab. Note that not all subscripts and superscripts are supported. For more details about allowed characters and variable names, see <a class="reference external" href="https://docs.julialang.org/en/v1/manual/variables/#man-allowed-variable-names">this docs page</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">κ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
@@ -431,6 +431,7 @@ Learn…</p>
 </div>
 </div>
 </div>
+<p>Like in MATLAB, you can put a semicolon <code class="docutils literal notranslate"><span class="pre">;</span></code> at the end of the line to suppress output, otherwise the last result of any given code block will be displayed if run in the REPL.</p>
 </section>
 <section id="arrays">
 <h2>Arrays<a class="headerlink" href="#arrays" title="Link to this heading">#</a></h2>
@@ -439,7 +440,7 @@ Learn…</p>
 <li><p>Dynamically sized</p></li>
 <li><p>One-indexed</p></li>
 <li><p>Column-major</p></li>
-<li><p>Slices allocate a new array (see <a class="reference external" href="https://docs.julialang.org/en/v1/base/arrays/#Views-(SubArrays-and-other-view-types)">views</a>)</p></li>
+<li><p>Allocating a new array by default when sliced (see <a class="reference external" href="https://docs.julialang.org/en/v1/base/arrays/#Views-(SubArrays-and-other-view-types)">views</a>)</p></li>
 </ul>
 <p>Julia Arrays behave a lot like numpy and MATLAB arrays and allow you to broadcast operations over the entire array and use index slicing. The <code class="docutils literal notranslate"><span class="pre">Array</span></code> type has several sub-types for conveinece, such as <code class="docutils literal notranslate"><span class="pre">Vector</span></code> for 1D arrays and <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> for 2D arrays. Check out the <code class="docutils literal notranslate"><span class="pre">Array</span></code> <a class="reference external" href="https://docs.julialang.org/en/v1/base/arrays/">documentation</a> for more details.</p>
 <div class="cell docutils container">
@@ -499,10 +500,9 @@ Learn…</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:2:10
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 2, 4, 6, 8, 10]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:
+2:10
+[0, 2, 4, 6, 8, 10]
 </pre></div>
 </div>
 </div>
@@ -551,7 +551,7 @@ Please define a function named <tt>get_last</tt> that takes an array and returns
 <span class="k">end</span>
 </pre></div>
 </div>
-</div><p>Type information can be set by the user as well. In practice, multiple <code class="docutils literal notranslate"><span class="pre">add</span></code> functions can be defined with different type information associated to their parameters. This is called multiple dispatch and will be covered in depth in the next section.</p>
+</div><p>Type information can be set by the user as well. In practice, multiple <code class="docutils literal notranslate"><span class="pre">add</span></code> functions can be defined with different type information associated to their parameters. This is another example of multiple dispatch, which was introduced in the first notebook, and we’ll see some more examples in the next one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span>
@@ -707,12 +707,12 @@ After: [336, 2, 3]
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 2 3 
 1 2 3 
-1 2 3 
+1 2 3
 </pre></div>
 </div>
 </div>
 </div>
-<p>Similarly, the if-else syntax is similar to Python. Just remove the <code class="docutils literal notranslate"><span class="pre">:</span></code> and add an <code class="docutils literal notranslate"><span class="pre">end</span></code></p>
+<p>The if-else syntax is similar to Python. Just remove the <code class="docutils literal notranslate"><span class="pre">:</span></code> and add an <code class="docutils literal notranslate"><span class="pre">end</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">test</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
@@ -742,7 +742,7 @@ x is equal to y.
 </section>
 <section id="structs">
 <h2>Structs<a class="headerlink" href="#structs" title="Link to this heading">#</a></h2>
-<p>Structs are like classes in Python and MATLAB. By default structs are immutable. Providing type information in a struct is common but not required. More info can be found in the Julia documentation <a class="reference external" href="https://docs.julialang.org/en/v1/manual/types/#Composite-Types">here</a>.</p>
+<p>Structs are like classes in Python and MATLAB. By default, structs are immutable. Providing type information in a struct is common but not required. More info can be found in the Julia documentation <a class="reference external" href="https://docs.julialang.org/en/v1/manual/types/#Composite-Types">here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">MyType</span>
@@ -787,7 +787,7 @@ x is equal to y.
 </div>
 </div>
 </div>
-<p>In Python you need to definie <code class="docutils literal notranslate"><span class="pre">__init__</span></code> which tells Python how to construct your object. Julia will always create a default constructor if one is not provided. To create an extra constructor, define a function with the same name as your <code class="docutils literal notranslate"><span class="pre">struct</span></code>.</p>
+<p>In Python you need to define <code class="docutils literal notranslate"><span class="pre">__init__</span></code> which tells Python how to construct your object. Julia will always create a default constructor if one is not provided. To create an extra constructor, define a function with the same name as your <code class="docutils literal notranslate"><span class="pre">struct</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Constructor that handles the case when only one parameter is known</span>
@@ -818,19 +818,19 @@ x is equal to y.
 <div class="alert alert-block alert-warning">
 <h3>Exercise</h3>
 <ul>
-    <li>Define a struct for a circle that contains its radius.</li>
-    <li>Define a method that returns the area of a circle</li>
+    <li>Define a struct for an equilateral triangle that contains its side length.</li>
+    <li>Define a method that returns the area of a triangle.</li>
 </ul>
 <h3>Solution:</h3>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">Circle</span>
-<span class="w">    </span><span class="n">radius</span><span class="o">::</span><span class="kt">Float64</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="kt">EquilateralTriangle</span>
+<span class="w">    </span><span class="n">side_length</span><span class="o">::</span><span class="kt">Float64</span>
 <span class="k">end</span>
 
 <span class="c"># Note how the method is not defined inside the class</span>
 <span class="c"># like in many other programming languages.</span>
-<span class="n">area</span><span class="p">(</span><span class="n">c</span><span class="o">::</span><span class="kt">Circle</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">pi</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">radius</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">area</span><span class="p">(</span><span class="n">t</span><span class="o">::</span><span class="kt">EquilateralTriangle</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">√</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">side_length</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Circle</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EquilateralTriangle</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">area</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -856,9 +856,7 @@ x is equal to y.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ParametricType{
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Int64}
+Int64}
 ParametricType{Float64}
 </pre></div>
 </div>
@@ -867,7 +865,7 @@ ParametricType{Float64}
 </section>
 <section id="broadcasting">
 <h2>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h2>
-<p>Like in MATLAB you can broadcast operations like, <code class="docutils literal notranslate"><span class="pre">+</span></code>, with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax. In Julia you can also broadcast functions with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax. See the <a class="reference external" href="https://docs.julialang.org/en/v1/manual/arrays/#Broadcasting">docs</a> for more info.</p>
+<p>Like in MATLAB, you can broadcast operations like, <code class="docutils literal notranslate"><span class="pre">+</span></code>, with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax. In Julia, you can also broadcast functions with the <code class="docutils literal notranslate"><span class="pre">.</span></code> syntax. See the <a class="reference external" href="https://docs.julialang.org/en/v1/manual/arrays/#Broadcasting">docs</a> for more info.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x_vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -900,10 +898,10 @@ ParametricType{Float64}
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
   <span class="o">+</span><span class="p">(::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="o">...</span><span class="p">)</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">596</span>
-  <span class="o">+</span><span class="p">(::</span><span class="n">Complex</span><span class="p">{</span><span class="n">Bool</span><span class="p">},</span> <span class="p">::</span><span class="n">Real</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="nb">complex</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">323</span>
-  <span class="o">+</span><span class="p">(::</span><span class="n">BigInt</span><span class="p">,</span> <span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Int16</span><span class="p">,</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">Int8</span><span class="p">})</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="n">gmp</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">550</span>
+  <span class="o">+</span><span class="p">(::</span><span class="n">BigFloat</span><span class="p">,</span> <span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Int16</span><span class="p">,</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">Int8</span><span class="p">})</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">mpfr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">506</span>
+  <span class="o">+</span><span class="p">(::</span><span class="n">Missing</span><span class="p">,</span> <span class="p">::</span><span class="n">Number</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">missing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">123</span>
   <span class="o">...</span>
 
 
@@ -992,7 +990,7 @@ ParametricType{Float64}
 <h3>Exercise</h3>
 Broadcast the <tt>square</tt> function defined earlier over any array.
 <h3>Solution:</h3>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">square</span><span class="o">.</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">square</span><span class="o">.</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 </pre></div>
 </div>
 </div></section>
@@ -1001,35 +999,16 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Writing files</span>
-<span class="n">outpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">joinpath</span><span class="p">(</span><span class="nd">@__DIR__</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;data&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;write_test.txt&quot;</span><span class="p">)</span>
+<span class="n">outpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">joinpath</span><span class="p">(</span><span class="nd">@__DIR__</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test.txt&quot;</span><span class="p">)</span>
 <span class="n">open</span><span class="p">(</span><span class="n">outpath</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;w&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">file</span>
-<span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;# Hello, World!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1.0 2.0 3.0</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">SystemError</span>: opening file &quot;/home/runner/work/julia-introduction/julia-introduction/book/data/write_test.txt&quot;: No such file or directory
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">systemerror</span><span class="p">(</span><span class="n">p</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">errno</span><span class="p">::</span><span class="n">Int32</span><span class="p">;</span> <span class="n">extrainfo</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">176</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">systemerror</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">175</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">lock</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">read</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">write</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">create</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">truncate</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">append</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">295</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="nb">open</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">277</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">mode</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">lock</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">358</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">mode</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">357</span>
- <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="nb">open</span><span class="p">(::</span><span class="n">var</span><span class="s2">&quot;#3#4&quot;</span><span class="p">,</span> <span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="n">Vararg</span><span class="p">{</span><span class="n">String</span><span class="p">};</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">408</span>
- <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="nb">open</span><span class="p">(::</span><span class="n">Function</span><span class="p">,</span> <span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">407</span>
- <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">]:</span><span class="mi">3</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
 </pre></div>
 </div>
 </div>
@@ -1064,35 +1043,17 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">data</span>
 <span class="k">end</span>
 
-<span class="n">inpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">joinpath</span><span class="p">(</span><span class="nd">@__DIR__</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;data&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;read_test.txt&quot;</span><span class="p">)</span>
+<span class="n">inpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">joinpath</span><span class="p">(</span><span class="nd">@__DIR__</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test.txt&quot;</span><span class="p">)</span>
 <span class="n">parse_file</span><span class="p">(</span><span class="n">inpath</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">SystemError</span>: opening file &quot;/home/runner/work/julia-introduction/julia-introduction/book/data/read_test.txt&quot;: No such file or directory
-
-<span class="ne">Stacktrace</span>:
-  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">systemerror</span><span class="p">(</span><span class="n">p</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">errno</span><span class="p">::</span><span class="n">Int32</span><span class="p">;</span> <span class="n">extrainfo</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">176</span>
-  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">systemerror</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">175</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">lock</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">read</span><span class="p">::</span><span class="n">Bool</span><span class="p">,</span> <span class="n">write</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">create</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">truncate</span><span class="p">::</span><span class="n">Nothing</span><span class="p">,</span> <span class="n">append</span><span class="p">::</span><span class="n">Nothing</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">295</span>
-  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="nb">open</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">277</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">mode</span><span class="p">::</span><span class="n">String</span><span class="p">;</span> <span class="n">lock</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">358</span>
-  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">mode</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">iostream</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">357</span>
-  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="nb">open</span><span class="p">(::</span><span class="n">var</span><span class="s2">&quot;#5#6&quot;</span><span class="p">{</span><span class="n">Vector</span><span class="p">{</span><span class="n">Any</span><span class="p">}},</span> <span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="n">Vararg</span><span class="p">{</span><span class="n">String</span><span class="p">};</span> <span class="n">kwargs</span><span class="p">::</span><span class="nd">@Kwargs</span><span class="p">{})</span>
-    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">408</span>
-  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="nb">open</span>
-    <span class="o">@</span> <span class="o">./</span><span class="n">io</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">407</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
-  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">parse_file</span><span class="p">(</span><span class="n">inpath</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span><span class="mi">4</span>
- <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span><span class="mi">29</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ignoring Comment: # Hello, World!
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-element Vector{Any}:
+ Float32[1.0, 2.0, 3.0]
 </pre></div>
 </div>
 </div>
@@ -1102,7 +1063,7 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
 <h2>Macros<a class="headerlink" href="#macros" title="Link to this heading">#</a></h2>
 <p>Julia has a special feature called <a class="reference external" href="https://docs.julialang.org/en/v1/manual/metaprogramming/#man-macros">macros</a>, which act upon your code to generate new code. The details of how macros work are complicated, but as an end-user, there are plenty of useful macros available to use.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> : Measures the run time, allocations, compile time, and garbage collection time of a piece of code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;time</span></code> : Measures the run time, allocations, compile time, and garbage collection time of a piece of code (for more on benchmarking code, see the “Optimization” notebook)</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1111,13 +1072,13 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000001 seconds (2 allocations: 144 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000004 seconds (2 allocations: 144 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
- 0.860948  0.855272  0.00447448
- 0.688968  0.136781  0.930878
- 0.66677   0.633124  0.938454
+ 0.750479  0.510762   0.665968
+ 0.550325  0.0206799  0.384768
+ 0.544159  0.797403   0.830226
 </pre></div>
 </div>
 </div>
@@ -1128,7 +1089,7 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@views</span><span class="w"> </span><span class="mf">3.1</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="k">end</span><span class="p">]</span>
+<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@views</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1139,10 +1100,10 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
   <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="n">number</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">6</span>
-  <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">126</span>
   <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">Number</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="n">number</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">7</span>
+  <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">126</span>
   <span class="o">...</span>
 
 
@@ -1227,20 +1188,20 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="setup.html"
+       href="2_juliarepl.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Set Up</p>
+        <p class="prev-next-title">Julia REPL</p>
       </div>
     </a>
     <a class="right-next"
-       href="3_whyjulia.html"
+       href="4_numericaldata.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Why Julia?</p>
+        <p class="prev-next-title">Numerical Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1292,7 +1253,7 @@ By The Molecular Sciences Software Institute
 
   <p class="copyright">
     
-      © Copyright 2024.
+      © Copyright 2025.
       <br/>
     
   </p>

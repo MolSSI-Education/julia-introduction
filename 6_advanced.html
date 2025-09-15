@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3685a5b4" />
@@ -143,7 +143,7 @@
     
   
 
-<a class="navbar-brand logo" href="intro.html">
+<a class="navbar-brand logo" href="setup.html">
   
   
   
@@ -173,9 +173,9 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="setup.html">Set Up</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_syntax.html">Syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_whyjulia.html">Why Julia?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_whyjulia.html">Why Julia?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_juliarepl.html">Julia REPL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_syntax.html">Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_numericaldata.html">Numerical Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_optimization.html">Optimizing Code</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Advanced Topics</a></li>
@@ -475,7 +475,7 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </div>
 </div>
 </div>
-<p>The Threads library does not let you set the number of tasks, to do that we can use the <code class="docutils literal notranslate"><span class="pre">OhMyThreads.jl</span></code> library. In <code class="docutils literal notranslate"><span class="pre">OhMyThreads</span></code> the <code class="docutils literal notranslate"><span class="pre">Threads.&#64;threads</span></code> macro is replaced with the <code class="docutils literal notranslate"><span class="pre">&#64;tasks</span></code> macro inside of which we can set certain properties like <code class="docutils literal notranslate"><span class="pre">ntasks</span></code> as well as the type of thread scheduling.</p>
+<p>The Threads library does not let you set the number of tasks, to do that we can use the <code class="docutils literal notranslate"><span class="pre">OhMyThreads.jl</span></code> library. In <code class="docutils literal notranslate"><span class="pre">OhMyThreads</span></code>, the <code class="docutils literal notranslate"><span class="pre">Threads.&#64;threads</span></code> macro is replaced with the <code class="docutils literal notranslate"><span class="pre">&#64;tasks</span></code> macro, inside of which we can set certain properties like <code class="docutils literal notranslate"><span class="pre">ntasks</span></code> as well as the type of thread scheduling.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">ohmythreads!</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span><span class="w"> </span><span class="n">n_threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">())</span>
@@ -514,7 +514,7 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </section>
 <section id="gpu-array-programming">
 <h2>GPU Array Programming<a class="headerlink" href="#gpu-array-programming" title="Link to this heading">#</a></h2>
-<p>With the power of multiple dispatch, we can perform many operations on the GPU just by changing the type of our data from <code class="docutils literal notranslate"><span class="pre">Array</span></code> to <code class="docutils literal notranslate"><span class="pre">CuArray</span></code> (or the analagous type for AMD, Intel, or Apple). The packge environment does not have access to a GPU so the test the cells below install one of the <code class="docutils literal notranslate"><span class="pre">CUDA.jl</span></code>/<code class="docutils literal notranslate"><span class="pre">AMDGPU.jl</span></code>/<code class="docutils literal notranslate"><span class="pre">Metal.jl</span></code>/<code class="docutils literal notranslate"><span class="pre">OneAPI.jl</span></code> packages and try running the code yourself! The example below is written for CUDA enabled GPUs.</p>
+<p>With the power of multiple dispatch, we can perform many operations on the GPU just by changing the type of our data from <code class="docutils literal notranslate"><span class="pre">Array</span></code> to <code class="docutils literal notranslate"><span class="pre">CuArray</span></code> (or the analagous type for AMD, Intel, or Apple). The package environment does not have access to a GPU, so to test the cells below install one of: <code class="docutils literal notranslate"><span class="pre">CUDA.jl</span></code>/<code class="docutils literal notranslate"><span class="pre">AMDGPU.jl</span></code>/<code class="docutils literal notranslate"><span class="pre">Metal.jl</span></code>/<code class="docutils literal notranslate"><span class="pre">OneAPI.jl</span></code> and try running the code yourself! The example below is written for CUDA enabled GPUs.</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># This example is for CUDA but is the same principle for all the GPU libraries</span>
 <span class="c">#using CUDA or AMDGPU or oneAPI or Metal or KernelAbstractions</span>
 <span class="k">using</span><span class="w"> </span><span class="n">CUDA</span>
@@ -638,7 +638,7 @@ By The Molecular Sciences Software Institute
 
   <p class="copyright">
     
-      © Copyright 2024.
+      © Copyright 2025.
       <br/>
     
   </p>
