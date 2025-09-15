@@ -22,7 +22,7 @@ In Julian mode you are able to write and execute Julia code. For example, you co
 
 #### Package Mode (activated by `]`):
 <img src="images/julia_pkg_mode.png"/></br>
-In the package mode you will see the currently active environment. The handle format is `(<env-name> pkg>)`. By default the global environment for your current Julia version is active (e.g., @v1.11). Packages in this environment are always available. The package mode grants quick access to methods in the `Pkg` package. For example, you can type `add <package-name>` to install a package. Other useful commands include, `activate <env-path>`, `st`, `up`, `resolve`, `instantiate`. For example, `st` and `status` list all packages in the current environment:
+In the package mode, you will see the currently active environment. The handle format is `(<env-name>) pkg>`. By default, the global environment for your current Julia version is active (e.g., @v1.11). Packages in this environment are always available. The package mode grants quick access to methods in the `Pkg` package. For example, you can type `add <package-name>` to install a package. Other useful commands include, `activate <env-path>`, `st`, `up`, `resolve`, `instantiate`. For example, `st` and `status` list all packages in the current environment:
 <img src="images/my_env.png"/>
 
 
@@ -31,7 +31,7 @@ The full documentation for the package manager can be found [here](https://pkgdo
 #### Help Mode (activated by `?`):
 <img src="images/julia_help_mode.png"/></br>
 
-In the help mode you can query the doc-string for any function or struct availaible in the current environment. For example, when querying `cos` you should see
+In the help mode you can query the docstring for any function or struct availaible in the current environment. For example, when querying `cos` you should see
 
 <img src="images/cos_help.png"/>
 

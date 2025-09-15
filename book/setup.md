@@ -51,11 +51,11 @@ The raw Jupyter notebooks for this tutorial can be installed from the [GitHub pa
 
 ## Environment Setup
 
-If you wish to run the Juptyer notebooks locally, you will need to have Julia, VSCode and Jupyter Notebook. Furthermore, we require the [IJulia](https://github.com/JuliaLang/IJulia.jl) package, and two VSCode extensions: [Julia extension](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia) and [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter).
+If you wish to run the Juptyer notebooks locally, you will need to have Julia, VSCode, and Jupyter Notebook. Furthermore, we require the [IJulia](https://github.com/JuliaLang/IJulia.jl) package, and two VSCode extensions: [Julia extension](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia) and [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter).
 
 #### Install IJulia
 
-IJulia is a Julia package which automatically installs Julia as a Jupyter kernel. This package should generally be installed in Julia's global package environment. To do so open the Julia REPL by typing `julia` in the command prompt which you installed `juliaup` into. By default, the initial environment is the correct one. Install IJulia by running:
+IJulia is a Julia package which automatically installs Julia as a Jupyter kernel. This package should generally be installed in Julia's global package environment. To do so, open the Julia REPL by typing `julia` in the command prompt that you installed `juliaup` into. By default, the initial environment is the correct one. Install IJulia by running:
 
 ```julia
 using Pkg
@@ -71,22 +71,22 @@ notebook()
 
 #### Activate the Kernel
 
-Open VSCode and ensure that the Jupyter and Julia extensions are installed. Next open one of the Jupyter notebooks from the tutorial.
+Open VSCode and ensure that the Jupyter and Julia extensions are installed. Next, open one of the Jupyter notebooks from the tutorial.
 
-If the Julia kernel is not automatically detected click the `Select Kernel` button and then choose `Julia` from the dropdown and choose your desired Julia kernel.
+If the Julia kernel is not automatically detected, click the `Select Kernel` button and then choose `Julia` from the dropdown and choose your desired Julia kernel.
 <img src="./images/select_kernel.png"/>
 <br></br>
 <img src="./images/select_julia.png"/>
 
 #### Install Dependencies
 
-Some of the notebooks require external packages to run, so we have to download those and active tell VSCode where to find them by activing the proper environment. To do this first install the `Project.toml` from the GitHub repo:
+Some of the notebooks require external packages to run, so we have to download those and tell VSCode where to find them by activating the proper environment. To do this, first install the `Project.toml` from the GitHub repo:
 - [Project.toml](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/Project.toml)
 
-Place this in the same directory as your jupyter notebooks. If the Julia VSCode extension is running you will see a button to select the environment in the bottom left of VSCode.
+Place this in the same directory as your jupyter notebooks. If the Julia VSCode extension is running, you will see a button to select the environment in the bottom left of VSCode.
 <img src="./images/julia_env.png"/>
 
-Click this button and then choose `(pick a folder)` or if auto-detected the correct environment. The first time you use an environment, Julia must download and precompile all of your packages. It should only take a minute or two.
+Click this button and then choose `(pick a folder)` or, if auto-detected, the correct environment. The first time you use an environment, Julia must download and precompile all of your packages. It should only take a minute or two.
 <img src="./images/pick_a_folder.png"/>
 
 You should be all set now!
