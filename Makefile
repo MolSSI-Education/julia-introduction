@@ -24,6 +24,7 @@ html:
 	export JUPYTER="/mnt/c/users/ejmei/Documents/GitHub/julia-introduction/venv/share/jupyter"
 	bash patch_kernel_versions.sh "$(FULL_VERSION)" "$(IJULIA_KERNEL_NAME)"
     julia --project="./book" -e 'using Pkg; Pkg.status(); Pkg.update()'
+	julia --project="./book" -e 'using Pkg; Pkg.status(); Pkg.update()'
 	julia --project="./book" -e 'using Pkg; Pkg.resolve(); Pkg.build("IJulia"); using IJulia; installkernel("$(KERNEL_NAME)", "--project=@.", env = Dict("JULIA_NUM_THREADS" => "2"))'
 	jupyter-book build book/
 
