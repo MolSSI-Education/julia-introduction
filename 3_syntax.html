@@ -898,10 +898,10 @@ ParametricType{Float64}
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
   <span class="o">+</span><span class="p">(::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Any</span><span class="o">...</span><span class="p">)</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">596</span>
+  <span class="o">+</span><span class="p">(::</span><span class="n">Base</span><span class="o">.</span><span class="n">CoreLogging</span><span class="o">.</span><span class="n">LogLevel</span><span class="p">,</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">logging</span><span class="o">/</span><span class="n">logging</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">132</span>
   <span class="o">+</span><span class="p">(::</span><span class="n">BigFloat</span><span class="p">,</span> <span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Int16</span><span class="p">,</span> <span class="n">Int32</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">Int8</span><span class="p">})</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="n">mpfr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">506</span>
-  <span class="o">+</span><span class="p">(::</span><span class="n">Missing</span><span class="p">,</span> <span class="p">::</span><span class="n">Number</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="n">missing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">123</span>
   <span class="o">...</span>
 
 
@@ -1072,13 +1072,13 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000004 seconds (2 allocations: 144 bytes)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.000003 seconds (2 allocations: 144 bytes)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
- 0.750479  0.510762   0.665968
- 0.550325  0.0206799  0.384768
- 0.544159  0.797403   0.830226
+ 0.969001   0.606435  0.156332
+ 0.416736   0.526852  0.179681
+ 0.0383492  0.868478  0.742504
 </pre></div>
 </div>
 </div>
@@ -1100,10 +1100,10 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
   <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
    <span class="o">@</span> <span class="n">Base</span> <span class="n">number</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">6</span>
-  <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">Number</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="n">number</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">7</span>
-  <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">126</span>
+  <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">CartesianIndex</span><span class="p">{</span><span class="mi">1</span><span class="p">})</span> <span class="n">where</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">multidimensional</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">136</span>
+  <span class="n">convert</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="p">::</span><span class="n">AbstractChar</span><span class="p">)</span> <span class="n">where</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Number</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="n">char</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">185</span>
   <span class="o">...</span>
 
 
@@ -1166,16 +1166,16 @@ Broadcast the <tt>square</tt> function defined earlier over any array.
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "julia_kernel-1.11"
+            mode: "julia_jupyterbook_kernel-1.11"
         },
         kernelOptions: {
-            name: "julia_kernel-1.11",
+            name: "julia_jupyterbook_kernel-1.11",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'julia_kernel-1.11'</script>
+    <script>kernelName = 'julia_jupyterbook_kernel-1.11'</script>
 
                 </article>
               
