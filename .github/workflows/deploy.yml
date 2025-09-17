@@ -37,28 +37,32 @@ jobs:
           version: ${{ env.JULIA_VERSION }}
           project : '.' # this is the default
 
+      - name: Build Books
+        run : | 
+          make html
+
       # Install Julia kernel
       # kernel will be named KERNEL_NAME-JULIA_VERSION
       # JULIA_VERSION is appened by IJulia automatically
-      - name: Setup IJulia 
-        run: |
-          julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; installkernel("${{ env.KERNEL_NAME }}", env=Dict("JULIA_NUM_THREADS"=>"2"))'
+      # - name: Setup IJulia 
+      #   run: |
+      #     julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.build("IJulia"); using IJulia; installkernel("${{ env.KERNEL_NAME }}", env=Dict("JULIA_NUM_THREADS"=>"2"))'
 
-      # Manually set kernel in notebooks
-      - name: Manually Set Kernels in Jupyter Notebooks
-        run: |
-          chmod +x patch_kernel_versions.sh
-          sh patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-${{ env.JULIA_VERSION }}"
-        shell: bash
+      # # Manually set kernel in notebooks
+      # - name: Manually Set Kernels in Jupyter Notebooks
+      #   run: |
+      #     chmod +x patch_kernel_versions.sh
+      #     sh patch_kernel_versions.sh "${{ env.JULIA_VERSION }}" "julia_kernel-${{ env.JULIA_VERSION }}"
+      #   shell: bash
 
-      - name: Setup Julia Environment 
-        run: |
-          julia -e 'using Pkg; Pkg.activate("./book"); Pkg.resolve(); Pkg.instantiate()'
+      # - name: Setup Julia Environment 
+      #   run: |
+      #     julia -e 'using Pkg; Pkg.activate("./book"); Pkg.resolve(); Pkg.instantiate()'
       
-      # Build the book
-      - name: Build the book
-        run: |
-          jupyter-book build book --all
+      # # Build the book
+      # - name: Build the book
+      #   run: |
+      #     jupyter-book build book --all
 
       # Deploy to GitHub Pages
       - name: Deploy Documentation
