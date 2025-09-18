@@ -1,7 +1,7 @@
 format: jb-book
 root: setup.md
 chapters:
-- file : setup.md
+- file : setup-copy.md
 - file : 1_whyjulia.ipynb
 - file : 2_juliarepl.md
 - file : 3_syntax.ipynb
