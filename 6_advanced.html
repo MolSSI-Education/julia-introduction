@@ -172,10 +172,15 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="setup.html">
+                    Installing Julia
+                </a>
+            </li>
+        </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="setup-copy.html">Installing Julia</a></li>
-
-
 <li class="toctree-l1"><a class="reference internal" href="1_whyjulia.html">Why Julia?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_juliarepl.html">Julia REPL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_syntax.html">Syntax</a></li>
@@ -423,14 +428,14 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 1774 samples with 1 evaluation per sample.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">2.787 ms</span> … <span class=" -Color -Color-Magenta"> 4.611 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">2.800 ms              </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">2.802 ms</span> ± <span class=" -Color -Color-Green">48.984 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 1776 samples with 1 evaluation per sample.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">2.787 ms</span> … <span class=" -Color -Color-Magenta">2.854 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">2.799 ms             </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">2.800 ms</span> ± <span class=" -Color -Color-Green">6.143 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-                     ▄▇█▇<span class=" -Color -Color-Blue">▆</span>▄▁<span class=" -Color -Color-Green">▄</span>▁                                
-  ▁▁▂▂▃▄▄▆▆▄▄▃▂▃▃▃▃▅█████<span class=" -Color -Color-Blue">█</span>██<span class=" -Color -Color-Green">█</span>█▆▆▅▄▄▄▃▃▂▃▂▂▂▁▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁ ▃
-  2.79 ms        Histogram: frequency by time        2.82 ms <span class=" -Color -Color-Bold">&lt;</span>
+                    ▆█▇<span class=" -Color -Color-Blue">▅</span>▆▄▂▁                                 
+  ▂▂▃▅▆▆▆▅▄▅▄▄▂▃▃▄▅████<span class=" -Color -Color-Blue">█</span>█████▆▆▄▄▃▃▃▃▃▂▃▃▃▂▃▂▃▂▂▂▃▂▂▂▁▂▂▂▁▂ ▄
+  2.79 ms        Histogram: frequency by time       2.82 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
 </pre></div>
@@ -444,13 +449,13 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 1783 samples with 1 evaluation per sample.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">2.789 ms</span> … <span class=" -Color -Color-Magenta">2.852 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">2.801 ms             </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">2.802 ms</span> ± <span class=" -Color -Color-Green">6.468 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 1785 samples with 1 evaluation per sample.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">2.787 ms</span> … <span class=" -Color -Color-Magenta">2.858 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">2.800 ms             </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">2.800 ms</span> ± <span class=" -Color -Color-Green">5.732 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-                  ▃▆▇█<span class=" -Color -Color-Blue">▃</span>▅▂▂▁                                  
-  ▂▃▅▆▅▅▅▄▄▃▃▃▃▂▄▆████<span class=" -Color -Color-Blue">█</span>████▆▇▆▅▄▃▃▃▄▃▃▃▃▃▃▃▂▃▂▂▂▁▂▂▂▁▂▂▁▂▂▂ ▃
+                     ▁▃▇█<span class=" -Color -Color-Blue">▇</span>▅▄▃▃                               
+  ▂▂▃▃▅▄▅▅▄▄▃▃▃▃▂▂▂▄▆████<span class=" -Color -Color-Blue">█</span>████▇█▅▄▄▃▂▃▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁ ▃
   2.79 ms        Histogram: frequency by time       2.82 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">0 bytes</span>, allocs estimate: <span class=" -Color -Color-Yellow">0</span>.
@@ -465,14 +470,14 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 3546 samples with 1 evaluation per sample.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.397 ms</span> … <span class=" -Color -Color-Magenta"> 2.360 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.405 ms              </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.408 ms</span> ± <span class=" -Color -Color-Green">28.099 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 3541 samples with 1 evaluation per sample.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.397 ms</span> … <span class=" -Color -Color-Magenta"> 2.321 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.404 ms              </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.409 ms</span> ± <span class=" -Color -Color-Green">39.825 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-      ▅██▆▇▇▅▄▁  <span class=" -Color -Color-Blue"> </span>    <span class=" -Color -Color-Green"> </span> ▁ ▂▃▂▃▁                               
-  ▁▃▅▇███████████<span class=" -Color -Color-Blue">▅</span>▄▄▄▅<span class=" -Color -Color-Green">▆</span>▇████████▆▇▆▄▄▄▄▃▂▂▂▂▂▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁ ▄
-  1.4 ms         Histogram: frequency by time        1.43 ms <span class=" -Color -Color-Bold">&lt;</span>
+    ▄██▆▄▂<span class=" -Color -Color-Blue"> </span>     ▁<span class=" -Color -Color-Green">▃</span>▄▂▁                                         
+  ▃▇██████<span class=" -Color -Color-Blue">▇</span>▅▄▃▄▆█<span class=" -Color -Color-Green">█</span>███▆▅▄▃▃▃▃▃▃▂▂▂▂▂▂▂▁▂▂▂▁▁▁▁▁▁▂▁▁▁▂▂▂▂▂▁▂▁▂ ▃
+  1.4 ms         Histogram: frequency by time        1.45 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">1.08 KiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">12</span>.
 </pre></div>
@@ -506,14 +511,14 @@ This notebook will cover basic multi-threading and programming Nvidia GPUs in Ju
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 3530 samples with 1 evaluation per sample.
- Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.401 ms</span> … <span class=" -Color -Color-Magenta"> 1.732 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.413 ms              </span>┊ GC (median):    0.00%
- Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.414 ms</span> ± <span class=" -Color -Color-Green">11.243 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BenchmarkTools.Trial: 3536 samples with 1 evaluation per sample.
+ Range (<span class=" -Color -Color-Bold -Color-Bold-Cyan">min</span> … <span class=" -Color -Color-Magenta">max</span>):  <span class=" -Color -Color-Bold -Color-Bold-Cyan">1.401 ms</span> … <span class=" -Color -Color-Magenta">1.693 ms</span>  ┊ GC (min … max): 0.00% … 0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Blue">median</span>):     <span class=" -Color -Color-Bold -Color-Bold-Blue">1.410 ms             </span>┊ GC (median):    0.00%
+ Time  (<span class=" -Color -Color-Bold -Color-Bold-Green">mean</span> ± <span class=" -Color -Color-Green">σ</span>):   <span class=" -Color -Color-Bold -Color-Bold-Green">1.411 ms</span> ± <span class=" -Color -Color-Green">9.231 μs</span>  ┊ GC (mean ± σ):  0.00% ± 0.00%
 
-    ▁▄█▆▅▃       <span class=" -Color -Color-Blue">▁</span><span class=" -Color -Color-Green">▃</span>▃                                          
-  ▂▆███████▇▅▄▄▅▆<span class=" -Color -Color-Blue">█</span><span class=" -Color -Color-Green">█</span>███▇▆▅▅▄▄▄▄▃▃▃▃▃▃▂▃▂▂▂▃▂▂▂▂▁▂▂▂▁▂▁▁▁▂▁▁▁▁ ▃
-  1.4 ms         Histogram: frequency by time        1.45 ms <span class=" -Color -Color-Bold">&lt;</span>
+    ▄█▂▂▁ ▂▅▁   <span class=" -Color -Color-Blue"> </span>  <span class=" -Color -Color-Green"> </span>    ▁▂▂                                  
+  ▂▆█████████▆▆▅<span class=" -Color -Color-Blue">▅</span>▅▆<span class=" -Color -Color-Green">▆</span>▅▅▆▆███▇▆▆▄▅▄▃▄▃▂▂▃▃▂▁▁▂▁▂▁▂▁▁▁▁▁▁▁▁▁▁▁ ▃
+  1.4 ms         Histogram: frequency by time       1.44 ms <span class=" -Color -Color-Bold">&lt;</span>
 
  Memory estimate: <span class=" -Color -Color-Yellow">1.67 KiB</span>, allocs estimate: <span class=" -Color -Color-Yellow">35</span>.
 </pre></div>
