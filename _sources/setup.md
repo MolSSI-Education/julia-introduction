@@ -41,9 +41,9 @@ We can list all available versions of Julia with `juliaup list` and choose one t
 ## Download Lesson Materials
 The raw Jupyter notebooks for this tutorial can be installed from the [GitHub page](https://github.com/MolSSI-Education/julia-introduction/tree/main/book) or by clicking one of the specific links:
 
-1. [Introduction to Julia](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/1_juliaintro.md)
-2. [Julia Syntax](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/2_syntax.ipynb)
-3. [Why Julia](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/3_whyjulia.ipynb)
+1. [Why Julia](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/1_whyjulia.ipynb)
+2. [Julia REPL](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/2_juliarepl.md)
+3. [Julia Syntax](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/3_syntax.ipynb)
 4. [Numerical Data](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/4_numericaldata.ipynb)
 5. [Optimizing Julia Code](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/5_optimization.ipynb)
 6. [Advanced Topics](https://github.com/MolSSI-Education/julia-introduction/blob/main/book/6_advanced.ipynb)
